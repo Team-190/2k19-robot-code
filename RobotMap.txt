@@ -1,0 +1,23 @@
+Drivetrain:
+2 SRXs
+Encoders for each side
+NavX
+
+Climber:
+2 pistons
+4 reed switches, 2 per piston
+2 solenoids
+2 IR sensors (anti-cliff, pro-cliff)
+
+Collector:
+2 pistons (raise/lower, hatch/ball)
+1 BAG motor
+1 Talon SRX
+2 solenoids
+? banner sensors
+1 Camera
+
+Elevator:
+1 775 Pro
+1 10 turn pot
+1 Talon SRX
