@@ -8,13 +8,36 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.SPI;
+
+import com.kauailabs.navx.frc.AHRS;
+
+import frc.robot.models.PairedTalonSRX;
 
 /**
  * Add your docs here.
  */
 public class Drivetrain extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+    static Drivetrain drivetrain = null;
+    
+    AHRS navx;
+    private final int leftOne = 0,
+        leftTwo = 1,
+        rightOne = 2,
+        rightTwo = 3;
+    PairedTalonSRX left, right;
+    
+    private Drivetrain() {
+        navx = new AHRS(SPI.Port.kMXP);
+        left = new PairedTalonSRX(leftOne, leftTwo);
+        right = new PairedTalonSRX(rightOne, rightTwo);
+
+    }
+
+    public static Drivetrain getInstance() {
+        if (drivetrain == null) drivetrain = new Drivetrain();
+        return drivetrain;
+    }
 
   @Override
   public void initDefaultCommand() {
