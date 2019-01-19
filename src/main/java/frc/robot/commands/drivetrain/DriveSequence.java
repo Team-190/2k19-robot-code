@@ -9,12 +9,12 @@ package frc.robot.commands.drivetrain;
 
 import java.io.File;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
+
 import frc.robot.models.PathfinderSequence;
 import frc.robot.subsystems.Drivetrain;
+
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.followers.EncoderFollower;
@@ -34,6 +34,7 @@ public class DriveSequence extends Command {
         requires(drivetrain);
         this.sequence = sequence;
         this.resetSensors = resetSensors;
+        isFinished = false;
     }
 
     // Called just before this Command runs the first time
@@ -43,7 +44,6 @@ public class DriveSequence extends Command {
             drivetrain.getNavX().reset();;
             drivetrain.resetEncoders();
         }
-        isFinished = false;
 
         File leftFile = new File(sequence.getLeftCSVName());
         File rightFile = new File(sequence.getRightCSVName());
@@ -69,7 +69,7 @@ public class DriveSequence extends Command {
             double gyroHeading = -drivetrain.getNavX().getAngle(); //TODO: adjust get_____ for real robot
             double desiredHeading = Pathfinder.r2d(leftFollower.getHeading());
             double angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);
-            double turn = -angleDifference/100; // magic number from 254
+            double turn = -angleDifference / 100; // magic number from 254
 
             drivetrain.drive(leftSpeed + turn, rightSpeed - turn);
         }
@@ -78,12 +78,13 @@ public class DriveSequence extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        return isFinished || (leftFollower.isFinished() && rightFollower.isFinished());
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
+        //TODO: stop driving at end of path?
     }
 
     // Called when another command which requires one or more of the same
