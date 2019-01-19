@@ -9,6 +9,8 @@ package frc.robot.commands.drivetrain;
 
 import java.io.File;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.models.PathfinderSequence;
@@ -18,7 +20,7 @@ import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.followers.EncoderFollower;
 
 public class DriveSequence extends Command {
-    Drivetrain drive;
+    Drivetrain drivetrain;
     PathfinderSequence sequence;
     boolean resetSensors, isFinished;
     private EncoderFollower leftFollower, rightFollower;
@@ -28,8 +30,8 @@ public class DriveSequence extends Command {
     }
 
     public DriveSequence(PathfinderSequence sequence, boolean resetSensors) {
-        drive = Drivetrain.getInstance();
-        requires(drive);
+        drivetrain = Drivetrain.getInstance();
+        requires(drivetrain);
         this.sequence = sequence;
         this.resetSensors = resetSensors;
     }
@@ -38,26 +40,39 @@ public class DriveSequence extends Command {
     @Override
     protected void initialize() {
         if (resetSensors) {
-            drive.resetNavX();
-            drive.resetEncoders();
+            drivetrain.getNavX().reset();;
+            drivetrain.resetEncoders();
         }
         isFinished = false;
 
         File leftFile = new File(sequence.getLeftCSVName());
         File rightFile = new File(sequence.getRightCSVName());
 
-        if (!(fileNotFound(leftFile) || fileNotFound(rightFile))) { // both files found, both methods called always
+        if (fileExists(leftFile) && fileExists(rightFile)) { // both files found, both methods called always
             Trajectory leftTrajectory = Pathfinder.readFromCSV(leftFile);
             leftFollower = new EncoderFollower(leftTrajectory);
             //TODO: configure left encoder values
             Trajectory rightTrajectory = Pathfinder.readFromCSV(rightFile);
             rightFollower = new EncoderFollower(rightTrajectory);
+            //TODO: configure right encoder values
         }
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+        // in case a file wasn't found, don't want to run
+        if (!isFinished) {
+            double leftSpeed = leftFollower.calculate(drivetrain.getLeftPosition());
+            double rightSpeed = rightFollower.calculate(drivetrain.getRightPosition());
+
+            double gyroHeading = -drivetrain.getNavX().getAngle(); //TODO: adjust get_____ for real robot
+            double desiredHeading = Pathfinder.r2d(leftFollower.getHeading());
+            double angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);
+            double turn = -angleDifference/100; // magic number from 254
+
+            drivetrain.drive(leftSpeed + turn, rightSpeed - turn);
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -77,11 +92,11 @@ public class DriveSequence extends Command {
     protected void interrupted() {
     }
 
-    public boolean fileNotFound(File file) {
+    public boolean fileExists(File file) {
         if (!file.exists()) {
             DriverStation.reportWarning(file.getPath() + " not found. DriveSequence.java", false);
-            return isFinished = true;
+            return isFinished = false;
         }
-        return false;
+        return true;
     }
 }

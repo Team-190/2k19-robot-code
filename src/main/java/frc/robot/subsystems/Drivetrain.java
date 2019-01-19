@@ -63,8 +63,16 @@ public class Drivetrain extends Subsystem {
         rightPair.set(ControlMode.PercentOutput, right);
     }
 
-    public void resetNavX() {
-        navx.reset();
+    public AHRS getNavX() {
+        return navx;
+    }
+
+    public int getLeftPosition() {
+        return leftPair.getSelectedSensorPosition(PID_X);
+    }
+
+    public int getRightPosition() {
+        return rightPair.getSelectedSensorPosition(PID_X);
     }
 
     public void resetEncoders() {
