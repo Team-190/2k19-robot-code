@@ -11,7 +11,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 /**
- * Add your docs here.
+ * Reads values from NetworkTables written from the Pi
  */
 public class Vision {
     private static Vision vision;
