@@ -14,7 +14,7 @@ import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
-import frc.robot.commands.drive.DefaultDrive;
+import frc.robot.commands.drivetrain.DefaultDrive;
 import frc.robot.models.PairedTalonSRX;
 
 /**
@@ -40,8 +40,8 @@ public class Drivetrain extends Subsystem {
         navx = new AHRS(SPI.Port.kMXP);
         leftPair = new PairedTalonSRX(LEFT_ONE, LEFT_TWO);
         rightPair = new PairedTalonSRX(RIGHT_ONE, RIGHT_TWO);
-        leftPair.configSelectedFeedbackSensor(FeedbackDevice.Analog, PID_X, TIMEOUT_MS);
-        rightPair.configSelectedFeedbackSensor(FeedbackDevice.Analog, PID_X, TIMEOUT_MS);
+        leftPair.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
+        rightPair.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
     }
 
     /**
@@ -61,6 +61,15 @@ public class Drivetrain extends Subsystem {
     public void drive(double left, double right) {
         leftPair.set(ControlMode.PercentOutput, left);
         rightPair.set(ControlMode.PercentOutput, right);
+    }
+
+    public void resetNavX() {
+        navx.reset();
+    }
+
+    public void resetEncoders() {
+        leftPair.setSelectedSensorPosition(0, PID_X, TIMEOUT_MS);
+        rightPair.setSelectedSensorPosition(0, PID_X, TIMEOUT_MS);
     }
 
     @Override
