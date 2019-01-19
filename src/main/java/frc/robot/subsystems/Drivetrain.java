@@ -21,7 +21,7 @@ import frc.robot.models.PairedTalonSRX;
  * Subsystem controls drivetrain and associated sensors
  */
 public class Drivetrain extends Subsystem {
-    static Drivetrain drivetrain = null;
+    private static Drivetrain drivetrain = null;
 
     AHRS navx;
     // Speed controller ports
@@ -45,7 +45,7 @@ public class Drivetrain extends Subsystem {
     }
 
     /**
-     * Gets the  Drivetrain instance
+     * Gets the Drivetrain instance
      * @return the single instance of the class
      */
     public static Drivetrain getInstance() {
