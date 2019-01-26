@@ -41,7 +41,7 @@ public class DriveSequence extends Command {
     @Override
     protected void initialize() {
         if (resetSensors) {
-            drivetrain.getNavX().reset();;
+            drivetrain.getNavX().reset();
             drivetrain.resetEncoders();
         }
 
@@ -51,10 +51,10 @@ public class DriveSequence extends Command {
         if (fileExists(leftFile) && fileExists(rightFile)) { // both files found, both methods called always
             Trajectory leftTrajectory = Pathfinder.readFromCSV(leftFile);
             leftFollower = new EncoderFollower(leftTrajectory);
-            //TODO: configure left encoder values
+            // TODO: configure left encoder values
             Trajectory rightTrajectory = Pathfinder.readFromCSV(rightFile);
             rightFollower = new EncoderFollower(rightTrajectory);
-            //TODO: configure right encoder values
+            // TODO: configure right encoder values
         }
     }
 
@@ -66,7 +66,7 @@ public class DriveSequence extends Command {
             double leftSpeed = leftFollower.calculate(drivetrain.getLeftPosition());
             double rightSpeed = rightFollower.calculate(drivetrain.getRightPosition());
 
-            double gyroHeading = -drivetrain.getNavX().getAngle(); //TODO: adjust get_____ for real robot
+            double gyroHeading = -drivetrain.getNavX().getAngle(); // TODO: adjust get_____ for real robot
             double desiredHeading = Pathfinder.r2d(leftFollower.getHeading());
             double angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);
             double turn = -angleDifference / 100; // magic number from 254
@@ -84,7 +84,7 @@ public class DriveSequence extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        //TODO: stop driving at end of path?
+        // TODO: stop driving at end of path?
     }
 
     // Called when another command which requires one or more of the same
