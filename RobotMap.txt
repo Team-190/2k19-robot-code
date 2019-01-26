@@ -16,6 +16,7 @@ Collector:
 2 solenoids
 ? banner sensors
 1 Camera
+2 Limit switches (back of jaw, when jaw is open)
 
 Elevator:
 1 775 Pro
