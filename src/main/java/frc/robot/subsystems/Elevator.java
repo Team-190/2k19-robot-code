@@ -34,8 +34,7 @@ public class Elevator extends Subsystem {
     private static final int LEFT = 4,
         RIGHT = 5;
 
-    private static final int PID_X = 0,
-        TIMEOUT_MS = 0;
+    private static final int PID_X = 0;
 
     private final static double POT_BOTTOM = 0; // Pot Value
     private final static double POT_TOP_OFFSET = 1024; // Pot Value
