@@ -8,14 +8,19 @@
 package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.climber.DeployArms;
+import frc.robot.commands.collector.OpenCollector;
+
 
 public class Climb extends CommandGroup {
     /**
      * Triggered by Climb Button
      */
     public Climb() {
-        // collector to starting position
         // deploy arms
+        addParallel(new DeployArms());
+        // collector to starting position
+        addSequential(new OpenCollector());
         // Parallel
         //      drive left forward until arm left anti-cliff triggered
         //      drive right forward until arm right anti-cliff triggered

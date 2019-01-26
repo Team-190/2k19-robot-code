@@ -4,6 +4,7 @@ Encoders for each side
 NavX
 
 Climber:
+1 servo
 2 pistons
 4 reed switches, 2 per piston
 2 solenoids
@@ -14,7 +15,6 @@ Collector:
 1 BAG motor
 1 Talon SRX
 2 solenoids
-? banner sensors
 1 Camera
 2 Limit switches (back of jaw, when jaw is open)
 
