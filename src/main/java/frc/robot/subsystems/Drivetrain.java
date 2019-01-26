@@ -25,10 +25,10 @@ public class Drivetrain extends Subsystem {
 
     AHRS navx;
     // Speed controller ports
-    private final int LEFT_ONE = 0,
-        LEFT_TWO = 1,
-        RIGHT_ONE = 2,
-        RIGHT_TWO = 3;
+    private final int LEFT_FRONT = 0,
+        LEFT_REAR = 1,
+        RIGHT_FRONT = 2,
+        RIGHT_REAR = 3;
     
     // Encoder config values
     private final int PID_X = 0,
@@ -38,8 +38,8 @@ public class Drivetrain extends Subsystem {
 
     private Drivetrain() {
         navx = new AHRS(SPI.Port.kMXP);
-        leftPair = new PairedTalonSRX(LEFT_ONE, LEFT_TWO);
-        rightPair = new PairedTalonSRX(RIGHT_ONE, RIGHT_TWO);
+        leftPair = new PairedTalonSRX(LEFT_FRONT, LEFT_REAR);
+        rightPair = new PairedTalonSRX(RIGHT_FRONT, RIGHT_REAR);
         leftPair.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
         rightPair.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
     }
