@@ -20,7 +20,7 @@ import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.followers.EncoderFollower;
 
 public class DriveSequence extends Command {
-    Drivetrain drivetrain;
+    Drivetrain drivetrain = Drivetrain.getInstance();
     PathfinderSequence sequence;
     boolean resetSensors, isFinished;
     private EncoderFollower leftFollower, rightFollower;
@@ -30,7 +30,6 @@ public class DriveSequence extends Command {
     }
 
     public DriveSequence(PathfinderSequence sequence, boolean resetSensors) {
-        drivetrain = Drivetrain.getInstance();
         requires(drivetrain);
         this.sequence = sequence;
         this.resetSensors = resetSensors;

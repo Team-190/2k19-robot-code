@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Climber;
 
 public class DeployArms extends Command {
-    Climber climber;
+    Climber climber = Climber.getInstance();
     public DeployArms() {
-        requires(climber = Climber.getInstance());
+        requires(climber);
     }
 
     // Called just before this Command runs the first time

@@ -5,51 +5,42 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.collector;
+package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.Collector;
+import frc.robot.subsystems.Climber;
 
-/**
- * Closes the collector
- */
-public class CloseCollector extends Command {
-    Collector collector = Collector.getInstance();
-    /**
-     * Requires Collector subsystem
-     */
-    public CloseCollector() {
-        requires(collector);
+public class DeployLifters extends Command {
+    Climber climber = Climber.getInstance();
+
+    public DeployLifters() {
+        requires(climber);
     }
 
-    /**
-     * Sets collector to close
-     */
+    // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        collector.setCollector(false);
+        climber.setSolenoid(true);
     }
 
-    /**
-     * Waits
-     */
+    // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
     }
 
-    /**
-     * Gets the state of the collector as the state of the command
-     * @return state of collector (open or closed)
-     */
+    // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return !collector.isOpen();
+        return climber.isArmsDown();
     }
 
+    // Called once after isFinished returns true
     @Override
     protected void end() {
     }
 
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
     @Override
     protected void interrupted() {
     }

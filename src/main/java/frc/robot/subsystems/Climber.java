@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -79,7 +80,13 @@ public class Climber extends Subsystem {
         motor.set(mode, speed);
     }
 
-    public void setSolenoid(DoubleSolenoid.Value value) {
+    public void setSolenoid(boolean state) {
+        DoubleSolenoid.Value value;
+        if (state)
+            value = Value.kForward;
+        else
+            value = Value.kReverse;
+
         solenoid.set(value);
     }
 

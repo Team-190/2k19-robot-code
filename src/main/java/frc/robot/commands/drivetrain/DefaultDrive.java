@@ -14,10 +14,9 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.input.AttackThree.AttackThreeAxis;
 
 public class DefaultDrive extends Command {
-    private Drivetrain drive;
+    private Drivetrain drive = Drivetrain.getInstance();
 
     public DefaultDrive() {
-        drive = Drivetrain.getInstance();
         requires(drive);
     }
 

@@ -12,15 +12,12 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 
 public class DriveToACS extends Command {
-    Drivetrain drive;
+    Drivetrain drive = Drivetrain.getInstance();
     Climber climber;
-    private boolean leftHit, rightHit;
     double leftSpeed, rightSpeed;
     public DriveToACS() {
-        requires(drive = Drivetrain.getInstance());
+        requires(drive);
         climber = Climber.getInstance(); // only reads, doesn't write
-        leftHit = false;
-        rightHit = false;
     }
 
     // Called just before this Command runs the first time
@@ -31,13 +28,15 @@ public class DriveToACS extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        
+        leftSpeed = climber.isLeftACSTriggered() ? 0.0 : 0.5;
+        rightSpeed = climber.isRightACSTriggered() ? 0.0 : 0.5;
+        drive.drive(leftSpeed, rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        return climber.isLeftACSTriggered() && climber.isRightACSTriggered();
     }
 
     // Called once after isFinished returns true

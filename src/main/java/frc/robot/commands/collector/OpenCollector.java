@@ -14,12 +14,12 @@ import frc.robot.subsystems.Collector;
  * Opens the collector
  */
 public class OpenCollector extends Command {
-    Collector collector;
+    Collector collector = Collector.getInstance();
     /**
      * Requires Collector subsystem
      */
     public OpenCollector() {
-        requires(collector = Collector.getInstance());
+        requires(collector);
     }
 
     /**
