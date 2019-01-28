@@ -10,7 +10,11 @@ package frc.robot.commands.auto;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.climber.DeployArms;
 import frc.robot.commands.climber.DeployLifters;
+import frc.robot.commands.climber.RetractLifters;
+import frc.robot.commands.climber.RollToHAB;
+import frc.robot.commands.climber.StopRoll;
 import frc.robot.commands.collector.OpenCollector;
+import frc.robot.commands.drivetrain.DriveForward;
 import frc.robot.commands.drivetrain.DriveToACS;
 
 
@@ -30,10 +34,13 @@ public class Climb extends CommandGroup {
         // trigger lifting pneumatics
         addSequential(new DeployLifters(), 10);
         // drive BAG motor on until chassis anti-cliff triggered
+        addSequential(new RollToHAB());
         // Parallel
         //      Stop BAG
+        addParallel(new StopRoll());
         //      Retract pneumatics
-        // wait until arm limit switch, upper chassis triggered
+        addSequential(new RetractLifters(), 4);
         // Drive forward 18"
+        addSequential(new DriveForward(), 2);
     }
 }

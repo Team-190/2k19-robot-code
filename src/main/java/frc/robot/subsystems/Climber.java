@@ -76,7 +76,7 @@ public class Climber extends Subsystem {
         return armsDown.get();
     }
 
-    public void setIntakeSpeed(ControlMode mode, double speed) {
+    public void setSpeed(ControlMode mode, double speed) {
         motor.set(mode, speed);
     }
 
