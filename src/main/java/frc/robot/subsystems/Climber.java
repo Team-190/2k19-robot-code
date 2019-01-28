@@ -97,9 +97,8 @@ public class Climber extends Subsystem {
     }
 
     public static Climber getInstance() {
-        if (climber == null) {
+        if (climber == null)
             climber = new Climber();
-        }
         return climber;
     }
 }
