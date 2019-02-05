@@ -5,22 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.collector;
+package frc.robot.input;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.subsystems.Collector;
+import edu.wpi.first.wpilibj.AnalogInput;
 
-public class AutoCollect extends CommandGroup {
-    Collector collector = Collector.getInstance();
-    /**
-     * Add your docs here.
-     */
-    public AutoCollect() {
-        // Move elevator to height 0
-
-        // Roll roller until limit switch
-
-        // Move elevator to height 1
+/**
+ * Add your docs here.
+ */
+public class AnalogUltrasound extends AnalogInput{
+    public AnalogUltrasound(int channel) {
+        super(channel);
         
     }
 }

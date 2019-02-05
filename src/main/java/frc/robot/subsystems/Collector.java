@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -23,8 +24,12 @@ public class Collector extends Subsystem {
     private final int SOL_OPEN_PORT = 0, SOL_HATCH_PORT = 1;
     WPI_TalonSRX intake;
     private final int INTAKE_PORT = 0;
-    DigitalInput ballInSwitch, collectorOpenSwitch;
-    private final int BALL_SWITCH_PORT = 0, OPEN_SWITCH_PORT = 1;
+    // one ultrasonic sensor to detect game pieces
+    Ultrasonic ultrasonic;
+    private final int ULTRA_PING = 0,
+        ULTRA_ECHO = 1;
+    private final double MAX_INCHES_CARGO = 6.0,
+        MAX_INCHES_HATCH = 18.0;
 
     /**
      * Constructs all hardware objects
@@ -33,8 +38,8 @@ public class Collector extends Subsystem {
         openCloseSolenoid = new Solenoid(SOL_OPEN_PORT);
         ejectHatchSolenoid = new Solenoid(SOL_HATCH_PORT);
         intake = new WPI_TalonSRX(INTAKE_PORT);
-        ballInSwitch = new DigitalInput(BALL_SWITCH_PORT);
-        collectorOpenSwitch = new DigitalInput(OPEN_SWITCH_PORT);
+        ultrasonic = new Ultrasonic(ULTRA_PING, ULTRA_ECHO);
+        ultrasonic.setAutomaticMode(true);
     }
 
     /**
@@ -67,29 +72,35 @@ public class Collector extends Subsystem {
      * Sets the speed of the intake roller
      * @param speed speed of roller, -1 to 1
      */
-    public void setIntakeSpeed(double speed) {
-        intake.set(ControlMode.PercentOutput, speed);
+    public void setIntakeSpeed(Speed speed) {
+        intake.set(ControlMode.PercentOutput, speed.speed);
     }
 
-    /**
-     * Gets the state of limit switch detecting ball in collector
-     * @return true if ball in, false if not
-     */
-    public boolean isBallIn() {
-        return ballInSwitch.get();
+    public double getUltrasonicInches() {
+        return ultrasonic.getRangeInches();
     }
 
-    /**
-     * Gets the state of limit switch detecting open collector
-     * @return true if open, false if false
-     */
-    public boolean isOpen() {
-        return collectorOpenSwitch.get();
+    public boolean hasCargo() {
+        return getUltrasonicInches() < MAX_INCHES_CARGO;
+    }
+
+    public boolean hasHatchPanel() {
+        return getUltrasonicInches() < MAX_INCHES_HATCH;
     }
 
     @Override
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
+    }
+
+    public enum Speed {
+        IN(1.0),
+        OFF(0.0),
+        OUT(-1.0);
+        final double speed;
+        private Speed(double speed) {
+            this.speed = speed;
+        }
     }
 }
