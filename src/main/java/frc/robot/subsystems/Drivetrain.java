@@ -23,6 +23,8 @@ import frc.robot.models.PairedTalonSRX;
 public class Drivetrain extends Subsystem {
     private static Drivetrain drivetrain = null;
 
+    final double ENCODER_TO_FEET = 3000;
+
     AHRS navx;
     // Speed controller ports
     private final int LEFT_FRONT = 0,
@@ -85,8 +87,11 @@ public class Drivetrain extends Subsystem {
         setDefaultCommand(new DefaultDrive());
     }
 
-    public double convertToEncoder(double feet) {
-        double encoderValue = 4;
-        return (feet * encoderValue);
+    public double encoderToFeet(double feet) {
+        return feet * ENCODER_TO_FEET;
+    }
+
+    public double feetToEncoder(double encoder) {
+        return encoder / ENCODER_TO_FEET;
     }
 }

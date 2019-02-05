@@ -7,7 +7,6 @@
 
 package frc.robot.commands.drivetrain;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.robot.subsystems.Drivetrain;
 
@@ -18,14 +17,12 @@ public class DriveFeet extends PIDCommand {
     public DriveFeet(double feet) {
         super(P, I, D);
         requires(drive);
-        
-
-
     }
 
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -52,6 +49,6 @@ public class DriveFeet extends PIDCommand {
 
     @Override
     protected void usePIDOutput(double output) {
-        drive.drive(drive.convertToEncoder(output), drive.convertToEncoder(output));
+        drive.drive(output, output);
     }
 }

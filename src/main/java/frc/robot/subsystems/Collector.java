@@ -12,7 +12,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -25,11 +24,6 @@ public class Collector extends Subsystem {
     WPI_TalonSRX intake;
     private final int INTAKE_PORT = 0;
     // one ultrasonic sensor to detect game pieces
-    Ultrasonic ultrasonic;
-    private final int ULTRA_PING = 0,
-        ULTRA_ECHO = 1;
-    private final double MAX_INCHES_CARGO = 6.0,
-        MAX_INCHES_HATCH = 18.0;
 
     /**
      * Constructs all hardware objects
@@ -38,8 +32,6 @@ public class Collector extends Subsystem {
         openCloseSolenoid = new Solenoid(SOL_OPEN_PORT);
         ejectHatchSolenoid = new Solenoid(SOL_HATCH_PORT);
         intake = new WPI_TalonSRX(INTAKE_PORT);
-        ultrasonic = new Ultrasonic(ULTRA_PING, ULTRA_ECHO);
-        ultrasonic.setAutomaticMode(true);
     }
 
     /**
@@ -74,18 +66,6 @@ public class Collector extends Subsystem {
      */
     public void setIntakeSpeed(Speed speed) {
         intake.set(ControlMode.PercentOutput, speed.speed);
-    }
-
-    public double getUltrasonicInches() {
-        return ultrasonic.getRangeInches();
-    }
-
-    public boolean hasCargo() {
-        return getUltrasonicInches() < MAX_INCHES_CARGO;
-    }
-
-    public boolean hasHatchPanel() {
-        return getUltrasonicInches() < MAX_INCHES_HATCH;
     }
 
     @Override

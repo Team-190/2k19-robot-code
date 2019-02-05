@@ -13,8 +13,12 @@ import edu.wpi.first.wpilibj.AnalogInput;
  * Add your docs here.
  */
 public class AnalogUltrasound extends AnalogInput{
+    final double VOLTS_PER_INCH = 6;
     public AnalogUltrasound(int channel) {
         super(channel);
-        
+    }
+
+    public double getInches() {
+        return getVoltage() / VOLTS_PER_INCH;
     }
 }
