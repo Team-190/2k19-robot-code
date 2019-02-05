@@ -84,4 +84,9 @@ public class Drivetrain extends Subsystem {
     public void initDefaultCommand() {
         setDefaultCommand(new DefaultDrive());
     }
+
+    public double convertToEncoder(double feet) {
+        double encoderValue = 4;
+        return (feet * encoderValue);
+    }
 }

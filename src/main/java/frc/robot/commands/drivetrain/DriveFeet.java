@@ -18,6 +18,9 @@ public class DriveFeet extends PIDCommand {
     public DriveFeet(double feet) {
         super(P, I, D);
         requires(drive);
+        
+
+
     }
 
     // Called just before this Command runs the first time
@@ -44,11 +47,11 @@ public class DriveFeet extends PIDCommand {
 
     @Override
     protected double returnPIDInput() {
-        return 0;
+        return (drive.getLeftPosition() +drive.getRightPosition())/2.00;
     }
 
     @Override
     protected void usePIDOutput(double output) {
-
+        drive.drive(drive.convertToEncoder(output), drive.convertToEncoder(output));
     }
 }
