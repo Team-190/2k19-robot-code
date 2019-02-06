@@ -7,7 +7,7 @@ public enum PathfinderSequence {
     LoadingLeftCloseRocket,
 
     RightStartFarRocket,
-    FarRocketRightLoading,
+    RightFarLoading,
     LoadingRightCloseRocket;
 
     private final String sequenceDirectory = "/home/lvuser/sequences";

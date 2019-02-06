@@ -12,18 +12,18 @@ import frc.robot.commands.collector.ExtakeHatchPanel;
 import frc.robot.commands.drivetrain.DriveSequence;
 import frc.robot.models.PathfinderSequence;
 
-public class LeftRocketAuto extends CommandGroup {
+public class RightRocketAuto extends CommandGroup {
     /**
-     * Left start auto
+     * Right start auto
      */
-    public LeftRocketAuto() {
-        addSequential(new DriveSequence(PathfinderSequence.LeftStartFarRocket));
+    public RightRocketAuto() {
+        addSequential(new DriveSequence(PathfinderSequence.RightStartFarRocket));
         addSequential(new ExtakeHatchPanel());
 
-        addSequential(new DriveSequence(PathfinderSequence.LeftFarLoading));
+        addSequential(new DriveSequence(PathfinderSequence.RightFarLoading));
         //TODO: wack into wall and get hatch panel, trial and error for that
 
-        addSequential(new DriveSequence(PathfinderSequence.LoadingLeftCloseRocket));
+        addSequential(new DriveSequence(PathfinderSequence.LoadingRightCloseRocket));
         addSequential(new ExtakeHatchPanel());
 
         //TODO: add to this if somehow under 15 seconds
