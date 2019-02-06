@@ -1,29 +1,14 @@
 package frc.robot.models;
 
 public enum PathfinderSequence {
-    LeftStartCloseRocket,
-    CloseRocketLeftLoading,
-    LoadingLeftCloseRocket,
-
-    LeftStartMiddleRocket,
-    MiddleRocketLeftLoading,
-    LoadingLeftMiddleRocket,
 
     LeftStartFarRocket,
-    FarRocketLeftLoading,
-    LoadingLeftFarRocket,
-
-    RightStartCloseRocket,
-    CloseRocketRightLoading,
-    LoadingRightCloseRocket,
-
-    RightStartMiddleRocket,
-    MiddleRocketRightLoading,
-    LoadingRightMiddleRocket,
+    LeftFarLoading,
+    LoadingLeftCloseRocket,
 
     RightStartFarRocket,
     FarRocketRightLoading,
-    LoadingRightFarRocket;
+    LoadingRightCloseRocket;
 
     private final String sequenceDirectory = "/home/lvuser/sequences";
 

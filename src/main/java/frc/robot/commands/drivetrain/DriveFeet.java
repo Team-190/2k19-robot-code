@@ -22,7 +22,6 @@ public class DriveFeet extends PIDCommand {
         super(P, I, D);
         requires(drive);
         this.feet = feet;
-        PIDController controller = this.getPIDController();
         setSetpoint(drive.feetToEncoder(feet));
     }
 

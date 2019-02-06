@@ -7,6 +7,8 @@
 
 package frc.robot.commands.drivetrain;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 import frc.robot.OI;
@@ -30,7 +32,7 @@ public class DefaultDrive extends Command {
     protected void execute() {
         double left = OI.getInstance().leftStick.getAxis(AttackThreeAxis.Y);
         double right = OI.getInstance().rightStick.getAxis(AttackThreeAxis.Y);
-        drive.drive(left, right);
+        drive.drive(ControlMode.PercentOutput, left, right);
     }
 
     // Make this return true when this Command no longer needs to run execute()

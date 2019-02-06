@@ -23,6 +23,6 @@ public class AutoCargoCollect extends CommandGroup {
         // Roll roller until limit switch
         addSequential(new RollIntakeForCargo(Collector.Speed.IN));
         // Move elevator to height 1
-        addSequential(new ElevateToHeight(Elevator.Position.HatchOne));
+        addSequential(new ElevateToHeight(Elevator.Position.CargoShipCargo));
     }
 }

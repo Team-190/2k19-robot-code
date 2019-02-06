@@ -22,7 +22,7 @@ public class ExtakeHatchPanel extends Command {
     @Override
     protected void initialize() {
         setTimeout(0.25);
-         collector.setEjector(true);
+        collector.setEjector(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
