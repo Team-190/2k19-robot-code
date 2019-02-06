@@ -70,6 +70,10 @@ public class Drivetrain extends Subsystem {
         return navx.getAngle();
     }
 
+    public void resetNavX() {
+        navx.reset();
+    }
+
     public int getLeftPosition() {
         return leftPair.getSelectedSensorPosition(PID_X);
     }

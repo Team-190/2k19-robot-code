@@ -90,11 +90,12 @@ public class Elevator extends Subsystem {
     }
     
     public enum Position {
-        Ground(0),
-        CollectHatch(10),
-        PlaceCargo(10),
+        Ground(0), // collector cargo too
+        HatchOne(10), 
+        CargoShipCargo(15),
         RocketHatchTwo(10),
         RocketHatchThree(10),
+        RocktCargoOne(10),
         RocketCargoTwo(10),
         RocketCargoThree(10),
         MaximumHeight(70);
