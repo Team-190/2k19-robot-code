@@ -13,29 +13,41 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.robot.subsystems.Drivetrain;
 
-public class DriveFeet extends PIDCommand {
+public class TurnToHeading extends PIDCommand {
     Drivetrain drive = Drivetrain.getInstance();
-    static final double P = 0.0, I = 0.0, D = 0.0;
-    double feet;
-
-    public DriveFeet(double feet) {
-        super(P, I, D);
-        requires(drive);
-        this.feet = feet;
-        PIDController controller = this.getPIDController();
-        setSetpoint(drive.feetToEncoder(feet));
+    PIDController controller;
+    double heading;
+    int countOnTarget =0;
+    public TurnToHeading(double heading) {
+        super(0, 0, 0);
+        this.heading = heading;
+        controller = getPIDController();
+        controller.setContinuous();
+        controller.setPercentTolerance(1);
+        setInputRange(-180, 180);
+        setSetpoint(heading);
     }
 
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+    }
 
+    // Called repeatedly when this Command is scheduled to run
+    @Override
+    protected void execute() {
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return (drive.getLeftPosition() +drive.getRightPosition())/2.00 > feet;
+        if (controller.onTarget()) {
+    		if (countOnTarget == 3)
+    			return true;
+    		countOnTarget++;
+    	} else
+    		countOnTarget = 0;
+    	return false;
     }
 
     // Called once after isFinished returns true
@@ -51,11 +63,11 @@ public class DriveFeet extends PIDCommand {
 
     @Override
     protected double returnPIDInput() {
-        return (drive.getLeftPosition() +drive.getRightPosition())/2.00;
+        return drive.getAngle();
     }
 
     @Override
     protected void usePIDOutput(double output) {
-        drive.drive(ControlMode.PercentOutput, output, output);
+        drive.drive(ControlMode.PercentOutput, output, -output);
     }
 }

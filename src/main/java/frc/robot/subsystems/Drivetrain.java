@@ -66,8 +66,8 @@ public class Drivetrain extends Subsystem {
         rightPair.set(mode, right);
     }
 
-    public AHRS getNavX() {
-        return navx;
+    public double getAngle() {
+        return navx.getAngle();
     }
 
     public int getLeftPosition() {
