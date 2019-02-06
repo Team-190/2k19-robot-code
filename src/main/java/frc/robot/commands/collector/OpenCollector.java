@@ -43,7 +43,7 @@ public class OpenCollector extends Command {
      */
     @Override
     protected boolean isFinished() {
-        return collector.isOpen();
+        return true;
     }
 
     @Override

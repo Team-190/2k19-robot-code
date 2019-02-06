@@ -7,6 +7,8 @@
 
 package frc.robot.commands.drivetrain;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -30,7 +32,7 @@ public class DriveToACS extends Command {
     protected void execute() {
         leftSpeed = climber.isLeftACSTriggered() ? 0.0 : 0.5;
         rightSpeed = climber.isRightACSTriggered() ? 0.0 : 0.5;
-        drive.drive(leftSpeed, rightSpeed);
+        drive.drive(ControlMode.PercentOutput, leftSpeed, rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

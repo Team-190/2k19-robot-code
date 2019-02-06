@@ -10,12 +10,13 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.input.AnalogUltrasonic;
 
 /**
- * Subsystem which controls the Collector
+ * Subsystem which controls the Collector   
  */
 public class Collector extends Subsystem {
     private static Collector collector;
@@ -24,6 +25,8 @@ public class Collector extends Subsystem {
     WPI_TalonSRX intake;
     private final int INTAKE_PORT = 0;
     // one ultrasonic sensor to detect game pieces
+    AnalogUltrasonic ultrasonic;
+    private final int ULTRA_PORT = 0;
 
     /**
      * Constructs all hardware objects
@@ -32,6 +35,7 @@ public class Collector extends Subsystem {
         openCloseSolenoid = new Solenoid(SOL_OPEN_PORT);
         ejectHatchSolenoid = new Solenoid(SOL_HATCH_PORT);
         intake = new WPI_TalonSRX(INTAKE_PORT);
+        ultrasonic = new AnalogUltrasonic(ULTRA_PORT);
     }
 
     /**
@@ -66,6 +70,14 @@ public class Collector extends Subsystem {
      */
     public void setIntakeSpeed(Speed speed) {
         intake.set(ControlMode.PercentOutput, speed.speed);
+    }
+
+    public boolean hasCargo() {
+        return ultrasonic.getInches() < 8;
+    }
+
+    public boolean hasHatchCover() {
+        return ultrasonic.getInches() < 14;
     }
 
     @Override

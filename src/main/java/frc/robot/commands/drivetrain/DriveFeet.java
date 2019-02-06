@@ -7,16 +7,20 @@
 
 package frc.robot.commands.drivetrain;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.robot.subsystems.Drivetrain;
 
 public class DriveFeet extends PIDCommand {
     Drivetrain drive = Drivetrain.getInstance();
     static final double P = 0.0, I = 0.0, D = 0.0;
+    double feet;
 
     public DriveFeet(double feet) {
         super(P, I, D);
         requires(drive);
+        this.feet = feet;
     }
 
     // Called just before this Command runs the first time
@@ -28,7 +32,7 @@ public class DriveFeet extends PIDCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        return (drive.getLeftPosition() +drive.getRightPosition())/2.00 > feet;
     }
 
     // Called once after isFinished returns true
@@ -49,6 +53,6 @@ public class DriveFeet extends PIDCommand {
 
     @Override
     protected void usePIDOutput(double output) {
-        drive.drive(output, output);
+        drive.drive(ControlMode.PercentOutput, output, output);
     }
 }

@@ -7,6 +7,8 @@
 
 package frc.robot.commands.drivetrain;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Drivetrain;
 
@@ -23,7 +25,7 @@ public class DriveForward extends Command {
 
     @Override
     protected void execute() {
-        drive.drive(1, 1);
+        drive.drive(ControlMode.PercentOutput, 1, 1);
     }
 
     @Override

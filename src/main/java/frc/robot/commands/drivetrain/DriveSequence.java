@@ -9,6 +9,8 @@ package frc.robot.commands.drivetrain;
 
 import java.io.File;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -70,7 +72,7 @@ public class DriveSequence extends Command {
             double angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);
             double turn = -angleDifference / 100; // magic number from 254
 
-            drivetrain.drive(leftSpeed + turn, rightSpeed - turn);
+            drivetrain.drive(ControlMode.PercentOutput, leftSpeed + turn, rightSpeed - turn);
         }
     }
 

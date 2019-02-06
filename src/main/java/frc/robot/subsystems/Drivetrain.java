@@ -36,6 +36,7 @@ public class Drivetrain extends Subsystem {
     private final int PID_X = 0,
         TIMEOUT_MS = 0;
 
+
     PairedTalonSRX leftPair, rightPair;
 
     private Drivetrain() {
@@ -60,9 +61,9 @@ public class Drivetrain extends Subsystem {
      * @param left left motor value
      * @param right right motor value
      */
-    public void drive(double left, double right) {
-        leftPair.set(ControlMode.PercentOutput, left);
-        rightPair.set(ControlMode.PercentOutput, right);
+    public void drive(ControlMode mode, double left, double right) {
+        leftPair.set(mode, left);
+        rightPair.set(mode, right);
     }
 
     public AHRS getNavX() {

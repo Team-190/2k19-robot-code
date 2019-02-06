@@ -8,7 +8,7 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.collector.AutoCollect;
+import frc.robot.commands.collector.AutoCargoCollect;
 import frc.robot.commands.collector.ExtakeHatchPanel;
 import frc.robot.commands.drivetrain.DriveSequence;
 import frc.robot.models.PathfinderSequence;
@@ -22,7 +22,7 @@ public class LeftRocketAuto extends CommandGroup {
         addSequential(new ExtakeHatchPanel());
 
         addSequential(new DriveSequence(PathfinderSequence.CloseRocketLeftLoading));
-        addSequential(new AutoCollect());
+        addSequential(new AutoCargoCollect());
 
         addSequential(new DriveSequence(PathfinderSequence.LoadingLeftFarRocket));
         addSequential(new ExtakeHatchPanel());
