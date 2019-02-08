@@ -12,6 +12,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+import frc.robot.commands.elevator.DefaultElevator;
 import frc.robot.models.PairedTalonSRX;
 
 /**
@@ -70,11 +72,12 @@ public class Elevator extends Subsystem {
         motor.set(ControlMode.Position, motorSetpoint);
     }
 
+
     public void stop() {
         motor.set(ControlMode.PercentOutput, 0);
     }
 
-    public void manualControl(double speed) {
+    public void moveElevator(double speed) {
         motor.set(ControlMode.PercentOutput, speed);
     }
 
@@ -85,14 +88,13 @@ public class Elevator extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        // setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new DefaultElevator());
     }
     
     public enum Position {
         Ground(0), // collector cargo too
-        HatchOne(10), 
-        CargoShipCargo(15),
+        HatchOne(10), // cargo ship, rocket, and loading
+        CargoShipCargo(15), 
         RocketHatchTwo(10),
         RocketHatchThree(10),
         RocktCargoOne(10),

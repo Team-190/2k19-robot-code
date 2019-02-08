@@ -36,11 +36,11 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
-        Collector.getInstance();
+        // Collector.getInstance();
         Drivetrain.getInstance();
-        Elevator.getInstance();
-        Climber.getInstance();
-        Vision.getInstance();
+        // Elevator.getInstance();
+        // Climber.getInstance();
+        // Vision.getInstance();
         OI.getInstance();
         m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
         m_chooser.addOption("My Auto", kCustomAuto);
