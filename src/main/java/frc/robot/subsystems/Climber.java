@@ -23,22 +23,16 @@ public class Climber extends Subsystem {
     private static Climber climber;
 
     private AnalogInput leftACS, rightACS, chassisACS;
-    private final int LEFT_ACS_PORT = 0,
-        RIGHT_ACS_PORT = 1,
-        CHASSIS_ACS_PORT = 2;
-
+    private final int LEFT_ACS_PORT = 0, RIGHT_ACS_PORT = 1, CHASSIS_ACS_PORT = 2;
 
     private DigitalInput trolleyUp, armsDown;
-    private final int TROLLEY_PORT = 0,
-        ARMS_PORT = 1;
+    private final int TROLLEY_PORT = 0, ARMS_PORT = 1;
 
     private WPI_TalonSRX motor;
     private final int MOTOR_PORT = 0;
 
     private DoubleSolenoid solenoid;
-    private final int SOLENOID_PORT = 0,
-        SOLENOID_FORWARD_PORT = 1,
-        SOLENOID_REVERSE_PORT = 2;
+    private final int SOLENOID_PORT = 0, SOLENOID_FORWARD_PORT = 1, SOLENOID_REVERSE_PORT = 2;
 
     private Climber() {
         leftACS = new AnalogInput(LEFT_ACS_PORT);
@@ -53,17 +47,17 @@ public class Climber extends Subsystem {
         solenoid = new DoubleSolenoid(SOLENOID_PORT, SOLENOID_FORWARD_PORT, SOLENOID_REVERSE_PORT);
     }
 
-    //TODO: find the real threshold
+    // TODO: find the real threshold
     public boolean isLeftACSTriggered() {
         return leftACS.getVoltage() > 1.5;
     }
 
-    //TODO: find the real threshold
+    // TODO: find the real threshold
     public boolean isRightACSTriggered() {
         return rightACS.getVoltage() > 1.5;
     }
 
-    //TODO: find the real threshold
+    // TODO: find the real threshold
     public boolean isChassisACSTriggered() {
         return chassisACS.getVoltage() > 1.5;
     }
@@ -100,5 +94,19 @@ public class Climber extends Subsystem {
         if (climber == null)
             climber = new Climber();
         return climber;
+    }
+
+    public enum Direction {
+        FORWARD(1),
+        BACKWARD(-1);
+
+        private final int value;
+        private Direction(int value) {
+            this.value = value;
+        }
+
+        public int get() {
+            return value;
+        }
     }
 }

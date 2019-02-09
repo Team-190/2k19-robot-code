@@ -2,24 +2,26 @@
 /* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
+/* the project.      F                                                         */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.collector;
+package frc.robot.commands.climber;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.Collector;
-import frc.robot.subsystems.Collector.Speed;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Elevator;
 
-public class RollIntakeForCargo extends Command {
-    Collector collector = Collector.getInstance();
-    Speed speed;
-
-    public RollIntakeForCargo(Speed speed) {
-        requires(collector);
-        this.speed = speed;
+public class RollManual extends Command {
+    Climber.Direction direction;
+    Climber climber = Climber.getInstance();
+    public RollManual(Climber.Direction direction) {
+        requires(climber);
+        this.direction = direction;
     }
 
+    // Called just before this Command runs the first time
     @Override
     protected void initialize() {
     }
@@ -27,19 +29,19 @@ public class RollIntakeForCargo extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        collector.setIntakeSpeed(speed);
+        climber.setSpeed(ControlMode.PercentOutput, direction.get());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return collector.hasCargo();
+        return true;
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        collector.setIntakeSpeed(Speed.OFF);
+        climber.setSpeed(ControlMode.PercentOutput, 0);
     }
 
     // Called when another command which requires one or more of the same

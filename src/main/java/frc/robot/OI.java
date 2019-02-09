@@ -7,10 +7,22 @@
 
 package frc.robot;
 
+import frc.robot.commands.climber.Climb;
+import frc.robot.commands.climber.RollManual;
+import frc.robot.commands.collector.AutoCargoCollect;
+import frc.robot.commands.collector.CloseCollector;
+import frc.robot.commands.collector.ExtakeHatchPanel;
+import frc.robot.commands.collector.OpenCollector;
+import frc.robot.commands.collector.RollIntakeForCargo;
+import frc.robot.commands.elevator.ElevateManual;
 import frc.robot.commands.elevator.ElevateToHeight;
 import frc.robot.input.AttackThree;
 import frc.robot.input.ButtonBox;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Collector.Speed;
+import frc.robot.subsystems.Elevator.Direction;
 
 /**
  * Add your docs here.
@@ -44,8 +56,24 @@ public class OI {
         buttonBox.cargoShipPanel.whenPressed(new ElevateToHeight(Elevator.Position.HatchOne));
 
         // collector
-        
+        buttonBox.intakeCargo.whenPressed(new AutoCargoCollect());
+        buttonBox.intakePanel.whenPressed(new ElevateToHeight(Elevator.Position.HatchOne));
+        buttonBox.extakeCargo.whenPressed(new RollIntakeForCargo(Collector.Speed.IN));
+        buttonBox.extakePanel.whenPressed(new ExtakeHatchPanel());
 
+        // Climber
+        buttonBox.cLimb.whenPressed(new Climb());
+
+        // Manual
+        buttonBox.manualElevator.getForward().whenPressed(new ElevateManual(Direction.UP));
+        buttonBox.manualElevator.getForward().whenPressed(new ElevateManual(Direction.DOWN));
+        buttonBox.manualCollector.getForward().whenPressed(new OpenCollector());
+        buttonBox.manualCollector.getBackward().whenPressed(new CloseCollector());
+        buttonBox.manualRoller.getForward().whenPressed(new RollIntakeForCargo(Speed.OUT));
+        buttonBox.manualRoller.getBackward().whenPressed(new RollIntakeForCargo(Speed.IN));
+        buttonBox.firePiston.whenPressed(new ExtakeHatchPanel());
+        buttonBox.manualClimber.getForward().whileHeld(new RollManual(Climber.Direction.FORWARD));  
+        buttonBox.manualClimber.getBackward().whileHeld(new RollManual(Climber.Direction.BACKWARD));
     }
 
     /**

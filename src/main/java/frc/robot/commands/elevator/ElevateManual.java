@@ -5,41 +5,40 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.collector;
+package frc.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.subsystems.Collector;
-import frc.robot.subsystems.Collector.Speed;
+import frc.robot.subsystems.Elevator;
 
-public class RollIntakeForCargo extends Command {
-    Collector collector = Collector.getInstance();
-    Speed speed;
+public class ElevateManual extends Command {
+    Elevator.Direction direction;
+    Elevator elevator = Elevator.getInstance();
 
-    public RollIntakeForCargo(Speed speed) {
-        requires(collector);
-        this.speed = speed;
+    public ElevateManual(Elevator.Direction direction) {
+        requires(elevator);
+        this.direction = direction;
     }
 
+    // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        elevator.setHeight(elevator.getPosition() + direction.get() * 10);
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        collector.setIntakeSpeed(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return collector.hasCargo();
+        return true;
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        collector.setIntakeSpeed(Speed.OFF);
     }
 
     // Called when another command which requires one or more of the same

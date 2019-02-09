@@ -72,6 +72,11 @@ public class Elevator extends Subsystem {
         motor.set(ControlMode.Position, motorSetpoint);
     }
 
+    public void setHeight(double pot) {
+        motorSetpoint = pot;
+        motor.set(ControlMode.Position, motorSetpoint);
+    }
+
 
     public void stop() {
         motor.set(ControlMode.PercentOutput, 0);
@@ -112,5 +117,18 @@ public class Elevator extends Subsystem {
             return inches;
         }
 
+    }
+
+    public enum Direction {
+        UP(1),
+        DOWN(-1);
+        private final int value;
+        private Direction(int value) {
+            this.value = value;
+        }
+
+        public int get() {
+            return value;
+        }
     }
 }
