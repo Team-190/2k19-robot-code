@@ -25,10 +25,10 @@ import frc.robot.subsystems.Vision;
  */
 public class Robot extends TimedRobot {
     //TODO: map out ports
-    private static final String kDefaultAuto = "Default";
-    private static final String kCustomAuto = "My Auto";
-    private String m_autoSelected;
-    private final SendableChooser<String> m_chooser = new SendableChooser<>();
+    // private static final String kDefaultAuto = "Default";
+    // private static final String kCustomAuto = "My Auto";
+    // private String m_autoSelected;
+    // private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -36,15 +36,15 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
+        OI.getInstance();
         // Collector.getInstance();
         Drivetrain.getInstance();
         // Elevator.getInstance();
         // Climber.getInstance();
         // Vision.getInstance();
-        OI.getInstance();
-        m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-        m_chooser.addOption("My Auto", kCustomAuto);
-        SmartDashboard.putData("Auto choices", m_chooser);
+        // m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+        // m_chooser.addOption("My Auto", kCustomAuto);
+        // SmartDashboard.putData("Auto choices", m_chooser);
     }
 
     /**
@@ -74,9 +74,9 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
-        m_autoSelected = m_chooser.getSelected();
+        // m_autoSelected = m_chooser.getSelected();
         // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-        System.out.println("Auto selected: " + m_autoSelected);
+        // System.out.println("Auto selected: " + m_autoSelected);
     }
 
     /**
@@ -84,15 +84,15 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousPeriodic() {
-        switch (m_autoSelected) {
-        case kCustomAuto:
-            // Put custom auto code here
-            break;
-        case kDefaultAuto:
-        default:
-            // Put default auto code here
-            break;
-        }
+        // switch (m_autoSelected) {
+        // case kCustomAuto:
+        //     // Put custom auto code here
+        //     break;
+        // case kDefaultAuto:
+        // default:
+        //     // Put default auto code here
+        //     break;
+        // }
     }
 
     /**

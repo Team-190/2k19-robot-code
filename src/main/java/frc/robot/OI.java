@@ -35,45 +35,45 @@ public class OI {
         BUTTON_BOX = 2;
 
     public final AttackThree leftStick, rightStick;
-    public final ButtonBox buttonBox;
+    // public final ButtonBox buttonBox;
 
     private OI() {
         leftStick = new AttackThree(LEFT_STICK);
         rightStick = new AttackThree(RIGHT_STICK);
-        buttonBox = new ButtonBox(BUTTON_BOX);
+        // buttonBox = new ButtonBox(BUTTON_BOX);
 
-        // map button box commands
-        // elevator
-        buttonBox.upperRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketHatchThree));
-        buttonBox.middleRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoTwo));
-        buttonBox.lowRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoTwo));
+        // // map button box commands
+        // // elevator
+        // buttonBox.upperRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketHatchThree));
+        // buttonBox.middleRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoTwo));
+        // buttonBox.lowRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoTwo));
 
-        buttonBox.upperRocketPanel.whenPressed(new ElevateToHeight(Elevator.Position.RocketHatchThree));
-        buttonBox.middleRocketPanel.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoTwo));
-        buttonBox.lowRocketPanel.whenPressed(new ElevateToHeight(Elevator.Position.HatchOne));
+        // buttonBox.upperRocketPanel.whenPressed(new ElevateToHeight(Elevator.Position.RocketHatchThree));
+        // buttonBox.middleRocketPanel.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoTwo));
+        // buttonBox.lowRocketPanel.whenPressed(new ElevateToHeight(Elevator.Position.HatchOne));
 
-        buttonBox.cargoShipCargo.whenPressed(new ElevateToHeight(Elevator.Position.CargoShipCargo));
-        buttonBox.cargoShipPanel.whenPressed(new ElevateToHeight(Elevator.Position.HatchOne));
+        // buttonBox.cargoShipCargo.whenPressed(new ElevateToHeight(Elevator.Position.CargoShipCargo));
+        // buttonBox.cargoShipPanel.whenPressed(new ElevateToHeight(Elevator.Position.HatchOne));
 
-        // collector
-        buttonBox.intakeCargo.whenPressed(new AutoCargoCollect());
-        buttonBox.intakePanel.whenPressed(new ElevateToHeight(Elevator.Position.HatchOne));
-        buttonBox.extakeCargo.whenPressed(new RollIntakeForCargo(Collector.Speed.IN));
-        buttonBox.extakePanel.whenPressed(new ExtakeHatchPanel());
+        // // collector
+        // buttonBox.intakeCargo.whenPressed(new AutoCargoCollect());
+        // buttonBox.intakePanel.whenPressed(new ElevateToHeight(Elevator.Position.HatchOne));
+        // buttonBox.extakeCargo.whenPressed(new RollIntakeForCargo(Collector.Speed.IN));
+        // buttonBox.extakePanel.whenPressed(new ExtakeHatchPanel());
 
-        // Climber
-        buttonBox.cLimb.whenPressed(new Climb());
+        // // Climber
+        // buttonBox.cLimb.whenPressed(new Climb());
 
-        // Manual
-        buttonBox.manualElevator.getForward().whenPressed(new ElevateManual(Direction.UP));
-        buttonBox.manualElevator.getForward().whenPressed(new ElevateManual(Direction.DOWN));
-        buttonBox.manualCollector.getForward().whenPressed(new OpenCollector());
-        buttonBox.manualCollector.getBackward().whenPressed(new CloseCollector());
-        buttonBox.manualRoller.getForward().whenPressed(new RollIntakeForCargo(Speed.OUT));
-        buttonBox.manualRoller.getBackward().whenPressed(new RollIntakeForCargo(Speed.IN));
-        buttonBox.firePiston.whenPressed(new ExtakeHatchPanel());
-        buttonBox.manualClimber.getForward().whileHeld(new RollManual(Climber.Direction.FORWARD));  
-        buttonBox.manualClimber.getBackward().whileHeld(new RollManual(Climber.Direction.BACKWARD));
+        // // Manual
+        // buttonBox.manualElevator.getForward().whenPressed(new ElevateManual(Direction.UP));
+        // buttonBox.manualElevator.getForward().whenPressed(new ElevateManual(Direction.DOWN));
+        // buttonBox.manualCollector.getForward().whenPressed(new OpenCollector());
+        // buttonBox.manualCollector.getBackward().whenPressed(new CloseCollector());
+        // buttonBox.manualRoller.getForward().whenPressed(new RollIntakeForCargo(Speed.OUT));
+        // buttonBox.manualRoller.getBackward().whenPressed(new RollIntakeForCargo(Speed.IN));
+        // buttonBox.firePiston.whenPressed(new ExtakeHatchPanel());
+        // buttonBox.manualClimber.getForward().whileHeld(new RollManual(Climber.Direction.FORWARD));  
+        // buttonBox.manualClimber.getBackward().whileHeld(new RollManual(Climber.Direction.BACKWARD));
     }
 
     /**
