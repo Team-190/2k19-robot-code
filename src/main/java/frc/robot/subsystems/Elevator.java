@@ -17,66 +17,85 @@ import frc.robot.commands.elevator.DefaultElevator;
 import frc.robot.models.PairedTalonSRX;
 
 /**
- * Add your docs here.
+ * Subsystem controls the elevator
  */
 public class Elevator extends Subsystem {
     private static Elevator elevator;
+    private PairedTalonSRX motor;
 
+    private static final int LEFT = 4, RIGHT = 5;
+
+    private final static double ENC_BOTTOM = 0; // Encoder Value
+    private final static double ENC_TOP_OFFSET = 1024; // Encoder Value
+    private final static double ERROR_TOLERANCE = 10;
+
+    private double motorSetpoint;
+
+    // Encoder config values
+    private final int PID_X = 0,
+        TIMEOUT_MS = 0;
+
+    /**
+     * Gets the singular instance of the Elevator class
+     * 
+     * @return the Elevator instance
+     */
     public static Elevator getInstance() {
         if (elevator == null)
             elevator = new Elevator();
         return elevator;
     }
 
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-
-    private PairedTalonSRX motor;
-
-    private static final int LEFT = 4,
-        RIGHT = 5;
-
-    private static final int PID_X = 0;
-
-    private final static double POT_BOTTOM = 0; // Pot Value
-    private final static double POT_TOP_OFFSET = 1024; // Pot Value
-    private final static double ERROR_TOLERANCE = 10;
-
-    private double motorSetpoint;
-    
-    public Elevator() {
+    /**
+     * Constructs the Paired Talon, configures it
+     */
+    private Elevator() {
         motor = new PairedTalonSRX(LEFT, RIGHT);
-        motor.configSelectedFeedbackSensor(FeedbackDevice.Analog);
+        motor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
         motor.configPIDF(PID_X, 0, 0, 0, 0);
         motor.setInverted(InvertType.None);
         motor.setSensorPhase(false);
         motorSetpoint = Position.Ground.getPosition();
     }
 
+    /**
+     * Gets the encoder value of the elevator
+     * @return the encoder value
+     */
     public int getPosition() {
         return motor.getSelectedSensorPosition();
     }
 
-    private double heightToPot(double inches) {
+    /**
+     * Converts inches to encoder values
+     * @param inches the amount of inches to convert
+     * @return the encoder values in inches
+     */
+    private double heightToEnc(double inches) {
         double heightScale = inches / Position.MaximumHeight.getPosition();
-        return (POT_TOP_OFFSET * heightScale) + POT_BOTTOM;
+        return (ENC_TOP_OFFSET * heightScale) + ENC_BOTTOM;
     }
 
-    private double potToInches(double potValue) {
-        return ((potValue - POT_BOTTOM) / POT_TOP_OFFSET) *
-            Position.MaximumHeight.getPosition();
+    /**
+     * Converts encoder values to inches
+     */
+    private double encToInches(double encValue) {
+        return ((encValue - ENC_BOTTOM) / ENC_TOP_OFFSET) * Position.MaximumHeight.getPosition();
     }
 
+    /**
+     * Changes the setpoint of Elevator subsystem to position
+     * @param position Position to move the elevator
+     */
     public void setHeight(Position position) {
-        motorSetpoint = heightToPot(position.getPosition());
+        motorSetpoint = heightToEnc(position.getPosition());
         motor.set(ControlMode.Position, motorSetpoint);
     }
 
-    public void setHeight(double pot) {
-        motorSetpoint = pot;
+    public void setHeight(double enc) {
+        motorSetpoint = enc;
         motor.set(ControlMode.Position, motorSetpoint);
     }
-
 
     public void stop() {
         motor.set(ControlMode.PercentOutput, 0);
@@ -95,17 +114,12 @@ public class Elevator extends Subsystem {
     public void initDefaultCommand() {
         setDefaultCommand(new DefaultElevator());
     }
-    
+
     public enum Position {
         Ground(0), // collector cargo too
         HatchOne(10), // cargo ship, rocket, and loading
-        CargoShipCargo(15), 
-        RocketHatchTwo(10),
-        RocketHatchThree(10),
-        RocktCargoOne(10),
-        RocketCargoTwo(10),
-        RocketCargoThree(10),
-        MaximumHeight(70);
+        CargoShipCargo(15), RocketHatchTwo(10), RocketHatchThree(10), RocktCargoOne(10), RocketCargoTwo(10),
+        RocketCargoThree(10), MaximumHeight(70);
 
         private int inches;
 
@@ -120,9 +134,9 @@ public class Elevator extends Subsystem {
     }
 
     public enum Direction {
-        UP(1),
-        DOWN(-1);
+        UP(1), DOWN(-1);
         private final int value;
+
         private Direction(int value) {
             this.value = value;
         }
