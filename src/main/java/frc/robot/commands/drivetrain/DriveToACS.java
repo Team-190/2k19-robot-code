@@ -15,11 +15,11 @@ import frc.robot.subsystems.Drivetrain;
 
 public class DriveToACS extends Command {
     Drivetrain drive = Drivetrain.getInstance();
-    Climber climber;
+    Climber climber = Climber.getInstance();
     double leftSpeed, rightSpeed;
     public DriveToACS() {
         requires(drive);
-        climber = Climber.getInstance(); // only reads, doesn't write
+        requires(climber); // only reads, doesn't write
     }
 
     // Called just before this Command runs the first time
@@ -44,11 +44,6 @@ public class DriveToACS extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    @Override
-    protected void interrupted() {
+        drive.drive(ControlMode.PercentOutput, 0, 0);
     }
 }

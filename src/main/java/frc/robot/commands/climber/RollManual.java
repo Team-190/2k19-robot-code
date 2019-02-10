@@ -11,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Elevator;
 
 public class RollManual extends Command {
     Climber.Direction direction;

@@ -17,9 +17,10 @@ public class TurnToHeading extends PIDCommand {
     Drivetrain drive = Drivetrain.getInstance();
     PIDController controller;
     double heading;
-    int countOnTarget =0;
+    int countOnTarget = 0;
+
     public TurnToHeading(double heading) {
-        super(0, 0, 0);
+        super(0, 0, 0); // TODO: tune PID
         this.heading = heading;
         controller = getPIDController();
         controller.setContinuous();
@@ -41,24 +42,20 @@ public class TurnToHeading extends PIDCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        if (controller.onTarget()) {
-    		if (countOnTarget == 3)
-    			return true;
-    		countOnTarget++;
-    	} else
-    		countOnTarget = 0;
-    	return false;
+        // if (controller.onTarget()) {
+        //     if (countOnTarget == 3)
+        //         return true;
+        //     countOnTarget++;
+        // } else
+        //     countOnTarget = 0;
+        // return false;
+        return controller.onTarget();
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    @Override
-    protected void interrupted() {
+        drive.drive(ControlMode.PercentOutput, 0, 0);
     }
 
     @Override
@@ -68,6 +65,6 @@ public class TurnToHeading extends PIDCommand {
 
     @Override
     protected void usePIDOutput(double output) {
-        drive.drive(ControlMode.PercentOutput, output, -output);
+        drive.drive(ControlMode.PercentOutput, output, -output); //TODO: fix signs?
     }
 }

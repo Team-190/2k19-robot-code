@@ -38,11 +38,11 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         OI.getInstance();
-        // Collector.getInstance();
+        Collector.getInstance();
         Drivetrain.getInstance();
-        // Elevator.getInstance();
-        // Climber.getInstance();
-        // Vision.getInstance();
+        Elevator.getInstance();
+        Climber.getInstance();
+        Vision.getInstance();
         // m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
         // m_chooser.addOption("My Auto", kCustomAuto);
         // SmartDashboard.putData("Auto choices", m_chooser);
@@ -78,6 +78,7 @@ public class Robot extends TimedRobot {
         // m_autoSelected = m_chooser.getSelected();
         // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
         // System.out.println("Auto selected: " + m_autoSelected);
+        Drivetrain.getInstance().setBrake();
     }
 
     /**
@@ -85,6 +86,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousPeriodic() {
+        Scheduler.getInstance().run();
         // switch (m_autoSelected) {
         // case kCustomAuto:
         //     // Put custom auto code here
@@ -94,6 +96,12 @@ public class Robot extends TimedRobot {
         //     // Put default auto code here
         //     break;
         // }
+    }
+
+    @Override
+    public void teleopInit() {
+        //TODO: cancel auto if running
+        Drivetrain.getInstance().setCoast();
     }
 
     /**
@@ -109,5 +117,6 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void testPeriodic() {
+        Scheduler.getInstance().run();
     }
 }

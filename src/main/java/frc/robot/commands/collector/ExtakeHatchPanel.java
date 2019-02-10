@@ -7,46 +7,26 @@
 
 package frc.robot.commands.collector;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.subsystems.Collector;
 
-//TODO: do all of this
-public class ExtakeHatchPanel extends Command {
+public class ExtakeHatchPanel extends TimedCommand {
     Collector collector = Collector.getInstance();
 
     public ExtakeHatchPanel() {
+        super(0.25);
         requires(collector);
     }
 
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        setTimeout(0.25);
         collector.setEjector(true);
-    }
-
-    // Called repeatedly when this Command is scheduled to run
-    @Override
-    protected void execute() {
-    }
-
-    // Make this return true when this Command no longer needs to run execute()
-    @Override
-    protected boolean isFinished() {
-        //just waits 0.25 seconds
-        return false;
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        collector.setEjector(false);
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    @Override
-    protected void interrupted() {
         collector.setEjector(false);
     }
 }

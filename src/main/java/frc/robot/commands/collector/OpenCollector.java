@@ -7,13 +7,13 @@
 
 package frc.robot.commands.collector;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.subsystems.Collector;
 
 /**
  * Opens the collector
  */
-public class OpenCollector extends Command {
+public class OpenCollector extends InstantCommand {
     Collector collector = Collector.getInstance();
     /**
      * Requires Collector subsystem
@@ -28,29 +28,5 @@ public class OpenCollector extends Command {
     @Override
     protected void initialize() {
         collector.setCollector(true);
-    }
-
-    /**
-     * Waits
-     */
-    @Override
-    protected void execute() {
-    }
-
-    /**
-     * Gets the state of the collector as the state of the command
-     * @return state of collector (open or closed)
-     */
-    @Override
-    protected boolean isFinished() {
-        return true;
-    }
-
-    @Override
-    protected void end() {
-    }
-
-    @Override
-    protected void interrupted() {
     }
 }

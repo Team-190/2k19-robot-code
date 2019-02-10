@@ -25,7 +25,7 @@ public class RollToHAB extends Command {
 
     @Override
     protected void execute() {
-        climber.setSpeed(ControlMode.PercentOutput, 1);
+        climber.setSpeed(ControlMode.PercentOutput, Climber.Direction.FORWARD.get());
     }
 
     @Override
@@ -35,9 +35,6 @@ public class RollToHAB extends Command {
 
     @Override
     protected void end() {
-    }
-
-    @Override
-    protected void interrupted() {
+        climber.setSpeed(ControlMode.PercentOutput, 0);
     }
 }

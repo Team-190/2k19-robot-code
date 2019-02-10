@@ -1,5 +1,8 @@
 package frc.robot.models;
 
+import jaci.pathfinder.PathfinderFRC;
+import jaci.pathfinder.Trajectory;
+
 public enum PathfinderSequence {
 
     LeftStartFarRocket,
@@ -10,13 +13,13 @@ public enum PathfinderSequence {
     RightFarLoading,
     LoadingRightCloseRocket;
 
-    private final String sequenceDirectory = "/home/lvuser/sequences";
 
-    public String getLeftCSVName() {
-        return sequenceDirectory + name() + ".left.pf1.csv";
+    public Trajectory getLeft() {
+        return PathfinderFRC.getTrajectory(name() + ".left");
+        // return sequenceDirectory + name() + ".left.pf1.csv";
     }
 
-    public String getRightCSVName() {
-        return sequenceDirectory + name() + ".right.pf1.csv";
+    public Trajectory getRight() {
+        return PathfinderFRC.getTrajectory(name() + ".right");
     }
 }

@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.SPI;
 import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import frc.robot.commands.drivetrain.DefaultDrive;
 import frc.robot.models.PairedTalonSRX;
@@ -23,7 +24,7 @@ import frc.robot.models.PairedTalonSRX;
 public class Drivetrain extends Subsystem {
     private static Drivetrain drivetrain = null;
 
-    final double ENCODER_TO_FEET = 3000;
+    final double ENCODER_TO_FEET = 3000; //TODO: configure this
 
     AHRS navx;
     // Speed controller ports
@@ -46,6 +47,10 @@ public class Drivetrain extends Subsystem {
         leftPair.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
         rightPair.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
         rightPair.setInverted(true);
+        addChild(leftPair);
+        addChild(rightPair);
+        addChild(leftPair.getFollower());
+        addChild(rightPair.getFollower());
     }
 
     /**
@@ -55,6 +60,16 @@ public class Drivetrain extends Subsystem {
     public static Drivetrain getInstance() {
         if (drivetrain == null) drivetrain = new Drivetrain();
         return drivetrain;
+    }
+
+    public void setCoast() {
+        leftPair.setNeutralMode(NeutralMode.Coast);
+        rightPair.setNeutralMode(NeutralMode.Coast);
+    }
+    
+    public void setBrake() {
+        leftPair.setNeutralMode(NeutralMode.Brake);
+        rightPair.setNeutralMode(NeutralMode.Brake);
     }
 
     /**

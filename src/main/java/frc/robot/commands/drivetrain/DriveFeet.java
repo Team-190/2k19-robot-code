@@ -9,13 +9,12 @@ package frc.robot.commands.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.robot.subsystems.Drivetrain;
 
 public class DriveFeet extends PIDCommand {
     Drivetrain drive = Drivetrain.getInstance();
-    static final double P = 0.0, I = 0.0, D = 0.0;
+    static final double P = 0.0, I = 0.0, D = 0.0; // TODO: tune PID
     double feet;
 
     public DriveFeet(double feet) {
@@ -34,23 +33,18 @@ public class DriveFeet extends PIDCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return (drive.getLeftPosition() +drive.getRightPosition())/2.00 > feet;
+        return getPIDController().onTarget();
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    @Override
-    protected void interrupted() {
+        drive.drive(ControlMode.PercentOutput, 0, 0);
     }
 
     @Override
     protected double returnPIDInput() {
-        return (drive.getLeftPosition() +drive.getRightPosition())/2.00;
+        return (drive.getLeftPosition() + drive.getRightPosition()) / 2.00;
     }
 
     @Override

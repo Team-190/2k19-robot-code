@@ -48,6 +48,7 @@ public class Climber extends Subsystem {
     }
 
     // TODO: find the real threshold
+    //TODO: create constants
     public boolean isLeftACSTriggered() {
         return leftACS.getVoltage() > 1.5;
     }
@@ -86,8 +87,6 @@ public class Climber extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        // setDefaultCommand(new MySpecialCommand());
     }
 
     public static Climber getInstance() {

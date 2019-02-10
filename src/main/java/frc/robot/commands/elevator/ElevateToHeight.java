@@ -36,8 +36,4 @@ public class ElevateToHeight extends Command {
     @Override
     protected void end() {
     }
-
-    @Override
-    protected void interrupted() {
-    }
 }

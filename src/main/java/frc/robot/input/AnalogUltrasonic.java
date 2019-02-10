@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
  * Add your docs here.
  */
 public class AnalogUltrasonic extends AnalogInput{
-    final double VOLTS_PER_INCH = 6;
+    final double VOLTS_PER_INCH = 6; //TODO: tune this
     public AnalogUltrasonic(int channel) {
         super(channel);
     }

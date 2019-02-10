@@ -9,7 +9,6 @@ package frc.robot.input;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
 
 public class ButtonBox extends Joystick {
 

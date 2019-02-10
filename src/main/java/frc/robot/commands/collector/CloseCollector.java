@@ -8,13 +8,15 @@
 package frc.robot.commands.collector;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.subsystems.Collector;
 
 /**
  * Closes the collector
  */
-public class CloseCollector extends Command {
+public class CloseCollector extends InstantCommand {
     Collector collector = Collector.getInstance();
+
     /**
      * Requires Collector subsystem
      */
@@ -30,27 +32,4 @@ public class CloseCollector extends Command {
         collector.setCollector(false);
     }
 
-    /**
-     * Waits
-     */
-    @Override
-    protected void execute() {
-    }
-
-    /**
-     * Gets the state of the collector as the state of the command
-     * @return state of collector (open or closed)
-     */
-    @Override
-    protected boolean isFinished() {
-        return true;
-    }
-
-    @Override
-    protected void end() {
-    }
-
-    @Override
-    protected void interrupted() {
-    }
 }

@@ -30,16 +30,13 @@ public class Climb extends CommandGroup {
         // Parallel
         //      drive left forward until arm left anti-cliff triggered
         //      drive right forward until arm right anti-cliff triggered
-        addSequential(new DriveToACS(), 3);
+        addSequential(new DriveToACS(), 5);
         // trigger lifting pneumatics
-        addSequential(new DeployLifters(), 10);
+        addSequential(new DeployLifters());
         // drive BAG motor on until chassis anti-cliff triggered
         addSequential(new RollToHAB());
-        // Parallel
-        //      Stop BAG
-        addParallel(new StopRoll());
         //      Retract pneumatics
-        addSequential(new RetractLifters(), 4);
+        addSequential(new RetractLifters());
         // Drive forward 18"
         addSequential(new DriveForward(), 2);
     }

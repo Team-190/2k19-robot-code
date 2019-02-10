@@ -2,18 +2,17 @@ package frc.robot.models;
 
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class PairedTalonSRX extends WPI_TalonSRX {
 
-    private final TalonSRX follower;
+    private final WPI_TalonSRX follower;
 
     public PairedTalonSRX(int leaderDeviceNumber, int followerDeviceNumber) {
         super(leaderDeviceNumber);
         configFactoryDefault();
 
-        follower = new TalonSRX(followerDeviceNumber);
+        follower = new WPI_TalonSRX(followerDeviceNumber);
         follower.configFactoryDefault();
         follower.follow(this);
         follower.setInverted(InvertType.FollowMaster);
@@ -30,6 +29,10 @@ public class PairedTalonSRX extends WPI_TalonSRX {
         config_kI(slotIdx, I);
         config_kD(slotIdx, D);
         config_kF(slotIdx, F);
+    }
+
+    public WPI_TalonSRX getFollower() {
+        return follower;
     }
 
 }

@@ -10,10 +10,11 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-import frc.robot.commands.elevator.DefaultElevator;
 import frc.robot.models.PairedTalonSRX;
 
 /**
@@ -23,11 +24,12 @@ public class Elevator extends Subsystem {
     private static Elevator elevator;
     private PairedTalonSRX motor;
 
-    private static final int LEFT = 4, RIGHT = 5;
+    private static final int LEFT = 11, RIGHT = 12;
 
     private final static double ENC_BOTTOM = 0; // Encoder Value
     private final static double ENC_TOP_OFFSET = 1024; // Encoder Value
     private final static double ERROR_TOLERANCE = 10;
+    private final static int DEFAULT_TIMEOUT_MS = 0;
 
     private double motorSetpoint;
 
@@ -52,7 +54,9 @@ public class Elevator extends Subsystem {
     private Elevator() {
         motor = new PairedTalonSRX(LEFT, RIGHT);
         motor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
-        motor.configPIDF(PID_X, 0, 0, 0, 0);
+        motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, DEFAULT_TIMEOUT_MS);
+        motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, DEFAULT_TIMEOUT_MS);
+        motor.configPIDF(PID_X, 0, 0, 0, 0); //TODO: tune PID
         motor.setInverted(InvertType.None);
         motor.setSensorPhase(false);
         motorSetpoint = Position.Ground.getPosition();
@@ -110,11 +114,6 @@ public class Elevator extends Subsystem {
         return Math.abs(thisError) <= ERROR_TOLERANCE;
     }
 
-    @Override
-    public void initDefaultCommand() {
-        setDefaultCommand(new DefaultElevator());
-    }
-
     public enum Position {
         Ground(0), // collector cargo too
         HatchOne(10), // cargo ship, rocket, and loading
@@ -144,5 +143,10 @@ public class Elevator extends Subsystem {
         public int get() {
             return value;
         }
+    }
+
+    @Override
+    protected void initDefaultCommand() {
+        // Nothing on purpose
     }
 }

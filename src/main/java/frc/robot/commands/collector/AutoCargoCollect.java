@@ -15,7 +15,7 @@ import frc.robot.subsystems.Elevator;
 public class AutoCargoCollect extends CommandGroup {
     Collector collector = Collector.getInstance();
     /**
-     * Add your docs here
+     * Automatically collects cargo
      */
     public AutoCargoCollect() {
         // Move elevator to height 0

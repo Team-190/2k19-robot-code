@@ -35,9 +35,6 @@ public class DriveForward extends Command {
 
     @Override
     protected void end() {
-    }
-
-    @Override
-    protected void interrupted() {
+        drive.drive(ControlMode.PercentOutput, 0, 0);
     }
 }

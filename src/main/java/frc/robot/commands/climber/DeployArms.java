@@ -10,6 +10,7 @@ package frc.robot.commands.climber;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Climber;
 
+//TODO: deploy arms with the servo
 public class DeployArms extends Command {
     Climber climber = Climber.getInstance();
     public DeployArms() {
