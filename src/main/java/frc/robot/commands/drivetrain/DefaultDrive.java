@@ -30,8 +30,10 @@ public class DefaultDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        double left = OI.getInstance().leftStick.getAxis(AttackThreeAxis.Y);
-        double right = OI.getInstance().rightStick.getAxis(AttackThreeAxis.Y);
+        double left = -OI.getInstance().leftStick.getAxis(AttackThreeAxis.Y);
+        left *= Math.abs(left);
+        double right = -OI.getInstance().rightStick.getAxis(AttackThreeAxis.Y);
+        right *= Math.abs(right);
         drive.drive(ControlMode.PercentOutput, left, right);
     }
 

@@ -27,10 +27,10 @@ public class Drivetrain extends Subsystem {
 
     AHRS navx;
     // Speed controller ports
-    private final int LEFT_FRONT = 0,
-        LEFT_REAR = 1,
-        RIGHT_FRONT = 2,
-        RIGHT_REAR = 3;
+    private final int LEFT_FRONT = 8,
+        LEFT_REAR = 6,
+        RIGHT_FRONT = 7,
+        RIGHT_REAR = 5;
     
     // Encoder config values
     private final int PID_X = 0,
@@ -45,6 +45,7 @@ public class Drivetrain extends Subsystem {
         rightPair = new PairedTalonSRX(RIGHT_FRONT, RIGHT_REAR);
         leftPair.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
         rightPair.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
+        rightPair.setInverted(true);
     }
 
     /**
