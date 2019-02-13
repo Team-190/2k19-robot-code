@@ -12,10 +12,11 @@ import frc.robot.commands.climber.DeployArms;
 import frc.robot.commands.climber.DeployLifters;
 import frc.robot.commands.climber.RetractLifters;
 import frc.robot.commands.climber.RollToHAB;
-import frc.robot.commands.climber.StopRoll;
 import frc.robot.commands.collector.OpenCollector;
 import frc.robot.commands.drivetrain.DriveForward;
 import frc.robot.commands.drivetrain.DriveToACS;
+import frc.robot.commands.elevator.ElevateToHeight;
+import frc.robot.subsystems.Elevator;
 
 
 public class Climb extends CommandGroup {
@@ -25,6 +26,8 @@ public class Climb extends CommandGroup {
     public Climb() {
         // deploy arms
         addParallel(new DeployArms(), 3);
+        // move elevator to ground
+        addParallel(new ElevateToHeight(Elevator.Position.Ground));
         // collector to starting position
         addSequential(new OpenCollector(), 3);
         // Parallel

@@ -17,13 +17,13 @@ public class RightRocketAuto extends CommandGroup {
      * Right start auto
      */
     public RightRocketAuto() {
-        addSequential(new DriveSequence(PathfinderSequence.RightStartFarRocket));
+        addSequential(new DriveSequence(PathfinderSequence.RightStartFarRocket, true));
         addSequential(new ExtakeHatchPanel());
 
-        addSequential(new DriveSequence(PathfinderSequence.RightFarLoading));
+        addSequential(new DriveSequence(PathfinderSequence.RightFarLoading, false));
         //TODO: wack into wall and get hatch panel, trial and error for that
 
-        addSequential(new DriveSequence(PathfinderSequence.LoadingRightCloseRocket));
+        addSequential(new DriveSequence(PathfinderSequence.LoadingRightCloseRocket, false));
         addSequential(new ExtakeHatchPanel());
 
         //TODO: add to this if somehow under 15 seconds
