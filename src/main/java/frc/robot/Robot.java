@@ -8,9 +8,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.autonomous.LeftRocketAuto;
+import frc.robot.commands.autonomous.RightRocketAuto;
+import frc.robot.commands.drivetrain.DriveFeet;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Drivetrain;
@@ -25,11 +29,13 @@ import frc.robot.subsystems.Vision;
  * project.
  */
 public class Robot extends TimedRobot {
-    //TODO: map out ports
-    // private static final String kDefaultAuto = "Default";
-    // private static final String kCustomAuto = "My Auto";
-    // private String m_autoSelected;
-    // private final SendableChooser<String> m_chooser = new SendableChooser<>();
+    // TODO: map out ports
+    private static final String MANUAL = "Teleop";
+    private static final String LEFT_ROCKET = "Left rocket";
+    private static final String RIGHT_ROCKET = "Right rocket";
+    private static Command autoCommand = null;
+    private String autoSelected;
+    private final SendableChooser<String> autoChooser = new SendableChooser<>();
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -43,9 +49,10 @@ public class Robot extends TimedRobot {
         Elevator.getInstance();
         Climber.getInstance();
         Vision.getInstance();
-        // m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-        // m_chooser.addOption("My Auto", kCustomAuto);
-        // SmartDashboard.putData("Auto choices", m_chooser);
+        autoChooser.setDefaultOption(MANUAL, MANUAL);
+        autoChooser.addOption(LEFT_ROCKET, LEFT_ROCKET);
+        autoChooser.addOption(RIGHT_ROCKET, RIGHT_ROCKET);
+        SmartDashboard.putData("Autos", autoChooser);
     }
 
     /**
@@ -75,9 +82,19 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
-        // m_autoSelected = m_chooser.getSelected();
-        // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
+        autoSelected = autoChooser.getSelected();
         // System.out.println("Auto selected: " + m_autoSelected);
+        switch (autoSelected) {
+        case LEFT_ROCKET:
+            autoCommand = new LeftRocketAuto();
+            break;
+        case RIGHT_ROCKET:
+            autoCommand = new RightRocketAuto();
+            break;
+        default:
+            // manual, just use joy sticks
+            break;
+        }
     }
 
     /**
@@ -86,20 +103,13 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        // switch (m_autoSelected) {
-        // case kCustomAuto:
-        //     // Put custom auto code here
-        //     break;
-        // case kDefaultAuto:
-        // default:
-        //     // Put default auto code here
-        //     break;
-        // }
+
     }
 
     @Override
     public void teleopInit() {
-        //TODO: cancel auto if running
+        if (autoCommand != null)
+            autoCommand.cancel();
     }
 
     /**
