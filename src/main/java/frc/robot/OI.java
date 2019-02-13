@@ -23,6 +23,7 @@ import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Collector.Speed;
 import frc.robot.subsystems.Elevator.Direction;
+import frc.robot.triggers.EndOfMatchClimb;
 
 /**
  * Add your docs here.
@@ -41,6 +42,8 @@ public class OI {
         leftStick = new AttackThree(LEFT_STICK);
         rightStick = new AttackThree(RIGHT_STICK);
         // buttonBox = new ButtonBox(BUTTON_BOX);
+        
+        // EndOfMatchClimb climbTrigger = new EndOfMatchClimb();
 
         // // map button box commands
         // // elevator
@@ -62,7 +65,8 @@ public class OI {
         // buttonBox.extakePanel.whenPressed(new ExtakeHatchPanel());
 
         // // Climber
-        // buttonBox.cLimb.whenPressed(new Climb());
+        // // buttonBox.climb.whenPressed(new Climb());
+        // climbTrigger.whenActive(new Climb());
 
         // // Manual
         // buttonBox.manualElevator.getForward().whenPressed(new ElevateManual(Direction.UP));
@@ -72,7 +76,7 @@ public class OI {
         // buttonBox.manualRoller.getForward().whenPressed(new RollIntakeForCargo(Speed.OUT));
         // buttonBox.manualRoller.getBackward().whenPressed(new RollIntakeForCargo(Speed.IN));
         // buttonBox.firePiston.whenPressed(new ExtakeHatchPanel());
-        // buttonBox.manualClimber.getForward().whileHeld(new RollManual(Climber.Direction.FORWARD));  
+        // buttonBox.manualClimber.getForward().whileHeld(new RollManual(Climber.Direction.FORWARD));
         // buttonBox.manualClimber.getBackward().whileHeld(new RollManual(Climber.Direction.BACKWARD));
     }
 

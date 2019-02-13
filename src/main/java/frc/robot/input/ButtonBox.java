@@ -47,7 +47,7 @@ public class ButtonBox extends Joystick {
         extakePanel,
         // End collector
 
-        cLimb,
+        climb,
         firePiston;
     
     public Rocker
