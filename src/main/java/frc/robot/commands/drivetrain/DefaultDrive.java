@@ -25,6 +25,7 @@ public class DefaultDrive extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        drive.setCoast();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -47,5 +48,6 @@ public class DefaultDrive extends Command {
     @Override
     protected void end() {
         drive.drive(ControlMode.PercentOutput, 0, 0);
+        drive.setBrake();
     }
 }

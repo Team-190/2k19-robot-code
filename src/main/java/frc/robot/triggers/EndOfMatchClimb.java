@@ -18,6 +18,8 @@ public class EndOfMatchClimb extends Trigger {
     @Override
     public boolean get() {
         double time = DriverStation.getInstance().getMatchTime();
-        return OI.getInstance().buttonBox.climb.get() && time < 60;
+        //TODO: uncomment when button box exists
+        // return OI.getInstance().buttonBox.climb.get() && time < 60;
+        return false;
     }
 }
