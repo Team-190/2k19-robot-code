@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.models.PairedTalonSRX;
@@ -23,8 +24,10 @@ import frc.robot.models.PairedTalonSRX;
 public class Elevator extends Subsystem {
     private static Elevator elevator;
     private PairedTalonSRX motor;
+    private DigitalInput zeroSwitch;
 
     private static final int LEFT = 11, RIGHT = 12;
+    private static final int SWITCH = 0;
 
     private final static double ENC_BOTTOM = 0; // Encoder Value
     private final static double ENC_TOP_OFFSET = 1024; // Encoder Value
@@ -60,6 +63,7 @@ public class Elevator extends Subsystem {
         motor.setInverted(InvertType.None);
         motor.setSensorPhase(false);
         motorSetpoint = Position.Ground.getPosition();
+        zeroSwitch = new DigitalInput(SWITCH);
     }
 
     /**
@@ -68,6 +72,14 @@ public class Elevator extends Subsystem {
      */
     public int getPosition() {
         return motor.getSelectedSensorPosition();
+    }
+
+    public boolean getSwitch() {
+        return zeroSwitch.get();
+    }
+
+    public void resetEncoder() {
+        motor.setSelectedSensorPosition(0, PID_X, TIMEOUT_MS);
     }
 
     /**

@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.LeftRocketAuto;
 import frc.robot.commands.autonomous.RightRocketAuto;
-import frc.robot.commands.drivetrain.DriveFeet;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Drivetrain;
@@ -47,7 +46,7 @@ public class Robot extends TimedRobot {
         Collector.getInstance();
         Drivetrain.getInstance();
         Elevator.getInstance();
-        Climber.getInstance();
+        // Climber.getInstance();
         Vision.getInstance();
         autoChooser.setDefaultOption(MANUAL, MANUAL);
         autoChooser.addOption(LEFT_ROCKET, LEFT_ROCKET);

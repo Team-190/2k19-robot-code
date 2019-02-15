@@ -41,10 +41,10 @@ public class ButtonBox extends Joystick {
         cargoShipPanel,
         // End elevator heights
 
-        intakeCargo,
-        intakePanel,
-        extakeCargo,
-        extakePanel,
+        collectCargo,
+        collectHatch,
+        releaseCargo,
+        releaseHatch,
         // End collector
 
         climb,
@@ -54,7 +54,7 @@ public class ButtonBox extends Joystick {
         manualElevator,
         manualCollector, // pistons
         manualRoller, 
-        manualClimber; // cylinders
+        manualClimbPistons; // cylinders
         
 
     public ButtonBox(int channel) {
@@ -71,8 +71,8 @@ public class ButtonBox extends Joystick {
         cargoShipPanel = new JoystickButton(this, 7);
         // End elevator heights
 
-        intakeCargo = new JoystickButton(this, 8);
-        intakePanel = new JoystickButton(this, 9);
+        collectCargo = new JoystickButton(this, 8);
+        collectHatch = new JoystickButton(this, 9);
         extakeCargo = new JoystickButton(this, 10);
         extakePanel = new JoystickButton(this, 11);
         // End collector

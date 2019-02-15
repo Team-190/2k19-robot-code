@@ -11,18 +11,29 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Climber;
 
 //TODO: deploy arms with the servo
+/**
+ * Deploys climbing arms
+ */
 public class DeployArms extends Command {
     Climber climber = Climber.getInstance();
+
+    /**
+     * Requires climber subsystem
+     */
     public DeployArms() {
         requires(climber);
     }
 
-    // Called just before this Command runs the first time
+    /**
+     * TODO: deploy arms
+     */
     @Override
     protected void initialize() {
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    /**
+     * null
+     */
     @Override
     protected void execute() {
     }

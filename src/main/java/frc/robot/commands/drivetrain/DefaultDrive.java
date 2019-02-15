@@ -15,20 +15,30 @@ import frc.robot.OI;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.input.AttackThree.AttackThreeAxis;
 
+/**
+ * Reads joysticks to drive
+ */
 public class DefaultDrive extends Command {
     private Drivetrain drive = Drivetrain.getInstance();
 
+    /**
+     * Requires drivetrain subsystem
+     */
     public DefaultDrive() {
         requires(drive);
     }
 
-    // Called just before this Command runs the first time
+    /**
+     * Sets talons to coast
+     */
     @Override
     protected void initialize() {
         drive.setCoast();
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    /**
+     * Reads joysticks, sets speeds
+     */
     @Override
     protected void execute() {
         double left = -OI.getInstance().leftStick.getAxis(AttackThreeAxis.Y);
@@ -38,13 +48,17 @@ public class DefaultDrive extends Command {
         drive.drive(ControlMode.PercentOutput, left, right);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
+    /**
+     * @return false, it never ends unless interrupted
+     */
     @Override
     protected boolean isFinished() {
         return false;
     }
 
-    // Called once after isFinished returns true
+    /**
+     * Sets speed to 0, sets talons to brake
+     */
     @Override
     protected void end() {
         drive.drive(ControlMode.PercentOutput, 0, 0);
