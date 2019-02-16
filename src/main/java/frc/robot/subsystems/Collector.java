@@ -23,7 +23,7 @@ public class Collector extends Subsystem {
     Solenoid openCloseSolenoid, ejectHatchSolenoid;
     private final int SOL_OPEN_PORT = 0, SOL_HATCH_PORT = 1;
     WPI_TalonSRX intake;
-    private final int INTAKE_PORT = 0;
+    private final int INTAKE_PORT = 17;
     // one ultrasonic sensor to detect game pieces
     // AnalogUltrasonic ultrasonic;
     // private final int ULTRA_PORT = 0;

@@ -29,7 +29,7 @@ public class Climber extends Subsystem {
     private final int TROLLEY_PORT = 0, ARMS_PORT = 1;
 
     private WPI_TalonSRX motor;
-    private final int MOTOR_PORT = 0;
+    private final int MOTOR_PORT = 18;
 
     private DoubleSolenoid solenoid;
     private final int SOLENOID_PORT = 0, SOLENOID_FORWARD_PORT = 1, SOLENOID_REVERSE_PORT = 2;
