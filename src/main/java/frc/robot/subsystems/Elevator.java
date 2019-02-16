@@ -27,7 +27,7 @@ public class Elevator extends Subsystem {
     private DigitalInput zeroSwitch;
 
     private static final int LEFT = 11, RIGHT = 12;
-    private static final int SWITCH = 0;
+    private static final int SWITCH = 9;
 
     private final static double ENC_BOTTOM = 0; // Encoder Value
     private final static double ENC_TOP_OFFSET = 1024; // Encoder Value

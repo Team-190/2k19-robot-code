@@ -28,7 +28,7 @@ public class Collector extends Subsystem {
     // AnalogUltrasonic ultrasonic;
     // private final int ULTRA_PORT = 0;
     DigitalInput cargoBanner;
-    private final int CARGO_BANNER_PORT = 0;
+    private final int CARGO_BANNER_PORT = 8;
 
     /**
      * Constructs all hardware objects

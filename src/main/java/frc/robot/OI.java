@@ -21,6 +21,7 @@ import frc.robot.commands.elevator.ElevateToHeight;
 import frc.robot.commands.elevator.ResetElevatorEncoder;
 import frc.robot.input.AttackThree;
 import frc.robot.input.ButtonBox;
+import frc.robot.input.ButtonBox2;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Elevator;
@@ -37,16 +38,19 @@ public class OI {
 
     private final int LEFT_STICK = 0,
         RIGHT_STICK = 1,
-        BUTTON_BOX = 2;
+        BUTTON_BOX = 2,
+        BUTTON_BOX_2 = 3;
 
     public final AttackThree leftStick, rightStick;
     public final ButtonBox buttonBox;
+    public final ButtonBox2 buttonBox2;
     ElevatorSwitch resetElevatorTrigger;
 
     private OI() {
         leftStick = new AttackThree(LEFT_STICK);
         rightStick = new AttackThree(RIGHT_STICK);
         buttonBox = new ButtonBox(BUTTON_BOX);
+        buttonBox2 = new ButtonBox2(BUTTON_BOX_2);
 
         resetElevatorTrigger = new ElevatorSwitch();
         resetElevatorTrigger.whenActive(new ResetElevatorEncoder());
@@ -77,12 +81,12 @@ public class OI {
         // climbTrigger.whenActive(new Climb());
 
         // Manual
-        buttonBox.manualElevator.getForward().whenPressed(new ElevateManual(Direction.UP));
-        buttonBox.manualElevator.getForward().whenPressed(new ElevateManual(Direction.DOWN));
+        buttonBox2.manualElevator.getForward().whenPressed(new ElevateManual(Direction.UP));
+        buttonBox2.manualElevator.getForward().whenPressed(new ElevateManual(Direction.DOWN));
         buttonBox.manualCollector.getForward().whenPressed(new OpenCollector());
         buttonBox.manualCollector.getBackward().whenPressed(new CloseCollector());
-        buttonBox.manualRoller.getForward().whileHeld(new RollIntake(Speed.OUT));
-        buttonBox.manualRoller.getBackward().whileHeld(new RollIntake(Speed.IN));
+        buttonBox2.manualRoller.getForward().whileHeld(new RollIntake(Speed.OUT));
+        buttonBox2.manualRoller.getBackward().whileHeld(new RollIntake(Speed.IN));
         buttonBox.firePiston.whenPressed(new ExtakeHatchPanel());
         // buttonBox.manualClimbPistons.getForward().whileHeld(new RollManual(Climber.Direction.FORWARD));
         // buttonBox.manualClimbPistons.getBackward().whileHeld(new RollManual(Climber.Direction.BACKWARD));

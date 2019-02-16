@@ -10,6 +10,9 @@ package frc.robot.input;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+/**
+ * Contains elevator buttons, collecting
+ */
 public class ButtonBox extends Joystick {
 
     public class Rocker {
@@ -47,42 +50,42 @@ public class ButtonBox extends Joystick {
         releaseHatch,
         // End collector
 
-        climb,
+        // climb,
         firePiston;
     
     public Rocker
-        manualElevator,
-        manualCollector, // pistons
-        manualRoller, 
-        manualClimbPistons; // cylinders
+        // manualElevator,
+        manualCollector; // pistons
+        // manualRoller, 
+        // manualClimbPistons; // cylinders
         
 
     public ButtonBox(int channel) {
         super(channel);
         //TODO: fix button values for real button box
-        upperRocketCargo = new JoystickButton(this, 1);
-        middleRocketCargo = new JoystickButton(this, 1);
-        lowRocketCargo = new JoystickButton(this, 2);
-        cargoShipCargo = new JoystickButton(this, 3);
+        upperRocketCargo = new JoystickButton(this, 6);
+        middleRocketCargo = new JoystickButton(this, 5);
+        lowRocketCargo = new JoystickButton(this, 4);
+        cargoShipCargo = new JoystickButton(this, 8);
 
-        upperRocketPanel = new JoystickButton(this, 4);
-        middleRocketPanel = new JoystickButton(this, 5);
-        lowRocketPanel = new JoystickButton(this, 6);
+        upperRocketPanel = new JoystickButton(this, 3);
+        middleRocketPanel = new JoystickButton(this, 2);
+        lowRocketPanel = new JoystickButton(this, 1);
         cargoShipPanel = new JoystickButton(this, 7);
         // End elevator heights
 
-        collectCargo = new JoystickButton(this, 8);
+        collectCargo = new JoystickButton(this, 10);
         collectHatch = new JoystickButton(this, 9);
-        releaseCargo = new JoystickButton(this, 10);
+        releaseCargo = new JoystickButton(this, 12);
         releaseHatch = new JoystickButton(this, 11);
         // End collector
 
-        climb = new JoystickButton(this, 12);
+        // climb = new JoystickButton(this, 12);
         firePiston = new JoystickButton(this, 13);
-        manualElevator = new Rocker(this, 14, 15);
-        manualCollector = new Rocker(this, 16, 17);
-        manualRoller = new Rocker(this, 18, 19);
-        manualClimbPistons = new Rocker(this, 20, 21);
+        // manualElevator = new Rocker(this, 14, 15);
+        manualCollector = new Rocker(this, 15, 16);
+        // manualRoller = new Rocker(this, 18, 19);
+        // manualClimbPistons = new Rocker(this, 20, 21);
 
     }
 
