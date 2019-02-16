@@ -79,14 +79,8 @@ public class Collector extends Subsystem {
         return cargoBanner.get();
     }
 
-    // public boolean hasHatchCover() {
-    //     return ultrasonic.getInches() < 14; //TODO: tune this
-    // }
-
     @Override
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        // setDefaultCommand(new MySpecialCommand());
     }
 
     public enum Speed {

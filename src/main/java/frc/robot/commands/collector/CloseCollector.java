@@ -7,7 +7,6 @@
 
 package frc.robot.commands.collector;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.subsystems.Collector;
 
