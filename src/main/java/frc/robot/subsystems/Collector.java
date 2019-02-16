@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Collector extends Subsystem {
     private static Collector collector;
     Solenoid openCloseSolenoid, ejectHatchSolenoid;
-    private final int SOL_OPEN_PORT = 0, SOL_HATCH_PORT = 1;
+    private final int SOL_OPEN_PORT = 1, SOL_HATCH_PORT = 0;
     WPI_TalonSRX intake;
     private final int INTAKE_PORT = 17;
     // one ultrasonic sensor to detect game pieces

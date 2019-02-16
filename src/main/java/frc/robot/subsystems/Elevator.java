@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -30,7 +31,7 @@ public class Elevator extends Subsystem {
     private static final int SWITCH = 9;
 
     private final static double ENC_BOTTOM = 0; // Encoder Value
-    private final static double ENC_TOP_OFFSET = 1024; // Encoder Value
+    private final static double ENC_TOP_OFFSET = 9800; // Encoder Value
     private final static double ERROR_TOLERANCE = 10;
     private final static int DEFAULT_TIMEOUT_MS = 0;
 
@@ -59,12 +60,17 @@ public class Elevator extends Subsystem {
         motor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
         motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, DEFAULT_TIMEOUT_MS);
         motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, DEFAULT_TIMEOUT_MS);
-        motor.configPIDF(PID_X, 0, 0, 0, 0); //TODO: tune PID
-        motor.setInverted(InvertType.None);
-        motor.setSensorPhase(false);
+        motor.configPIDF(PID_X, .3, 0, 0, 0); //TODO: tune PID
+        motor.setInverted(InvertType.InvertMotorOutput);
+        motor.setSensorPhase(true);
         motorSetpoint = Position.Ground.getPosition();
         zeroSwitch = new DigitalInput(SWITCH);
     }
+
+    public double getSetpoint() {
+        return motorSetpoint;
+    }
+
 
     /**
      * Gets the encoder value of the elevator
@@ -75,7 +81,7 @@ public class Elevator extends Subsystem {
     }
 
     public boolean getSwitch() {
-        return zeroSwitch.get();
+        return !zeroSwitch.get();
     }
 
     public void resetEncoder() {
@@ -89,6 +95,7 @@ public class Elevator extends Subsystem {
      */
     private double heightToEnc(double inches) {
         double heightScale = inches / Position.MaximumHeight.getPosition();
+        System.out.println(heightScale);
         return (ENC_TOP_OFFSET * heightScale) + ENC_BOTTOM;
     }
 
@@ -128,9 +135,9 @@ public class Elevator extends Subsystem {
 
     public enum Position {
         Ground(0), // collector cargo too
-        HatchOne(10), // cargo ship, rocket, and loading
+        HatchOne(20), // cargo ship, rocket, and loading
         CargoShipCargo(15), RocketHatchTwo(10), RocketHatchThree(10), RocketCargoOne(10), RocketCargoTwo(10),
-        RocketCargoThree(10), MaximumHeight(70);
+        RocketCargoThree(60), MaximumHeight(84);
 
         private int inches;
 
@@ -145,7 +152,7 @@ public class Elevator extends Subsystem {
     }
 
     public enum Direction {
-        UP(1), DOWN(-1);
+        UP(1), DOWN(-1), OFF(0);
         private final int value;
 
         private Direction(int value) {

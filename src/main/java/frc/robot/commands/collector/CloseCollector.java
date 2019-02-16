@@ -30,6 +30,7 @@ public class CloseCollector extends InstantCommand {
     @Override
     protected void initialize() {
         collector.setCollector(false);
+        System.out.println("Close");
     }
 
 }

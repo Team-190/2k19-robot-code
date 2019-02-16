@@ -45,7 +45,7 @@ public class ButtonBox2 extends Joystick {
         super(channel);
         manualElevator = new Rocker(this, 4, 5);
         // manualCollector = new Rocker(this, 16, 17);
-        manualRoller = new Rocker(this, 2, 3);
+        manualRoller = new Rocker(this, 3, 2);
         // manualClimbPistons = new Rocker(this, 20, 21);
 
     }

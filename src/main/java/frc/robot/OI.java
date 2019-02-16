@@ -59,7 +59,7 @@ public class OI {
 
         // map button box commands
         // elevator
-        buttonBox.upperRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketHatchThree));
+        buttonBox.upperRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoThree));
         buttonBox.middleRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoTwo));
         buttonBox.lowRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoTwo));
 
@@ -81,8 +81,10 @@ public class OI {
         // climbTrigger.whenActive(new Climb());
 
         // Manual
-        buttonBox2.manualElevator.getForward().whenPressed(new ElevateManual(Direction.UP));
-        buttonBox2.manualElevator.getForward().whenPressed(new ElevateManual(Direction.DOWN));
+        buttonBox2.manualElevator.getForward().whileHeld(new ElevateManual(Direction.UP));
+        buttonBox2.manualElevator.getBackward().whileHeld(new ElevateManual(Direction.DOWN));
+        buttonBox2.manualElevator.getForward().whenReleased(new ElevateManual(Direction.OFF));
+        buttonBox2.manualElevator.getBackward().whenReleased(new ElevateManual(Direction.OFF));
         buttonBox.manualCollector.getForward().whenPressed(new OpenCollector());
         buttonBox.manualCollector.getBackward().whenPressed(new CloseCollector());
         buttonBox2.manualRoller.getForward().whileHeld(new RollIntake(Speed.OUT));

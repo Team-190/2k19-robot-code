@@ -27,6 +27,7 @@ public class ResetElevatorEncoder extends InstantCommand {
     @Override
     protected void initialize() {
         elevator.resetEncoder();
+        System.out.println("Zeroing Elevator");
     }
 
 }

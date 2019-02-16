@@ -22,6 +22,7 @@ public class ExtakeHatchPanel extends TimedCommand {
     @Override
     protected void initialize() {
         collector.setEjector(true);
+        System.out.println("Eject");
     }
 
     // Called once after isFinished returns true

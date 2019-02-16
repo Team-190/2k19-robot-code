@@ -22,12 +22,13 @@ public class ElevateManual extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        System.out.println("Manual elevator init");
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        elevator.moveElevator(direction.get());
+        elevator.moveElevator(direction.get()*.3);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -36,9 +37,14 @@ public class ElevateManual extends Command {
         return false;
     }
 
-    // Called once after isFinished returns true
     @Override
     protected void end() {
-        elevator.moveElevator(0);
+        
+    }
+
+    // Called once after isFinished returns true
+    @Override
+    protected void interrupted() {
+        System.out.println("End manual elevator");
     }
 }
