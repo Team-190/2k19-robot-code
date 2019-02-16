@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.LeftRocketAuto;
@@ -35,6 +37,7 @@ public class Robot extends TimedRobot {
     private static Command autoCommand = null;
     private String autoSelected;
     private final SendableChooser<String> autoChooser = new SendableChooser<>();
+    public ShuffleboardTab tab;
 
     /**
      * This function is run when the robot is first started up and should be used
@@ -52,6 +55,7 @@ public class Robot extends TimedRobot {
         autoChooser.addOption(LEFT_ROCKET, LEFT_ROCKET);
         autoChooser.addOption(RIGHT_ROCKET, RIGHT_ROCKET);
         SmartDashboard.putData("Autos", autoChooser);
+        tab = Shuffleboard.getTab("Testing");
     }
 
     /**
@@ -65,6 +69,8 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotPeriodic() {
+        SmartDashboard.putNumber("Elevator Height", Elevator.getInstance().getPosition());
+        SmartDashboard.putBoolean("Has Cargo", Collector.getInstance().hasCargo());
     }
 
     /**

@@ -13,7 +13,9 @@ import frc.robot.commands.collector.AutoCargoCollect;
 import frc.robot.commands.collector.CloseCollector;
 import frc.robot.commands.collector.ExtakeHatchPanel;
 import frc.robot.commands.collector.OpenCollector;
+import frc.robot.commands.collector.RollIntake;
 import frc.robot.commands.collector.RollIntakeForCargo;
+import frc.robot.commands.collector.TimedRollIntake;
 import frc.robot.commands.elevator.ElevateManual;
 import frc.robot.commands.elevator.ElevateToHeight;
 import frc.robot.commands.elevator.ResetElevatorEncoder;
@@ -67,7 +69,7 @@ public class OI {
         // collector
         buttonBox.collectCargo.whenPressed(new AutoCargoCollect());
         buttonBox.collectHatch.whenPressed(new ElevateToHeight(Elevator.Position.HatchOne));
-        buttonBox.releaseCargo.whenPressed(new RollIntakeForCargo(Collector.Speed.IN));
+        buttonBox.releaseCargo.whenPressed(new TimedRollIntake(Collector.Speed.OUT, .75));
         buttonBox.releaseHatch.whenPressed(new ExtakeHatchPanel());
 
         // Climber
@@ -79,8 +81,8 @@ public class OI {
         buttonBox.manualElevator.getForward().whenPressed(new ElevateManual(Direction.DOWN));
         buttonBox.manualCollector.getForward().whenPressed(new OpenCollector());
         buttonBox.manualCollector.getBackward().whenPressed(new CloseCollector());
-        buttonBox.manualRoller.getForward().whenPressed(new RollIntakeForCargo(Speed.OUT));
-        buttonBox.manualRoller.getBackward().whenPressed(new RollIntakeForCargo(Speed.IN));
+        buttonBox.manualRoller.getForward().whileHeld(new RollIntake(Speed.OUT));
+        buttonBox.manualRoller.getBackward().whileHeld(new RollIntake(Speed.IN));
         buttonBox.firePiston.whenPressed(new ExtakeHatchPanel());
         // buttonBox.manualClimbPistons.getForward().whileHeld(new RollManual(Climber.Direction.FORWARD));
         // buttonBox.manualClimbPistons.getBackward().whileHeld(new RollManual(Climber.Direction.BACKWARD));

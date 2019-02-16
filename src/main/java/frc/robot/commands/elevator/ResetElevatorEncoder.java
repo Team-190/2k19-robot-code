@@ -8,23 +8,25 @@
 package frc.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.subsystems.Elevator;
 
 /**
  * Add your docs here.
  */
 public class ResetElevatorEncoder extends InstantCommand {
-  /**
-   * Add your docs here.
-   */
-  public ResetElevatorEncoder() {
-    super();
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-  }
+    Elevator elevator = Elevator.getInstance();
+    /**
+     * Add your docs here.
+     */
+    public ResetElevatorEncoder() {
+        super();
+        requires(elevator);
+    }
 
-  // Called once when the command executes
-  @Override
-  protected void initialize() {
-  }
+    // Called once when the command executes
+    @Override
+    protected void initialize() {
+        elevator.resetEncoder();
+    }
 
 }

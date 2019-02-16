@@ -5,20 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.input;
+package frc.robot.commands.collector;
 
-import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.subsystems.Collector.Speed;
 
-/**
- * Add your docs here.
- */
-public class AnalogUltrasonic extends AnalogInput{
-    final double VOLTS_PER_INCH = 6; //TODO: tune this
-    public AnalogUltrasonic(int channel) {
-        super(channel);
-    }
-
-    public double getInches() {
-        return getVoltage() / VOLTS_PER_INCH;
+public class TimedRollIntake extends CommandGroup {
+    public TimedRollIntake(Speed speed, double time) {
+        addSequential(new RollIntake(speed), time);
     }
 }

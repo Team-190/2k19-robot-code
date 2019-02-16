@@ -73,8 +73,8 @@ public class ButtonBox extends Joystick {
 
         collectCargo = new JoystickButton(this, 8);
         collectHatch = new JoystickButton(this, 9);
-        extakeCargo = new JoystickButton(this, 10);
-        extakePanel = new JoystickButton(this, 11);
+        releaseCargo = new JoystickButton(this, 10);
+        releaseHatch = new JoystickButton(this, 11);
         // End collector
 
         climb = new JoystickButton(this, 12);
@@ -82,7 +82,7 @@ public class ButtonBox extends Joystick {
         manualElevator = new Rocker(this, 14, 15);
         manualCollector = new Rocker(this, 16, 17);
         manualRoller = new Rocker(this, 18, 19);
-        manualClimber = new Rocker(this, 20, 21);
+        manualClimbPistons = new Rocker(this, 20, 21);
 
     }
 

@@ -11,30 +11,27 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Collector.Speed;
 
-public class RollIntakeForCargo extends Command {
+public class RollIntake extends Command {
     Collector collector = Collector.getInstance();
     Speed speed;
 
-    public RollIntakeForCargo(Speed speed) {
+    public RollIntake(Speed speed) {
         requires(collector);
         this.speed = speed;
     }
 
     @Override
     protected void initialize() {
-    }
-
-    @Override
-    protected void execute() {
         collector.setIntakeSpeed(speed);
     }
 
+    // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return collector.hasCargo();
-        // return false;
+        return false;
     }
 
+    // Called once after isFinished returns true
     @Override
     protected void end() {
         collector.setIntakeSpeed(Speed.OFF);
