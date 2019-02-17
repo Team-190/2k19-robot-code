@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.LeftRocketAuto;
 import frc.robot.commands.autonomous.RightRocketAuto;
+import frc.robot.subsystems.BlinkinPark;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Drivetrain;
@@ -34,6 +35,7 @@ public class Robot extends TimedRobot {
     ShuffleboardTab tab;
     NetworkTableEntry elevHeight, zeroSwitch, elevSetpoint;
     NetworkTableEntry hasCargo, angle;
+    NetworkTableEntry encoderLeft, encoderRight;
     public static SendableChooser<Double> headingChooser = new SendableChooser<Double>();
 
     @Override
@@ -42,6 +44,7 @@ public class Robot extends TimedRobot {
         Collector.getInstance();
         Drivetrain.getInstance();
         Elevator.getInstance();
+        BlinkinPark.getInstance();
         // Climber.getInstance();
         Vision.getInstance();
         autoChooser.setDefaultOption(MANUAL, MANUAL);
@@ -54,6 +57,8 @@ public class Robot extends TimedRobot {
         elevSetpoint = tab.add("Elevator Setpoint", 0).getEntry();
         hasCargo = tab.add("Has Cargo", false).getEntry();
         angle = tab.add("Drivetrain Angle", 0).getEntry();
+        encoderLeft = tab.add("Left encoder", 0).getEntry();
+        encoderRight = tab.add("Right encoder", 0).getEntry();
         headingChooser.setDefaultOption("0", 0.0);
         headingChooser.addOption("90", 90.0);
         headingChooser.addOption("-90", -90.0);
@@ -68,6 +73,8 @@ public class Robot extends TimedRobot {
         elevSetpoint.setDouble(Elevator.getInstance().getSetpoint());
         hasCargo.setBoolean(Collector.getInstance().hasCargo());
         angle.setDouble(Drivetrain.getInstance().getAngle());
+        encoderLeft.setNumber(Drivetrain.getInstance().getLeftPosition());
+        encoderRight.setNumber(Drivetrain.getInstance().getRightPosition());
     }
 
     @Override

@@ -61,7 +61,7 @@ public class OI {
         buttonBox.lowRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoOne));
 
         buttonBox.upperRocketPanel.whenPressed(new ElevateToHeight(Elevator.Position.RocketHatchThree));
-        buttonBox.middleRocketPanel.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoTwo));
+        buttonBox.middleRocketPanel.whenPressed(new ElevateToHeight(Elevator.Position.RocketHatchTwo));
         buttonBox.lowRocketPanel.whenPressed(new ElevateToHeight(Elevator.Position.HatchOne));
 
         buttonBox.cargoShipCargo.whenPressed(new ElevateToHeight(Elevator.Position.CargoShipCargo));

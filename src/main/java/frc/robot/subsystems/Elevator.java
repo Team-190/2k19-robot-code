@@ -96,7 +96,7 @@ public class Elevator extends Subsystem {
      */
     private double heightToEnc(double inches) {
         double heightScale = inches / Position.MaximumHeight.getPosition();
-        System.out.println(heightScale);
+        // System.out.println(heightScale);
         return (ENC_TOP_OFFSET * heightScale) + ENC_BOTTOM;
     }
 
@@ -131,11 +131,11 @@ public class Elevator extends Subsystem {
         Ground(0), // collector cargo too
         HatchOne(11), // cargo ship, rocket, and loading
         CargoShipCargo(20), 
-        RocketHatchTwo(39),
+        RocketHatchTwo(38),
         RocketHatchThree(67), 
         RocketCargoOne(19), 
         RocketCargoTwo(47),
-        RocketCargoThree(75), 
+        RocketCargoThree(80), 
         MaximumHeight(80);
 
         private int inches;
