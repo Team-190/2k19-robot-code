@@ -28,12 +28,19 @@ public class AllianceColor extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    alliance = DriverStation.getInstance().getAlliance();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Alliance newAlliance = DriverStation.getInstance().getAlliance();
+    if (newAlliance != alliance) {
+      alliance = newAlliance;
+      setColor();
+    }
+  }
+
+  private void setColor() {
     if (alliance == Alliance.Blue) {
       blinkinPark.playSong(Song.LightChaseRed);
     } else if (alliance == Alliance.Red) {
