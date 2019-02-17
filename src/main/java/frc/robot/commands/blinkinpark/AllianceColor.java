@@ -42,7 +42,7 @@ public class AllianceColor extends Command {
 
   private void setColor() {
     if (alliance == Alliance.Blue) {
-      blinkinPark.playSong(Song.LightChaseRed);
+      blinkinPark.playSong(Song.LightChaseBlue);
     } else if (alliance == Alliance.Red) {
       blinkinPark.playSong(Song.LightChaseRed);
     } else {
