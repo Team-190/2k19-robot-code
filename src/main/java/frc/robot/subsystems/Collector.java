@@ -76,7 +76,7 @@ public class Collector extends Subsystem {
     }
 
     public boolean hasCargo() {
-        return cargoBanner.get();
+        return !cargoBanner.get();
     }
 
     @Override

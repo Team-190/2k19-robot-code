@@ -15,79 +15,48 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class ButtonBox extends Joystick {
 
-    public class Rocker {
-        private JoystickButton forward, backward;
-        public Rocker(Joystick joystick, int forwardChannel, int backwardChannel) {
-            forward = new JoystickButton(joystick, forwardChannel);
-            backward = new JoystickButton(joystick, backwardChannel);
-        }
-        
-        public JoystickButton getForward() {
-            return forward;
-        }
+    public JoystickButton upperRocketCargo, middleRocketCargo, lowRocketCargo, cargoShipCargo,
 
-        public JoystickButton getBackward() {
-            return backward;
-        }
+            upperRocketPanel, middleRocketPanel, lowRocketPanel, cargoShipPanel,
+            // End elevator heights
 
-    }
+            collectCargo, collectHatch, releaseCargo, releaseHatch,
+            // End collector
 
-    public JoystickButton
-        upperRocketCargo,
-        middleRocketCargo,
-        lowRocketCargo,
-        cargoShipCargo,
+            climb, firePiston,
 
-        upperRocketPanel,
-        middleRocketPanel,
-        lowRocketPanel,
-        cargoShipPanel,
-        // End elevator heights
+            // manual
+            closeCollector;
 
-        collectCargo,
-        collectHatch,
-        releaseCargo,
-        releaseHatch,
-        // End collector
-
-        // climb,
-        firePiston;
-    
-    public Rocker
-        // manualElevator,
-        manualCollector; // pistons
-        // manualRoller, 
-        // manualClimbPistons; // cylinders
-        
+    // public Rocker
+    // // manualElevator;
+    // manualCollector; // pistons
+    // manualRoller,
+    // manualClimbPistons; // cylinders
 
     public ButtonBox(int channel) {
         super(channel);
-        //TODO: fix button values for real button box
-        upperRocketCargo = new JoystickButton(this, 6);
-        middleRocketCargo = new JoystickButton(this, 5);
-        lowRocketCargo = new JoystickButton(this, 4);
+        // TODO: fix button values for real button box
+        upperRocketCargo = new JoystickButton(this, 7);
+        middleRocketCargo = new JoystickButton(this, 6);
+        lowRocketCargo = new JoystickButton(this, 5);
         cargoShipCargo = new JoystickButton(this, 8);
 
         upperRocketPanel = new JoystickButton(this, 3);
         middleRocketPanel = new JoystickButton(this, 2);
         lowRocketPanel = new JoystickButton(this, 1);
-        cargoShipPanel = new JoystickButton(this, 7);
+        cargoShipPanel = new JoystickButton(this, 4);
         // End elevator heights
 
-        collectCargo = new JoystickButton(this, 10);
-        collectHatch = new JoystickButton(this, 9);
-        releaseCargo = new JoystickButton(this, 12);
-        releaseHatch = new JoystickButton(this, 11);
+        collectCargo = new JoystickButton(this, 9);
+        collectHatch = new JoystickButton(this, 12);
+        releaseCargo = new JoystickButton(this, 10);
+        releaseHatch = new JoystickButton(this, 13);
         // End collector
 
-        // climb = new JoystickButton(this, 12);
-        firePiston = new JoystickButton(this, 13);
-        // manualElevator = new Rocker(this, 14, 15);
-        manualCollector = new Rocker(this, 16, 15);
-        // manualRoller = new Rocker(this, 18, 19);
-        // manualClimbPistons = new Rocker(this, 20, 21);
+        climb = new JoystickButton(this, 11);
+        closeCollector = new JoystickButton(this, 15);
 
     }
 
-    
 }

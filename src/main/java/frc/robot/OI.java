@@ -36,10 +36,7 @@ import frc.robot.triggers.EndOfMatchClimb;
 public class OI {
     private static OI oi = null;
 
-    private final int LEFT_STICK = 0,
-        RIGHT_STICK = 1,
-        BUTTON_BOX = 2,
-        BUTTON_BOX_2 = 3;
+    private final int LEFT_STICK = 0, RIGHT_STICK = 1, BUTTON_BOX = 2, BUTTON_BOX_2 = 3;
 
     public final AttackThree leftStick, rightStick;
     public final ButtonBox buttonBox;
@@ -54,7 +51,7 @@ public class OI {
 
         resetElevatorTrigger = new ElevatorSwitch();
         resetElevatorTrigger.whenActive(new ResetElevatorEncoder());
-        
+
         // EndOfMatchClimb climbTrigger = new EndOfMatchClimb();
 
         // map button box commands
@@ -85,17 +82,20 @@ public class OI {
         buttonBox2.manualElevator.getBackward().whileHeld(new ElevateManual(Direction.DOWN));
         buttonBox2.manualElevator.getForward().whenReleased(new ElevateManual(Direction.OFF));
         buttonBox2.manualElevator.getBackward().whenReleased(new ElevateManual(Direction.OFF));
-        buttonBox.manualCollector.getForward().whenPressed(new OpenCollector());
-        buttonBox.manualCollector.getBackward().whenPressed(new CloseCollector());
+        buttonBox2.openCollector.whenPressed(new OpenCollector());
+        buttonBox.closeCollector.whenPressed(new CloseCollector());
         buttonBox2.manualRoller.getForward().whileHeld(new RollIntake(Speed.OUT));
         buttonBox2.manualRoller.getBackward().whileHeld(new RollIntake(Speed.IN));
         buttonBox.firePiston.whenPressed(new ExtakeHatchPanel());
-        // buttonBox.manualClimbPistons.getForward().whileHeld(new RollManual(Climber.Direction.FORWARD));
-        // buttonBox.manualClimbPistons.getBackward().whileHeld(new RollManual(Climber.Direction.BACKWARD));
+        // buttonBox.manualClimbPistons.getForward().whileHeld(new
+        // RollManual(Climber.Direction.FORWARD));
+        // buttonBox.manualClimbPistons.getBackward().whileHeld(new
+        // RollManual(Climber.Direction.BACKWARD));
     }
 
     /**
-     * Gets the  Drivetrain instance
+     * Gets the Drivetrain instance
+     * 
      * @return the single instance of the class
      */
     public static OI getInstance() {

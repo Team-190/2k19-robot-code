@@ -23,7 +23,6 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Vision;
 
-
 public class Robot extends TimedRobot {
     // TODO: map out ports
     private static final String MANUAL = "Teleop";
@@ -35,7 +34,7 @@ public class Robot extends TimedRobot {
     ShuffleboardTab tab;
     NetworkTableEntry elevHeight, zeroSwitch, elevSetpoint;
     NetworkTableEntry hasCargo, angle;
-
+    public static SendableChooser<Double> headingChooser = new SendableChooser<Double>();
 
     @Override
     public void robotInit() {
@@ -55,12 +54,15 @@ public class Robot extends TimedRobot {
         elevSetpoint = tab.add("Elevator Setpoint", 0).getEntry();
         hasCargo = tab.add("Has Cargo", false).getEntry();
         angle = tab.add("Drivetrain Angle", 0).getEntry();
+        headingChooser.setDefaultOption("0", 0.0);
+        headingChooser.addOption("90", 90.0);
+        headingChooser.addOption("-90", -90.0);
+        // tab.add("Chooser", headingChooser);
     }
-
 
     @Override
     public void robotPeriodic() {
-        tab.add("Elevator subsystem", Elevator.getInstance());
+        // tab.add("Elevator subsystem", Elevator.getInstance());
         elevHeight.setDouble(Elevator.getInstance().getPosition());
         zeroSwitch.setBoolean(Elevator.getInstance().getSwitch());
         elevSetpoint.setDouble(Elevator.getInstance().getSetpoint());

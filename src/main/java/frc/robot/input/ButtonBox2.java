@@ -17,11 +17,12 @@ public class ButtonBox2 extends Joystick {
 
     public class Rocker {
         private JoystickButton forward, backward;
+
         public Rocker(Joystick joystick, int forwardChannel, int backwardChannel) {
             forward = new JoystickButton(joystick, forwardChannel);
             backward = new JoystickButton(joystick, backwardChannel);
         }
-        
+
         public JoystickButton getForward() {
             return forward;
         }
@@ -32,23 +33,19 @@ public class ButtonBox2 extends Joystick {
 
     }
 
+    public JoystickButton firePiston, climbPiston, openCollector;
 
-    
-    public Rocker
-        manualElevator,
-        // manualCollector, // pistons
-        manualRoller;
-        // manualClimbPistons; // cylinders
-        
+    public Rocker manualElevator, manualRoller;
 
     public ButtonBox2(int channel) {
         super(channel);
-        manualElevator = new Rocker(this, 4, 5);
-        // manualCollector = new Rocker(this, 16, 17);
-        manualRoller = new Rocker(this, 3, 2);
-        // manualClimbPistons = new Rocker(this, 20, 21);
+        firePiston = new JoystickButton(this, 1);
+        climbPiston = new JoystickButton(this, 2);
+        openCollector = new JoystickButton(this, 3);
+
+        manualElevator = new Rocker(this, 5, 4);
+        manualRoller = new Rocker(this, 7, 6);
 
     }
 
-    
 }

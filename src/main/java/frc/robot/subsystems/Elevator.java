@@ -98,12 +98,12 @@ public class Elevator extends Subsystem {
         return (ENC_TOP_OFFSET * heightScale) + ENC_BOTTOM;
     }
 
-    /**
-     * Converts encoder values to inches
-     */
-    private double encToInches(double encValue) {
-        return ((encValue - ENC_BOTTOM) / ENC_TOP_OFFSET) * Position.MaximumHeight.getPosition();
-    }
+    // /**
+    //  * Converts encoder values to inches
+    //  */
+    // private double encToInches(double encValue) {
+    //     return ((encValue - ENC_BOTTOM) / ENC_TOP_OFFSET) * Position.MaximumHeight.getPosition();
+    // }
 
     /**
      * Changes the setpoint of Elevator subsystem to position

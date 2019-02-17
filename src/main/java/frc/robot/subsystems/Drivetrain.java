@@ -16,6 +16,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import frc.robot.commands.drivetrain.DefaultDrive;
+import frc.robot.commands.drivetrain.TurnToHeading;
 import frc.robot.models.PairedTalonSRX;
 
 /**
@@ -106,6 +107,7 @@ public class Drivetrain extends Subsystem {
     @Override
     public void initDefaultCommand() {
         setDefaultCommand(new DefaultDrive());
+        // setDefaultCommand(new TurnToHeading(0));
     }
 
     public double encoderToFeet(double feet) {

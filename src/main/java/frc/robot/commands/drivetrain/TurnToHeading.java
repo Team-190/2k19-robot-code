@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.PIDCommand;
+import frc.robot.Robot;
 import frc.robot.subsystems.Drivetrain;
 
 public class TurnToHeading extends PIDCommand {
@@ -34,10 +35,6 @@ public class TurnToHeading extends PIDCommand {
     protected void initialize() {
     }
 
-    // Called repeatedly when this Command is scheduled to run
-    @Override
-    protected void execute() {
-    }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
@@ -49,7 +46,8 @@ public class TurnToHeading extends PIDCommand {
         // } else
         //     countOnTarget = 0;
         // return false;
-        return controller.onTarget();
+        // return controller.onTarget();
+        return false;
     }
 
     // Called once after isFinished returns true
@@ -60,6 +58,7 @@ public class TurnToHeading extends PIDCommand {
 
     @Override
     protected double returnPIDInput() {
+        setSetpoint(Robot.headingChooser.getSelected());
         return drive.getAngle();
     }
 
