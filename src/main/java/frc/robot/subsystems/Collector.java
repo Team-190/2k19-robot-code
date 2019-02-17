@@ -84,9 +84,9 @@ public class Collector extends Subsystem {
     }
 
     public enum Speed {
-        IN(1.0),
+        IN(-1.0),
         OFF(0.0),
-        OUT(-1.0);
+        OUT(1.0);
         final double speed;
         private Speed(double speed) {
             this.speed = speed;

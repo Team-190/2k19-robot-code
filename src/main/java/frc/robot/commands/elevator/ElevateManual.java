@@ -22,7 +22,7 @@ public class ElevateManual extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        System.out.println("Manual elevator init");
+        // System.out.println("Manual elevator init");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -45,6 +45,6 @@ public class ElevateManual extends Command {
     // Called once after isFinished returns true
     @Override
     protected void interrupted() {
-        System.out.println("End manual elevator");
+        // System.out.println("End manual elevator");
     }
 }

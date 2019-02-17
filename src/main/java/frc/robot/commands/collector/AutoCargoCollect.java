@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.elevator.ElevateToHeight;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Collector.Speed;
 
 public class AutoCargoCollect extends CommandGroup {
     Collector collector = Collector.getInstance();
@@ -18,10 +19,12 @@ public class AutoCargoCollect extends CommandGroup {
      * Automatically collects cargo
      */
     public AutoCargoCollect() {
+        addParallel(new CloseCollector());
         // Move elevator to height 0
         addSequential(new ElevateToHeight(Elevator.Position.Ground));
         // Roll roller until limit switch
         addSequential(new RollIntakeForCargo(Collector.Speed.IN));
+        addSequential(new RollIntake(Speed.IN), .1);
         // Move elevator to height 1
         addSequential(new ElevateToHeight(Elevator.Position.RocketCargoOne));
     }

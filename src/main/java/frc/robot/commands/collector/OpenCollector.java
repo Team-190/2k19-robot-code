@@ -27,7 +27,7 @@ public class OpenCollector extends InstantCommand {
      */
     @Override
     protected void initialize() {
-        collector.setCollector(true);
+        collector.setCollector(false);
         System.out.println("Open");
     }
 }

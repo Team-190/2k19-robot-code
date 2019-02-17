@@ -58,7 +58,7 @@ public class OI {
         // elevator
         buttonBox.upperRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoThree));
         buttonBox.middleRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoTwo));
-        buttonBox.lowRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoTwo));
+        buttonBox.lowRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoOne));
 
         buttonBox.upperRocketPanel.whenPressed(new ElevateToHeight(Elevator.Position.RocketHatchThree));
         buttonBox.middleRocketPanel.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoTwo));
@@ -86,7 +86,7 @@ public class OI {
         buttonBox.closeCollector.whenPressed(new CloseCollector());
         buttonBox2.manualRoller.getForward().whileHeld(new RollIntake(Speed.OUT));
         buttonBox2.manualRoller.getBackward().whileHeld(new RollIntake(Speed.IN));
-        buttonBox.firePiston.whenPressed(new ExtakeHatchPanel());
+        buttonBox2.firePiston.whenPressed(new ExtakeHatchPanel());
         // buttonBox.manualClimbPistons.getForward().whileHeld(new
         // RollManual(Climber.Direction.FORWARD));
         // buttonBox.manualClimbPistons.getBackward().whileHeld(new

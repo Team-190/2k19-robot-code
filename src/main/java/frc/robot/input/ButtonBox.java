@@ -23,7 +23,7 @@ public class ButtonBox extends Joystick {
             collectCargo, collectHatch, releaseCargo, releaseHatch,
             // End collector
 
-            climb, firePiston,
+            climb,
 
             // manual
             closeCollector;

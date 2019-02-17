@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -31,7 +32,7 @@ public class Elevator extends Subsystem {
 
     private final static double ENC_BOTTOM = 0; // Encoder Value
     private final static double ENC_TOP_OFFSET = 9800; // Encoder Value
-    private final static double ERROR_TOLERANCE = 10;
+    private final static double ERROR_TOLERANCE = 100;
     private final static int DEFAULT_TIMEOUT_MS = 0;
 
     private double motorSetpoint;
@@ -59,9 +60,10 @@ public class Elevator extends Subsystem {
         motor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
         motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, DEFAULT_TIMEOUT_MS);
         motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, DEFAULT_TIMEOUT_MS);
-        motor.configPIDF(PID_X, .3, 0, 0, 0);
+        motor.configPIDF(PID_X, .5, 0, 0, 0);
         motor.setInverted(InvertType.InvertMotorOutput);
         motor.setSensorPhase(true);
+        motor.setNeutralMode(NeutralMode.Brake);
         motorSetpoint = Position.Ground.getPosition();
         zeroSwitch = new DigitalInput(SWITCH);
     }
@@ -98,13 +100,6 @@ public class Elevator extends Subsystem {
         return (ENC_TOP_OFFSET * heightScale) + ENC_BOTTOM;
     }
 
-    // /**
-    //  * Converts encoder values to inches
-    //  */
-    // private double encToInches(double encValue) {
-    //     return ((encValue - ENC_BOTTOM) / ENC_TOP_OFFSET) * Position.MaximumHeight.getPosition();
-    // }
-
     /**
      * Changes the setpoint of Elevator subsystem to position
      * @param position Position to move the elevator
@@ -134,9 +129,14 @@ public class Elevator extends Subsystem {
 
     public enum Position {
         Ground(0), // collector cargo too
-        HatchOne(20), // cargo ship, rocket, and loading
-        CargoShipCargo(15), RocketHatchTwo(10), RocketHatchThree(10), RocketCargoOne(10), RocketCargoTwo(10),
-        RocketCargoThree(60), MaximumHeight(84);
+        HatchOne(11), // cargo ship, rocket, and loading
+        CargoShipCargo(20), 
+        RocketHatchTwo(39),
+        RocketHatchThree(67), 
+        RocketCargoOne(19), 
+        RocketCargoTwo(47),
+        RocketCargoThree(75), 
+        MaximumHeight(80);
 
         private int inches;
 
