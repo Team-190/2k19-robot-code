@@ -14,7 +14,6 @@ import frc.robot.commands.climber.RetractLifters;
 import frc.robot.commands.climber.RollToHAB;
 import frc.robot.commands.collector.OpenCollector;
 import frc.robot.commands.drivetrain.DriveForward;
-import frc.robot.commands.drivetrain.DriveToACS;
 import frc.robot.commands.elevator.ElevateToHeight;
 import frc.robot.subsystems.Elevator;
 
@@ -25,15 +24,11 @@ public class Climb extends CommandGroup {
      */
     public Climb() {
         // deploy arms
-        addParallel(new DeployArms(), 3);
-        // move elevator to ground
-        addParallel(new ElevateToHeight(Elevator.Position.Ground));
-        // collector to starting position
-        addSequential(new OpenCollector(), 3);
+        
         // Parallel
         //      drive left forward until arm left anti-cliff triggered
         //      drive right forward until arm right anti-cliff triggered
-        addSequential(new DriveToACS(), 5);
+        // addSequential(new DriveToACS(), 5);
         // trigger lifting pneumatics
         addSequential(new DeployLifters());
         // drive BAG motor on until chassis anti-cliff triggered

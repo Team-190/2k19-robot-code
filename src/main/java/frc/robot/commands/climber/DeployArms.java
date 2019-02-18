@@ -29,6 +29,7 @@ public class DeployArms extends Command {
      */
     @Override
     protected void initialize() {
+        climber.setClimbPressed();
     }
 
     /**

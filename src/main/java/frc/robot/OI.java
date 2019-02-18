@@ -8,6 +8,8 @@
 package frc.robot;
 
 import frc.robot.commands.climber.Climb;
+import frc.robot.commands.climber.InterruptClimb;
+import frc.robot.commands.climber.PreClimb;
 import frc.robot.commands.climber.RollManual;
 import frc.robot.commands.collector.AutoCargoCollect;
 import frc.robot.commands.collector.CloseCollector;
@@ -19,16 +21,13 @@ import frc.robot.commands.collector.TimedRollIntake;
 import frc.robot.commands.drivetrain.DriveFeet;
 import frc.robot.commands.elevator.ElevateManual;
 import frc.robot.commands.elevator.ElevateToHeight;
-import frc.robot.commands.elevator.ResetElevatorEncoder;
 import frc.robot.input.AttackThree;
 import frc.robot.input.ButtonBox;
 import frc.robot.input.ButtonBox2;
-import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Collector.Speed;
 import frc.robot.subsystems.Elevator.Direction;
-import frc.robot.triggers.EndOfMatchClimb;
 
 /**
  * Add your docs here.
@@ -72,8 +71,12 @@ public class OI {
         buttonBox.releaseHatch.whenPressed(new ExtakeHatchPanel());
 
         // Climber
-        // buttonBox.climb.whenPressed(new Climb());
+        leftStick.getButton(3).whenPressed(new PreClimb());
+        rightStick.getButton(3).whenPressed(new PreClimb());
+        buttonBox.climb.whenPressed(new Climb());
         // climbTrigger.whenActive(new Climb());
+        leftStick.getButton(1).whenPressed(new InterruptClimb());
+        rightStick.getButton(1).whenPressed(new InterruptClimb());
 
         // Manual
         buttonBox2.manualElevator.getForward().whileHeld(new ElevateManual(Direction.UP));

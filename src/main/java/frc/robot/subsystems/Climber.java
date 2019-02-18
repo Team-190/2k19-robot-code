@@ -33,8 +33,10 @@ public class Climber extends Subsystem {
 
     private DoubleSolenoid solenoid;
     private final int SOLENOID_PORT = 0, SOLENOID_FORWARD_PORT = 1, SOLENOID_REVERSE_PORT = 2;
+    private boolean climbPressed;
 
     private Climber() {
+        climbPressed = false;
         leftACS = new AnalogInput(LEFT_ACS_PORT);
         rightACS = new AnalogInput(RIGHT_ACS_PORT);
         chassisACS = new AnalogInput(CHASSIS_ACS_PORT);
@@ -45,6 +47,14 @@ public class Climber extends Subsystem {
         motor = new WPI_TalonSRX(MOTOR_PORT);
 
         solenoid = new DoubleSolenoid(SOLENOID_PORT, SOLENOID_FORWARD_PORT, SOLENOID_REVERSE_PORT);
+    }
+
+    public void setClimbPressed() {
+        climbPressed = true;
+    }
+
+    public boolean getClimbPressed() {
+        return climbPressed;
     }
 
     // TODO: find the real threshold

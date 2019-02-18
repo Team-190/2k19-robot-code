@@ -5,30 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.elevator;
+package frc.robot.commands.climber;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+
 import frc.robot.subsystems.Elevator;
+import frc.robot.commands.collector.OpenCollector;
+import frc.robot.commands.elevator.ElevateToHeight;
 
 /**
- * Add your docs here.
+ * Does all the work that needs to be done before robot is lined up
  */
-public class ResetElevatorEncoder extends InstantCommand {
-    Elevator elevator = Elevator.getInstance();
+public class PreClimb extends CommandGroup {
     /**
      * Add your docs here.
      */
-    public ResetElevatorEncoder() {
-        super();
-        requires(elevator);
+    public PreClimb() {
+        addParallel(new DeployArms(), 3);
+        // move elevator to ground
+        addParallel(new ElevateToHeight(Elevator.Position.Ground));
+        // collector to starting position
+        addSequential(new OpenCollector(), 3);
     }
-
-    // Called once when the command executes
-    @Override
-    protected void initialize() {
-        elevator.resetEncoder();
-        elevator.moveElevator(0);
-        // System.out.println("Zeroing Elevator");
-    }
-
 }

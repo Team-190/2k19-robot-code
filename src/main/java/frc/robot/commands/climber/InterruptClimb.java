@@ -5,21 +5,27 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.triggers;
+package frc.robot.commands.climber;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.buttons.Trigger;
-import frc.robot.OI;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.Drivetrain;
 
 /**
  * Add your docs here.
  */
-public class EndOfMatchClimb extends Trigger {
-    @Override
-    public boolean get() {
-        double time = DriverStation.getInstance().getMatchTime();
-        //TODO: uncomment when button box exists
-        // return OI.getInstance().buttonBox.climb.get() && time < 60;
-        return false;
+public class InterruptClimb extends InstantCommand {
+    /**
+     * Add your docs here.
+     */
+    public InterruptClimb() {
+        super();
+        requires(Drivetrain.getInstance());
+        requires(Climber.getInstance());
     }
+
+    @Override
+    protected void initialize() {
+    }
+
 }
