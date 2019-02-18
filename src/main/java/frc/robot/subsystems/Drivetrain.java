@@ -69,13 +69,13 @@ public class Drivetrain extends Subsystem {
     }
 
     public void setCoast() {
-        System.out.println("Coast");
+        // System.out.println("Coast");
         leftPair.setNeutralMode(NeutralMode.Coast);
         rightPair.setNeutralMode(NeutralMode.Coast);
     }
 
     public void setBrake() {
-        System.out.println("Brake");
+        // System.out.println("Brake");
         leftPair.setNeutralMode(NeutralMode.Brake);
         rightPair.setNeutralMode(NeutralMode.Brake);
     }
