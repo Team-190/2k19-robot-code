@@ -35,6 +35,8 @@ public class Elevator extends Subsystem {
     private final static double ERROR_TOLERANCE = 200;
     private final static int DEFAULT_TIMEOUT_MS = 0;
 
+    private Position setpoint;
+
     private double motorSetpoint;
 
     // Encoder config values
@@ -66,6 +68,7 @@ public class Elevator extends Subsystem {
         motor.setNeutralMode(NeutralMode.Brake);
         motorSetpoint = Position.Ground.getPosition();
         zeroSwitch = new DigitalInput(SWITCH);
+        setpoint = Position.Ground;
     }
 
     /**
@@ -76,8 +79,12 @@ public class Elevator extends Subsystem {
             resetEncoder();
     }
 
-    public double getSetpoint() {
+    public double getMotorSetpoint() {
         return motorSetpoint;
+    }
+
+    public Position getSetpoint() {
+        return setpoint;
     }
 
     /**
@@ -113,13 +120,8 @@ public class Elevator extends Subsystem {
      */
     public void setHeight(Position position) {
         resetTrigger();
+        setpoint = position;
         motorSetpoint = heightToEnc(position.getPosition());
-        motor.set(ControlMode.Position, motorSetpoint);
-    }
-
-    public void setHeight(double enc) {
-        resetTrigger();
-        motorSetpoint = enc;
         motor.set(ControlMode.Position, motorSetpoint);
     }
 

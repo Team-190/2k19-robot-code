@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -31,6 +32,9 @@ public class Climber extends Subsystem {
     private WPI_TalonSRX motor;
     private final int MOTOR_PORT = 18;
 
+    private Servo servo;
+    private final int SERVO_PORT = 1;
+
     private DoubleSolenoid solenoid;
     private final int SOLENOID_PORT = 0, SOLENOID_FORWARD_PORT = 1, SOLENOID_REVERSE_PORT = 2;
     private boolean climbPressed;
@@ -45,8 +49,20 @@ public class Climber extends Subsystem {
         armsDown = new DigitalInput(ARMS_PORT);
 
         motor = new WPI_TalonSRX(MOTOR_PORT);
+        servo = new Servo(SERVO_PORT);
 
         solenoid = new DoubleSolenoid(SOLENOID_PORT, SOLENOID_FORWARD_PORT, SOLENOID_REVERSE_PORT);
+    }
+
+    /**
+     * Value between 0 and 1
+     */
+    public void setServo(double value) {
+        servo.set(value);
+    }
+
+    public double getServoValue() {
+        return servo.get();
     }
 
     public void setClimbPressed() {
@@ -55,17 +71,6 @@ public class Climber extends Subsystem {
 
     public boolean getClimbPressed() {
         return climbPressed;
-    }
-
-    // TODO: find the real threshold
-    //TODO: create constants
-    public boolean isLeftACSTriggered() {
-        return leftACS.getVoltage() > 1.5;
-    }
-
-    // TODO: find the real threshold
-    public boolean isRightACSTriggered() {
-        return rightACS.getVoltage() > 1.5;
     }
 
     // TODO: find the real threshold
@@ -106,10 +111,10 @@ public class Climber extends Subsystem {
     }
 
     public enum Direction {
-        FORWARD(1),
-        BACKWARD(-1);
+        FORWARD(1), BACKWARD(-1);
 
         private final int value;
+
         private Direction(int value) {
             this.value = value;
         }

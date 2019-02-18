@@ -32,7 +32,7 @@ public class Robot extends TimedRobot {
     private String autoSelected;
     private final SendableChooser<String> autoChooser = new SendableChooser<>();
     ShuffleboardTab tab;
-    NetworkTableEntry elevHeight, zeroSwitch, elevSetpoint;
+    NetworkTableEntry elevHeight, zeroSwitch, elevSetpoint, elevMotorSetpoint;
     NetworkTableEntry hasCargo, angle;
     NetworkTableEntry encoderLeft, encoderRight;
     public static SendableChooser<Double> headingChooser = new SendableChooser<Double>();
@@ -46,14 +46,18 @@ public class Robot extends TimedRobot {
         BlinkinPark.getInstance();
         // Climber.getInstance();
         Vision.getInstance();
+    
+
         autoChooser.setDefaultOption(MANUAL, MANUAL);
         autoChooser.addOption(LEFT_ROCKET, LEFT_ROCKET);
         autoChooser.addOption(RIGHT_ROCKET, RIGHT_ROCKET);
         SmartDashboard.putData("Autos", autoChooser);
+        
         tab = Shuffleboard.getTab("Sensors");
         elevHeight = tab.add("Elevator Height", 0).getEntry();
         zeroSwitch = tab.add("Elevator Switch", false).getEntry();
-        elevSetpoint = tab.add("Elevator Setpoint", 0).getEntry();
+        elevSetpoint = tab.add("Elevator Setpoint", Elevator.Position.Ground.name()).getEntry();
+        elevMotorSetpoint = tab.add("Elevator Motor Setpoint", 0).getEntry();
         hasCargo = tab.add("Has Cargo", false).getEntry();
         angle = tab.add("Drivetrain Angle", 0).getEntry();
         encoderLeft = tab.add("Left encoder", 0).getEntry();
@@ -70,7 +74,8 @@ public class Robot extends TimedRobot {
         // tab.add("Elevator subsystem", Elevator.getInstance());
         elevHeight.setDouble(Elevator.getInstance().getPosition());
         zeroSwitch.setBoolean(Elevator.getInstance().getSwitch());
-        elevSetpoint.setDouble(Elevator.getInstance().getSetpoint());
+        elevSetpoint.setString(Elevator.getInstance().getSetpoint().name());
+        elevMotorSetpoint.setDouble(Elevator.getInstance().getMotorSetpoint());
         hasCargo.setBoolean(Collector.getInstance().hasCargo());
         angle.setDouble(Drivetrain.getInstance().getNavX().getAngle());
         encoderLeft.setNumber(Drivetrain.getInstance().getLeftPosition());
