@@ -59,7 +59,7 @@ public class TurnToHeading extends PIDCommand {
     @Override
     protected double returnPIDInput() {
         setSetpoint(Robot.headingChooser.getSelected());
-        return drive.getAngle();
+        return drive.getYaw();
     }
 
     @Override

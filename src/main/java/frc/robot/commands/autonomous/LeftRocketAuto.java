@@ -18,13 +18,14 @@ public class LeftRocketAuto extends CommandGroup {
      */
     public LeftRocketAuto() {
         addSequential(new DriveSequence(PathfinderSequence.LeftStartFarRocket, true));
-        addSequential(new ExtakeHatchPanel());
+        //TODO: uncomment
+        // addSequential(new ExtakeHatchPanel());
 
-        addSequential(new DriveSequence(PathfinderSequence.LeftFarLoading, false));
-        // TODO: wack into wall and get hatch panel, trial and error for that
+        // addSequential(new DriveSequence(PathfinderSequence.LeftFarLoading, false));
+        // // TODO: wack into wall and get hatch panel, trial and error for that
 
-        addSequential(new DriveSequence(PathfinderSequence.LoadingLeftCloseRocket, false));
-        addSequential(new ExtakeHatchPanel());
+        // addSequential(new DriveSequence(PathfinderSequence.LoadingLeftCloseRocket, false));
+        // addSequential(new ExtakeHatchPanel());
 
         // TODO: add to this if somehow under 15 seconds
     }

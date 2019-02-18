@@ -14,7 +14,7 @@ import frc.robot.subsystems.Drivetrain;
 
 public class DriveFeet extends PIDCommand {
     Drivetrain drive = Drivetrain.getInstance();
-    static final double P = 0.0, I = 0.0, D = 0.0; // TODO: tune PID
+    static final double P = 0.0004, I = 0.0, D = 0.0; // TODO: tune PID
     double feet;
 
     public DriveFeet(double feet) {
@@ -22,17 +22,21 @@ public class DriveFeet extends PIDCommand {
         requires(drive);
         this.feet = feet;
         setSetpoint(drive.feetToEncoder(feet));
+        getPIDController().setAbsoluteTolerance(50);
+        
     }
 
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-
+        drive.setBrake();
+        drive.resetEncoders();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
+        // System.out.println(getSetpoint());
         return getPIDController().onTarget();
     }
 
@@ -40,6 +44,7 @@ public class DriveFeet extends PIDCommand {
     @Override
     protected void end() {
         drive.drive(ControlMode.PercentOutput, 0, 0);
+        // drive.setCoast();
     }
 
     @Override
@@ -49,6 +54,8 @@ public class DriveFeet extends PIDCommand {
 
     @Override
     protected void usePIDOutput(double output) {
+        // System.out.println(output);
+        // drive.setBrake();
         drive.drive(ControlMode.PercentOutput, output, output);
     }
 }

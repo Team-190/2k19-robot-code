@@ -37,6 +37,6 @@ public class RollIntakeForCargo extends Command {
 
     @Override
     protected void end() {
-        // collector.setIntakeSpeed(Speed.OFF);
+        collector.setIntakeSpeed(Speed.OFF);
     }
 }

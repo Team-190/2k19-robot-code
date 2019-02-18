@@ -32,7 +32,7 @@ public class Elevator extends Subsystem {
 
     private final static double ENC_BOTTOM = 0; // Encoder Value
     private final static double ENC_TOP_OFFSET = 9800; // Encoder Value
-    private final static double ERROR_TOLERANCE = 100;
+    private final static double ERROR_TOLERANCE = 200;
     private final static int DEFAULT_TIMEOUT_MS = 0;
 
     private double motorSetpoint;
@@ -131,11 +131,11 @@ public class Elevator extends Subsystem {
         Ground(0), // collector cargo too
         HatchOne(11), // cargo ship, rocket, and loading
         CargoShipCargo(20), 
-        RocketHatchTwo(38),
-        RocketHatchThree(67), 
-        RocketCargoOne(19), 
-        RocketCargoTwo(47),
-        RocketCargoThree(80), 
+        RocketHatchTwo(40),
+        RocketHatchThree(70), 
+        RocketCargoOne(28), 
+        RocketCargoTwo(57),
+        RocketCargoThree(82), 
         MaximumHeight(80);
 
         private int inches;

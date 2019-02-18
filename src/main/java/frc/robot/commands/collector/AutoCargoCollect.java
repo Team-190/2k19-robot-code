@@ -19,7 +19,7 @@ public class AutoCargoCollect extends CommandGroup {
      * Automatically collects cargo
      */
     public AutoCargoCollect() {
-        addParallel(new CloseCollector());
+        addSequential(new CloseCollector());
         // Move elevator to height 0
         addSequential(new ElevateToHeight(Elevator.Position.Ground));
         // Roll roller until limit switch

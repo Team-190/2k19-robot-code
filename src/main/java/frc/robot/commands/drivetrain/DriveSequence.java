@@ -48,7 +48,7 @@ public class DriveSequence extends Command {
         double leftSpeed = leftFollower.calculate(drivetrain.getLeftPosition());
         double rightSpeed = rightFollower.calculate(drivetrain.getRightPosition());
 
-        double gyroHeading = -drivetrain.getAngle(); // TODO: adjust get_____ for real robot
+        double gyroHeading = -drivetrain.getYaw(); // TODO: adjust get_____ for real robot
         double desiredHeading = Pathfinder.r2d(leftFollower.getHeading());
         double angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);
         double turn = -angleDifference / 100; // magic number from 254

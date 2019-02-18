@@ -16,6 +16,7 @@ import frc.robot.commands.collector.OpenCollector;
 import frc.robot.commands.collector.RollIntake;
 import frc.robot.commands.collector.RollIntakeForCargo;
 import frc.robot.commands.collector.TimedRollIntake;
+import frc.robot.commands.drivetrain.DriveFeet;
 import frc.robot.commands.elevator.ElevateManual;
 import frc.robot.commands.elevator.ElevateToHeight;
 import frc.robot.commands.elevator.ResetElevatorEncoder;
@@ -48,6 +49,8 @@ public class OI {
         rightStick = new AttackThree(RIGHT_STICK);
         buttonBox = new ButtonBox(BUTTON_BOX);
         buttonBox2 = new ButtonBox2(BUTTON_BOX_2);
+
+        leftStick.getButton(7).whenPressed(new DriveFeet(6));
 
         resetElevatorTrigger = new ElevatorSwitch();
         resetElevatorTrigger.whenActive(new ResetElevatorEncoder());

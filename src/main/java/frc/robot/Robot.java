@@ -62,6 +62,7 @@ public class Robot extends TimedRobot {
         headingChooser.setDefaultOption("0", 0.0);
         headingChooser.addOption("90", 90.0);
         headingChooser.addOption("-90", -90.0);
+        tab.add("Auto chooser", autoChooser);
         // tab.add("Chooser", headingChooser);
     }
 
@@ -72,7 +73,7 @@ public class Robot extends TimedRobot {
         zeroSwitch.setBoolean(Elevator.getInstance().getSwitch());
         elevSetpoint.setDouble(Elevator.getInstance().getSetpoint());
         hasCargo.setBoolean(Collector.getInstance().hasCargo());
-        angle.setDouble(Drivetrain.getInstance().getAngle());
+        angle.setDouble(Drivetrain.getInstance().getNavX().getAngle());
         encoderLeft.setNumber(Drivetrain.getInstance().getLeftPosition());
         encoderRight.setNumber(Drivetrain.getInstance().getRightPosition());
     }

@@ -33,7 +33,7 @@ public class DefaultDrive extends Command {
      */
     @Override
     protected void initialize() {
-        drive.setCoast();
+        // drive.setCoast();
     }
 
     /**

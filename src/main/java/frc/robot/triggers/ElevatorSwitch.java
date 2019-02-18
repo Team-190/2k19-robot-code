@@ -16,6 +16,6 @@ import frc.robot.subsystems.Elevator;
 public class ElevatorSwitch extends Trigger {
     @Override
     public boolean get() {
-        return Elevator.getInstance().getSwitch();
+        return Math.abs(Elevator.getInstance().getPosition()) > 100 && Elevator.getInstance().getSwitch();
     }
 }
