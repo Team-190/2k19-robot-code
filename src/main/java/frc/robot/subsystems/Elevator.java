@@ -68,10 +68,17 @@ public class Elevator extends Subsystem {
         zeroSwitch = new DigitalInput(SWITCH);
     }
 
+    /**
+     * Resets the encoder if the sensor is triggered
+     */
+    public void resetTrigger() {
+        if (Math.abs(Elevator.getInstance().getPosition()) > 100 && Elevator.getInstance().getSwitch())
+            resetEncoder();
+    }
+
     public double getSetpoint() {
         return motorSetpoint;
     }
-
 
     /**
      * Gets the encoder value of the elevator
@@ -105,20 +112,24 @@ public class Elevator extends Subsystem {
      * @param position Position to move the elevator
      */
     public void setHeight(Position position) {
+        resetTrigger();
         motorSetpoint = heightToEnc(position.getPosition());
         motor.set(ControlMode.Position, motorSetpoint);
     }
 
     public void setHeight(double enc) {
+        resetTrigger();
         motorSetpoint = enc;
         motor.set(ControlMode.Position, motorSetpoint);
     }
 
     public void stop() {
+        resetTrigger();
         motor.set(ControlMode.PercentOutput, 0);
     }
 
     public void moveElevator(double speed) {
+        resetTrigger();
         motor.set(ControlMode.PercentOutput, speed);
     }
 

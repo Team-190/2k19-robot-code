@@ -25,7 +25,6 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Vision;
 
 public class Robot extends TimedRobot {
-    // TODO: map out ports
     private static final String MANUAL = "Teleop";
     private static final String LEFT_ROCKET = "Left rocket";
     private static final String RIGHT_ROCKET = "Right rocket";
@@ -81,7 +80,6 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
         autoSelected = autoChooser.getSelected();
-        // System.out.println("Auto selected: " + m_autoSelected);
         switch (autoSelected) {
         case LEFT_ROCKET:
             autoCommand = new LeftRocketAuto();

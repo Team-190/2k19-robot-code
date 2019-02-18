@@ -28,7 +28,6 @@ import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Collector.Speed;
 import frc.robot.subsystems.Elevator.Direction;
-import frc.robot.triggers.ElevatorSwitch;
 import frc.robot.triggers.EndOfMatchClimb;
 
 /**
@@ -42,7 +41,6 @@ public class OI {
     public final AttackThree leftStick, rightStick;
     public final ButtonBox buttonBox;
     public final ButtonBox2 buttonBox2;
-    ElevatorSwitch resetElevatorTrigger;
 
     private OI() {
         leftStick = new AttackThree(LEFT_STICK);
@@ -51,9 +49,6 @@ public class OI {
         buttonBox2 = new ButtonBox2(BUTTON_BOX_2);
 
         leftStick.getButton(7).whenPressed(new DriveFeet(6));
-
-        resetElevatorTrigger = new ElevatorSwitch();
-        resetElevatorTrigger.whenActive(new ResetElevatorEncoder());
 
         // EndOfMatchClimb climbTrigger = new EndOfMatchClimb();
 
