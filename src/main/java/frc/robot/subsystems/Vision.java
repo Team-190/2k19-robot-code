@@ -18,7 +18,7 @@ public class Vision {
     private static Vision vision;
 
     private NetworkTable table;
-    String tableKey = "ProcessedTape";
+    String tableKey = "Sensors";
     Solenoid lightRing;
     final int LIGHT_PORT = 3;
 
@@ -42,7 +42,11 @@ public class Vision {
      * @return array of x coordinates of detected cargo ports
      */
     public double[] getXCoordinates() {
-        return table.getEntry("x_coordinates").getDoubleArray(new double[0]);
+        return table.getEntry("ports").getDoubleArray(new double[getPortCount()]);
+    }
+
+    public int getPortCount() {
+        return (int) table.getEntry("nb_ports").getNumber(0);
     }
 
     public void setLightOn(boolean status) {

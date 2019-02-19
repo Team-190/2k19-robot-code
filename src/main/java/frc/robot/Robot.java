@@ -35,7 +35,8 @@ public class Robot extends TimedRobot {
     NetworkTableEntry elevHeight, zeroSwitch, elevSetpoint, elevMotorSetpoint;
     NetworkTableEntry hasCargo, angle;
     NetworkTableEntry encoderLeft, encoderRight;
-    NetworkTableEntry chassisACS, servo;
+    NetworkTableEntry chassisACS, servo, trolleyUp, armsDown;
+    NetworkTableEntry portCount;
     public static SendableChooser<Double> headingChooser = new SendableChooser<Double>();
 
     @Override
@@ -46,7 +47,7 @@ public class Robot extends TimedRobot {
         Elevator.getInstance();
         BlinkinPark.getInstance();
         // Climber.getInstance();
-        Vision.getInstance().setLightOn(true);
+        Vision.getInstance();
 
         autoChooser.setDefaultOption(MANUAL, MANUAL);
         autoChooser.addOption(LEFT_ROCKET, LEFT_ROCKET);
@@ -64,6 +65,9 @@ public class Robot extends TimedRobot {
         encoderRight = tab.add("Right encoder", 0).getEntry();
         chassisACS = tab.add("Chassis ACS", 0).getEntry();
         servo = tab.add("Climber Servo", 0).getEntry();
+        trolleyUp = tab.add("Trolley Up", true).getEntry();
+        armsDown = tab.add("Arms Down", true).getEntry();
+        portCount = tab.add("Port Count", 0).getEntry();
         headingChooser.setDefaultOption("0", 0.0);
         headingChooser.addOption("90", 90.0);
         headingChooser.addOption("-90", -90.0);
@@ -84,10 +88,14 @@ public class Robot extends TimedRobot {
         encoderRight.setNumber(Drivetrain.getInstance().getRightPosition());
         chassisACS.setNumber(Climber.getInstance().getChassisACS());
         servo.setNumber(Climber.getInstance().getServoValue());
+        trolleyUp.setBoolean(Climber.getInstance().isTrolleyUp());
+        armsDown.setBoolean(Climber.getInstance().isArmsDown());
+        portCount.setNumber(Vision.getInstance().getPortCount());
     }
 
     @Override
     public void autonomousInit() {
+        Vision.getInstance().setLightOn(true);
         autoSelected = autoChooser.getSelected();
         switch (autoSelected) {
         case LEFT_ROCKET:
@@ -113,6 +121,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        Vision.getInstance().setLightOn(true);
         if (autoCommand != null)
             autoCommand.cancel();
     }

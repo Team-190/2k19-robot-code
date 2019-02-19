@@ -27,7 +27,7 @@ public class Climber extends Subsystem {
     private final int CHASSIS_ACS_PORT = 3;
 
     private DigitalInput trolleyUp, armsDown;
-    private final int TROLLEY_PORT = 0, ARMS_PORT = 1;
+    private final int TROLLEY_PORT = 7, ARMS_PORT = 6;
 
     private WPI_TalonSRX motor;
     private final int MOTOR_PORT = 18;
