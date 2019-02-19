@@ -25,7 +25,7 @@ public class DriveForward extends Command {
 
     @Override
     protected void execute() {
-        drive.drive(ControlMode.PercentOutput, 1, 1);
+        drive.drive(ControlMode.PercentOutput, .4, .4);
     }
 
     @Override

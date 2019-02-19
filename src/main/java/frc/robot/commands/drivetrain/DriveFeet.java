@@ -23,7 +23,11 @@ public class DriveFeet extends PIDCommand {
         this.feet = feet;
         setSetpoint(drive.feetToEncoder(feet));
         getPIDController().setAbsoluteTolerance(50);
-        
+    }
+
+    public DriveFeet(double feet, double maxAbsSpeed) {
+        this(feet);
+        getPIDController().setOutputRange(-maxAbsSpeed, maxAbsSpeed);
     }
 
     // Called just before this Command runs the first time

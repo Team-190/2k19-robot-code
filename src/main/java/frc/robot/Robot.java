@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
         Elevator.getInstance();
         BlinkinPark.getInstance();
         // Climber.getInstance();
-        Vision.getInstance();
+        Vision.getInstance().setLightOn(true);
 
         autoChooser.setDefaultOption(MANUAL, MANUAL);
         autoChooser.addOption(LEFT_ROCKET, LEFT_ROCKET);

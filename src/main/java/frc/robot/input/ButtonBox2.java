@@ -33,7 +33,7 @@ public class ButtonBox2 extends Joystick {
 
     }
 
-    public JoystickButton firePiston, climbPiston, openCollector;
+    public JoystickButton firePiston, climbPiston, openCollector, preClimb;
 
     public Rocker manualElevator, manualRoller;
 
@@ -45,6 +45,7 @@ public class ButtonBox2 extends Joystick {
 
         manualElevator = new Rocker(this, 5, 4);
         manualRoller = new Rocker(this, 7, 6);
+        preClimb = new JoystickButton(this, 8);
 
     }
 

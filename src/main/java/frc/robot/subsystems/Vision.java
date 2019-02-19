@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Solenoid;
 
 /**
  * Reads values from NetworkTables written from the Pi
@@ -18,9 +19,12 @@ public class Vision {
 
     private NetworkTable table;
     String tableKey = "ProcessedTape";
+    Solenoid lightRing;
+    final int LIGHT_PORT = 3;
 
     private Vision() {
         table = NetworkTableInstance.getDefault().getTable(tableKey);
+        lightRing = new Solenoid(LIGHT_PORT);
     }
 
     /**
@@ -39,5 +43,9 @@ public class Vision {
      */
     public double[] getXCoordinates() {
         return table.getEntry("x_coordinates").getDoubleArray(new double[0]);
+    }
+
+    public void setLightOn(boolean status) {
+        lightRing.set(status);
     }
 }

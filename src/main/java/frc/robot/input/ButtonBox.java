@@ -48,9 +48,9 @@ public class ButtonBox extends Joystick {
         cargoShipPanel = new JoystickButton(this, 4);
         // End elevator heights
 
-        collectCargo = new JoystickButton(this, 9);
+        collectCargo = new JoystickButton(this, 10);
         collectHatch = new JoystickButton(this, 12);
-        releaseCargo = new JoystickButton(this, 10);
+        releaseCargo = new JoystickButton(this, 9);
         releaseHatch = new JoystickButton(this, 13);
         // End collector
 

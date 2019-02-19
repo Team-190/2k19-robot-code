@@ -14,7 +14,7 @@ public class ExtakeHatchPanel extends TimedCommand {
     Collector collector = Collector.getInstance();
 
     public ExtakeHatchPanel() {
-        super(0.25);
+        super(0.4);
         requires(collector);
     }
 
