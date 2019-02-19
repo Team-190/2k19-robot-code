@@ -52,6 +52,10 @@ public class Climber extends Subsystem {
         solenoid = new DoubleSolenoid(SOLENOID_FORWARD_PORT, SOLENOID_REVERSE_PORT);
     }
 
+    public double getChassisACS() {
+        return chassisACS.getVoltage();
+    }
+
     /**
      * Value between 0 and 1
      */

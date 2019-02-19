@@ -35,6 +35,7 @@ public class Robot extends TimedRobot {
     NetworkTableEntry elevHeight, zeroSwitch, elevSetpoint, elevMotorSetpoint;
     NetworkTableEntry hasCargo, angle;
     NetworkTableEntry encoderLeft, encoderRight;
+    NetworkTableEntry chassisACS, servo;
     public static SendableChooser<Double> headingChooser = new SendableChooser<Double>();
 
     @Override
@@ -61,6 +62,8 @@ public class Robot extends TimedRobot {
         angle = tab.add("Drivetrain Angle", 0).getEntry();
         encoderLeft = tab.add("Left encoder", 0).getEntry();
         encoderRight = tab.add("Right encoder", 0).getEntry();
+        chassisACS = tab.add("Chassis ACS", 0).getEntry();
+        servo = tab.add("Climber Servo", 0).getEntry();
         headingChooser.setDefaultOption("0", 0.0);
         headingChooser.addOption("90", 90.0);
         headingChooser.addOption("-90", -90.0);
@@ -79,6 +82,8 @@ public class Robot extends TimedRobot {
         angle.setDouble(Drivetrain.getInstance().getNavX().getAngle());
         encoderLeft.setNumber(Drivetrain.getInstance().getLeftPosition());
         encoderRight.setNumber(Drivetrain.getInstance().getRightPosition());
+        chassisACS.setNumber(Climber.getInstance().getChassisACS());
+        servo.setNumber(Climber.getInstance().getServoValue());
     }
 
     @Override
