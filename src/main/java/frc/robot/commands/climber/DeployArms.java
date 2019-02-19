@@ -7,52 +7,28 @@
 
 package frc.robot.commands.climber;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.subsystems.Climber;
 
-//TODO: deploy arms with the servo
 /**
- * Deploys climbing arms
+ * Add your docs here.
  */
-public class DeployArms extends Command {
-    Climber climber = Climber.getInstance();
-
+public class DeployArms extends InstantCommand {
+    Climber climber;
     /**
-     * Requires climber subsystem
+     * Add your docs here.
      */
     public DeployArms() {
+        super();
+        climber = Climber.getInstance();
         requires(climber);
     }
 
-    /**
-     * TODO: deploy arms
-     */
+    // Called once when the command executes
     @Override
     protected void initialize() {
         climber.setClimbPressed();
+        climber.setServo(0);
     }
 
-    /**
-     * null
-     */
-    @Override
-    protected void execute() {
-    }
-
-    // Make this return true when this Command no longer needs to run execute()
-    @Override
-    protected boolean isFinished() {
-        return false;
-    }
-
-    // Called once after isFinished returns true
-    @Override
-    protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    @Override
-    protected void interrupted() {
-    }
 }
