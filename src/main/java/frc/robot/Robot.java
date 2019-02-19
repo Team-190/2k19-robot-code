@@ -46,13 +46,12 @@ public class Robot extends TimedRobot {
         BlinkinPark.getInstance();
         // Climber.getInstance();
         Vision.getInstance();
-    
 
         autoChooser.setDefaultOption(MANUAL, MANUAL);
         autoChooser.addOption(LEFT_ROCKET, LEFT_ROCKET);
         autoChooser.addOption(RIGHT_ROCKET, RIGHT_ROCKET);
         SmartDashboard.putData("Autos", autoChooser);
-        
+
         tab = Shuffleboard.getTab("Sensors");
         elevHeight = tab.add("Elevator Height", 0).getEntry();
         zeroSwitch = tab.add("Elevator Switch", false).getEntry();

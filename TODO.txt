@@ -1,0 +1,5 @@
+1. Test pathing
+2. Test autos
+3. Implement vision
+4. Systems check pre-bag
+5. 

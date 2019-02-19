@@ -23,8 +23,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Climber extends Subsystem {
     private static Climber climber;
 
-    private AnalogInput leftACS, rightACS, chassisACS;
-    private final int LEFT_ACS_PORT = 0, RIGHT_ACS_PORT = 1, CHASSIS_ACS_PORT = 2;
+    private AnalogInput chassisACS;
+    private final int CHASSIS_ACS_PORT = 3;
 
     private DigitalInput trolleyUp, armsDown;
     private final int TROLLEY_PORT = 0, ARMS_PORT = 1;
@@ -36,13 +36,11 @@ public class Climber extends Subsystem {
     private final int SERVO_PORT = 1;
 
     private DoubleSolenoid solenoid;
-    private final int SOLENOID_PORT = 0, SOLENOID_FORWARD_PORT = 1, SOLENOID_REVERSE_PORT = 2;
+    private final int SOLENOID_FORWARD_PORT = 4, SOLENOID_REVERSE_PORT = 5;
     private boolean climbPressed;
 
     private Climber() {
         climbPressed = false;
-        leftACS = new AnalogInput(LEFT_ACS_PORT);
-        rightACS = new AnalogInput(RIGHT_ACS_PORT);
         chassisACS = new AnalogInput(CHASSIS_ACS_PORT);
 
         trolleyUp = new DigitalInput(TROLLEY_PORT);
@@ -51,7 +49,7 @@ public class Climber extends Subsystem {
         motor = new WPI_TalonSRX(MOTOR_PORT);
         servo = new Servo(SERVO_PORT);
 
-        solenoid = new DoubleSolenoid(SOLENOID_PORT, SOLENOID_FORWARD_PORT, SOLENOID_REVERSE_PORT);
+        solenoid = new DoubleSolenoid(SOLENOID_FORWARD_PORT, SOLENOID_REVERSE_PORT);
     }
 
     /**
