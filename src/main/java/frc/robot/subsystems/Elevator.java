@@ -75,7 +75,7 @@ public class Elevator extends Subsystem {
      * Resets the encoder if the sensor is triggered
      */
     public void resetTrigger() {
-        if (Math.abs(Elevator.getInstance().getPosition()) > 100 && Elevator.getInstance().getSwitch())
+        if (Elevator.getInstance().getSwitch())
             resetEncoder();
     }
 
@@ -141,7 +141,7 @@ public class Elevator extends Subsystem {
     }
 
     public enum Position {
-        Ground(0), // collector cargo too
+        Ground(-2), // collector cargo too
         HatchOne(11), // cargo ship, rocket, and loading
         CargoShipCargo(20), 
         RocketHatchTwo(40),

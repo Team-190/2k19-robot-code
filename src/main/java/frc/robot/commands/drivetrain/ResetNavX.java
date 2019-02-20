@@ -5,28 +5,27 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.collector;
+package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
-import frc.robot.subsystems.Collector;
+import frc.robot.subsystems.Drivetrain;
 
-public class ExtakeHatchPanel extends InstantCommand {
-    Collector collector = Collector.getInstance();
-
-    public ExtakeHatchPanel() {
-        // super(0.4);
-        requires(collector);
+/**
+ * Add your docs here.
+ */
+public class ResetNavX extends InstantCommand {
+    /**
+     * Add your docs here.
+     */
+    public ResetNavX() {
+        super();
+        requires(Drivetrain.getInstance());
     }
 
-    // Called just before this Command runs the first time
+    // Called once when the command executes
     @Override
     protected void initialize() {
-        collector.setEjector(true);
-        // System.out.println("Eject");
+        Drivetrain.getInstance().resetNavX();
     }
 
-    // Called once after isFinished returns true
-    @Override
-    protected void end() {
-    }
 }

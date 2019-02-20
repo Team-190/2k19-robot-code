@@ -11,15 +11,17 @@ public enum PathfinderSequence {
 
     RightStartFarRocket,
     RightFarLoading,
-    LoadingRightCloseRocket;
+    LoadingRightCloseRocket,
+    
+    Forward;
 
 
     public Trajectory getLeft() {
-        return PathfinderFRC.getTrajectory(name() + ".left");
+        return PathfinderFRC.getTrajectory(name() + ".right");
         // return sequenceDirectory + name() + ".left.pf1.csv";
     }
 
     public Trajectory getRight() {
-        return PathfinderFRC.getTrajectory(name() + ".right");
+        return PathfinderFRC.getTrajectory(name() + ".left");
     }
 }

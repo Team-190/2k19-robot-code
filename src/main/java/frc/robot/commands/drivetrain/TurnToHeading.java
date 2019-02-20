@@ -21,12 +21,13 @@ public class TurnToHeading extends PIDCommand {
     int countOnTarget = 0;
 
     public TurnToHeading(double heading) {
-        super(0, 0, 0); // TODO: tune PID
+        super(.03, 0, 0); // TODO: tune PID
+        requires(drive);
         this.heading = heading;
         controller = getPIDController();
-        controller.setContinuous();
         controller.setPercentTolerance(1);
         setInputRange(-180, 180);
+        controller.setContinuous();
         setSetpoint(heading);
     }
 

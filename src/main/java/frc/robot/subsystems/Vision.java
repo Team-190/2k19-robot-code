@@ -46,10 +46,15 @@ public class Vision {
     }
 
     public int getPortCount() {
-        return (int) table.getEntry("nb_ports").getNumber(0);
+        int ports = (int) table.getEntry("nb_ports").getDouble(0);
+        // if (ports > 0) System.out.println(ports);
+        // System.out.println((int) table.getEntry("nb_ports").getDouble(0));
+        return ports;
     }
+
 
     public void setLightOn(boolean status) {
         lightRing.set(status);
     }
 }
+ 

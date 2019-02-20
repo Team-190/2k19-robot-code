@@ -33,12 +33,19 @@ public class DriveSequence extends Command {
     @Override
     protected void initialize() {
         if (resetSensors) {
-            drivetrain.resetNavX();
+            // drivetrain.resetNavX();
             drivetrain.resetEncoders();
         }
 
+        drivetrain.setBrake();
+
         leftFollower = new EncoderFollower(sequence.getLeft());
+        leftFollower.configureEncoder(drivetrain.getLeftPosition(), (int) Drivetrain.TICKS_PER_REV, Drivetrain.WHEEL_DIAMETER);
+        leftFollower.configurePIDVA(0.75, 0, 0, 1 / 8, 0);
         rightFollower = new EncoderFollower(sequence.getRight());
+        rightFollower.configureEncoder(drivetrain.getRightPosition(), (int) Drivetrain.TICKS_PER_REV, Drivetrain.WHEEL_DIAMETER);
+        rightFollower.configurePIDVA(0.75, 0, 0, 1 / 8, 0); 
+
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -51,7 +58,7 @@ public class DriveSequence extends Command {
         double gyroHeading = -drivetrain.getYaw(); // TODO: adjust get_____ for real robot
         double desiredHeading = Pathfinder.r2d(leftFollower.getHeading());
         double angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);
-        double turn = -angleDifference / 100; // magic number from 254
+        double turn = angleDifference / 600; // magic number from 254
 
         drivetrain.drive(ControlMode.PercentOutput, leftSpeed + turn, rightSpeed - turn);
 

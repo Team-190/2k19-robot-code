@@ -10,23 +10,21 @@ package frc.robot.commands.collector;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.subsystems.Collector;
 
-public class ExtakeHatchPanel extends InstantCommand {
-    Collector collector = Collector.getInstance();
-
-    public ExtakeHatchPanel() {
-        // super(0.4);
+/**
+ * Add your docs here.
+ */
+public class RetractHatchCylinder extends InstantCommand {
+    Collector collector;
+    public RetractHatchCylinder() {
+        super();
+        collector = Collector.getInstance();
         requires(collector);
     }
 
-    // Called just before this Command runs the first time
+    // Called once when the command executes
     @Override
     protected void initialize() {
-        collector.setEjector(true);
-        // System.out.println("Eject");
+        collector.setEjector(false);
     }
 
-    // Called once after isFinished returns true
-    @Override
-    protected void end() {
-    }
 }

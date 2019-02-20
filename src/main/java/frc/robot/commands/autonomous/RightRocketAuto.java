@@ -10,6 +10,7 @@ package frc.robot.commands.autonomous;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.collector.ExtakeHatchPanel;
 import frc.robot.commands.drivetrain.DriveSequence;
+import frc.robot.commands.drivetrain.TurnToHeading;
 import frc.robot.models.PathfinderSequence;
 
 public class RightRocketAuto extends CommandGroup {
@@ -18,14 +19,15 @@ public class RightRocketAuto extends CommandGroup {
      */
     public RightRocketAuto() {
         addSequential(new DriveSequence(PathfinderSequence.RightStartFarRocket, true));
-        addSequential(new ExtakeHatchPanel());
+        addSequential(new TurnToHeading(145));
+        // addSequential(new ExtakeHatchPanel());
 
-        addSequential(new DriveSequence(PathfinderSequence.RightFarLoading, false));
-        //TODO: wack into wall and get hatch panel, trial and error for that
+        // addSequential(new DriveSequence(PathfinderSequence.RightFarLoading, false));
+        // //TODO: wack into wall and get hatch panel, trial and error for that
 
-        addSequential(new DriveSequence(PathfinderSequence.LoadingRightCloseRocket, false));
-        addSequential(new ExtakeHatchPanel());
+        // addSequential(new DriveSequence(PathfinderSequence.LoadingRightCloseRocket, false));
+        // addSequential(new ExtakeHatchPanel());
 
-        //TODO: add to this if somehow under 15 seconds
+        // //TODO: add to this if somehow under 15 seconds
     }
 }

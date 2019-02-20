@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import frc.robot.commands.autonomous.RightRocketAuto;
 import frc.robot.commands.climber.Climb;
 import frc.robot.commands.climber.InterruptClimb;
 import frc.robot.commands.climber.PreClimb;
@@ -21,11 +22,15 @@ import frc.robot.commands.collector.RollIntake;
 import frc.robot.commands.collector.RollIntakeForCargo;
 import frc.robot.commands.collector.TimedRollIntake;
 import frc.robot.commands.drivetrain.DriveFeet;
+import frc.robot.commands.drivetrain.DriveSequence;
+import frc.robot.commands.drivetrain.ResetNavX;
 import frc.robot.commands.elevator.ElevateManual;
 import frc.robot.commands.elevator.ElevateToHeight;
 import frc.robot.input.AttackThree;
 import frc.robot.input.ButtonBox;
 import frc.robot.input.ButtonBox2;
+import frc.robot.models.PathfinderSequence;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Collector.Speed;
@@ -49,11 +54,12 @@ public class OI {
         buttonBox = new ButtonBox(BUTTON_BOX);
         buttonBox2 = new ButtonBox2(BUTTON_BOX_2);
 
-        leftStick.getButton(7).whenPressed(new DriveFeet(6));
-
-        // EndOfMatchClimb climbTrigger = new EndOfMatchClimb();
+        // leftStick.getButton(7).whenPressed(new DriveFeet(6));
 
         // map button box commands
+        buttonBox2.blueOne.whenPressed(new RightRocketAuto());
+        buttonBox2.blueTwo.whenPressed(new ResetNavX());
+
         // elevator
         buttonBox.upperRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoThree));
         buttonBox.middleRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoTwo));
@@ -70,7 +76,7 @@ public class OI {
         buttonBox.collectCargo.whenPressed(new AutoCargoCollect());
         buttonBox.collectHatch.whenPressed(new CollectHatch());
         buttonBox.releaseCargo.whenPressed(new TimedRollIntake(Collector.Speed.OUT, .75));
-        buttonBox.releaseHatch.whenPressed(new ExtakeHatchPanel());
+        buttonBox.releaseHatch.whenPressed(new ReleaseHatch());
 
         // Climber
         buttonBox2.preClimb.whenPressed(new PreClimb());

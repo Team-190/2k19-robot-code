@@ -8,13 +8,18 @@
 package frc.robot.commands.collector;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class ReleaseHatch extends CommandGroup {
     /**
      * Add your docs here.
      */
     public ReleaseHatch() {
-        addSequential(new ExtakeHatchPanel());
         addSequential(new OpenCollector());
+        addSequential(new WaitCommand(.75));
+        addSequential(new ExtakeHatchPanel());
+        addSequential(new WaitCommand(.5));
+        addSequential(new RetractHatchCylinder());
+
     }
 }

@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
+import frc.robot.Robot;
 import frc.robot.commands.drivetrain.DefaultDrive;
 import frc.robot.commands.drivetrain.TurnToHeading;
 import frc.robot.models.PairedTalonSRX;
@@ -25,9 +26,9 @@ import frc.robot.models.PairedTalonSRX;
 public class Drivetrain extends Subsystem {
     private static Drivetrain drivetrain = null;
 
-    final double TICKS_PER_REV = 1024;
-    final double WHEEL_DIAMETER = .5; // feet
-    final double ENCODER_TO_FEET = WHEEL_DIAMETER * TICKS_PER_REV; // TODO: configure this
+    public final static double TICKS_PER_REV = 1024;
+    public final static double WHEEL_DIAMETER = .5; // feet
+    public final static double ENCODER_TO_FEET = WHEEL_DIAMETER * TICKS_PER_REV; // TODO: configure this
 
     AHRS navx;
     // Speed controller ports
@@ -118,7 +119,7 @@ public class Drivetrain extends Subsystem {
     @Override
     public void initDefaultCommand() {
         setDefaultCommand(new DefaultDrive());
-        // setDefaultCommand(new TurnToHeading(0));
+        // setDefaultCommand(new TurnToHeading(Robot.headingChooser.getSelected()));
     }
 
     public double feetToEncoder(double feet) {

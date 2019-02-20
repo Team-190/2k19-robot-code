@@ -46,6 +46,7 @@ public class Robot extends TimedRobot {
         Drivetrain.getInstance();
         Elevator.getInstance();
         BlinkinPark.getInstance();
+        Drivetrain.getInstance().resetNavX();
         // Climber.getInstance();
         Vision.getInstance();
 
@@ -65,14 +66,14 @@ public class Robot extends TimedRobot {
         encoderRight = tab.add("Right encoder", 0).getEntry();
         chassisACS = tab.add("Chassis ACS", 0).getEntry();
         servo = tab.add("Climber Servo", 0).getEntry();
-        trolleyUp = tab.add("Trolley Up", true).getEntry();
-        armsDown = tab.add("Arms Down", true).getEntry();
+        trolleyUp = tab.add("Trolley Up", false).getEntry();
+        armsDown = tab.add("Arms Down", false).getEntry();
         portCount = tab.add("Port Count", 0).getEntry();
         headingChooser.setDefaultOption("0", 0.0);
         headingChooser.addOption("90", 90.0);
         headingChooser.addOption("-90", -90.0);
         tab.add("Auto chooser", autoChooser);
-        // tab.add("Chooser", headingChooser);
+        tab.add("Chooser", headingChooser);
     }
 
     @Override
@@ -83,7 +84,7 @@ public class Robot extends TimedRobot {
         elevSetpoint.setString(Elevator.getInstance().getSetpoint().name());
         elevMotorSetpoint.setDouble(Elevator.getInstance().getMotorSetpoint());
         hasCargo.setBoolean(Collector.getInstance().hasCargo());
-        angle.setDouble(Drivetrain.getInstance().getNavX().getAngle());
+        angle.setDouble(Drivetrain.getInstance().getNavX().getYaw());
         encoderLeft.setNumber(Drivetrain.getInstance().getLeftPosition());
         encoderRight.setNumber(Drivetrain.getInstance().getRightPosition());
         chassisACS.setNumber(Climber.getInstance().getChassisACS());
@@ -121,6 +122,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        // Drivetrain.getInstance().resetNavX();
         Vision.getInstance().setLightOn(true);
         if (autoCommand != null)
             autoCommand.cancel();

@@ -52,6 +52,15 @@ public class Climber extends Subsystem {
         solenoid = new DoubleSolenoid(SOLENOID_FORWARD_PORT, SOLENOID_REVERSE_PORT);
     }
 
+    // public Value getSolenoidState() {
+    //     DoubleSolenoid.Value value = solenoid.get();
+    //     if (value == DoubleSolenoid.Value.kForward)
+    //         return true;
+    //     else
+    //         value = Value.kReverse;
+    //     return solenoid.get();
+    // }
+
     public double getChassisACS() {
         return chassisACS.getVoltage();
     }
@@ -75,17 +84,16 @@ public class Climber extends Subsystem {
         return climbPressed;
     }
 
-    // TODO: find the real threshold
     public boolean isChassisACSTriggered() {
-        return chassisACS.getVoltage() > 1.5;
+        return chassisACS.getVoltage() > 2.25;
     }
 
     public boolean isTrolleyUp() {
-        return trolleyUp.get();
+        return !trolleyUp.get();
     }
 
     public boolean isArmsDown() {
-        return armsDown.get();
+        return !armsDown.get();
     }
 
     public void setSpeed(ControlMode mode, double speed) {
@@ -113,7 +121,7 @@ public class Climber extends Subsystem {
     }
 
     public enum Direction {
-        FORWARD(1), BACKWARD(-1);
+        FORWARD(1), BACKWARD(-1), OFF(0);
 
         private final int value;
 
