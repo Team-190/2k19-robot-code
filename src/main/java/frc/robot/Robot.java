@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.LeftRocketAuto;
@@ -37,18 +38,17 @@ public class Robot extends TimedRobot {
     NetworkTableEntry encoderLeft, encoderRight;
     NetworkTableEntry chassisACS, servo, trolleyUp, armsDown;
     NetworkTableEntry portCount;
-    public static SendableChooser<Double> headingChooser = new SendableChooser<Double>();
 
     @Override
     public void robotInit() {
-        OI.getInstance();
-        Collector.getInstance();
-        Drivetrain.getInstance();
-        Elevator.getInstance();
-        BlinkinPark.getInstance();
-        Drivetrain.getInstance().resetNavX();
-        // Climber.getInstance();
-        Vision.getInstance();
+        // OI.getInstance();
+        // Collector.getInstance();
+        // Drivetrain.getInstance();
+        // Elevator.getInstance();
+        // BlinkinPark.getInstance();
+        // Drivetrain.getInstance().resetNavX();
+        // // Climber.getInstance();
+        // Vision.getInstance();
 
         autoChooser.setDefaultOption(MANUAL, MANUAL);
         autoChooser.addOption(LEFT_ROCKET, LEFT_ROCKET);
@@ -56,42 +56,78 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData("Autos", autoChooser);
 
         tab = Shuffleboard.getTab("Sensors");
-        elevHeight = tab.add("Elevator Height", 0).getEntry();
-        zeroSwitch = tab.add("Elevator Switch", false).getEntry();
-        elevSetpoint = tab.add("Elevator Setpoint", Elevator.Position.Ground.name()).getEntry();
-        elevMotorSetpoint = tab.add("Elevator Motor Setpoint", 0).getEntry();
-        hasCargo = tab.add("Has Cargo", false).getEntry();
-        angle = tab.add("Drivetrain Angle", 0).getEntry();
-        encoderLeft = tab.add("Left encoder", 0).getEntry();
-        encoderRight = tab.add("Right encoder", 0).getEntry();
-        chassisACS = tab.add("Chassis ACS", 0).getEntry();
-        servo = tab.add("Climber Servo", 0).getEntry();
-        trolleyUp = tab.add("Trolley Up", false).getEntry();
-        armsDown = tab.add("Arms Down", false).getEntry();
-        portCount = tab.add("Port Count", 0).getEntry();
-        headingChooser.setDefaultOption("0", 0.0);
-        headingChooser.addOption("90", 90.0);
-        headingChooser.addOption("-90", -90.0);
-        tab.add("Auto chooser", autoChooser);
-        tab.add("Chooser", headingChooser);
+
+        SimpleWidget elevHeightWidget = tab.add("Elevator Height", 0);
+        elevHeightWidget.withSize(1, 1).withPosition(5, 2);
+        elevHeight = elevHeightWidget.getEntry();
+
+        SimpleWidget zeroSwitchWidget = tab.add("Elevator Switch", false);
+        zeroSwitchWidget.withSize(1, 1).withPosition(6, 3);
+        zeroSwitch = zeroSwitchWidget.getEntry();
+
+        SimpleWidget elevSetpointWidget = tab.add("Elevator Setpoint", Elevator.Position.Ground.name());
+        elevSetpointWidget.withSize(1, 1).withPosition(5, 1);
+        elevSetpoint = elevSetpointWidget.getEntry();
+
+        SimpleWidget elevMotorSetpointWidget = tab.add("Elevator Motor Setpoint", 0);
+        elevMotorSetpointWidget.withSize(1, 1).withPosition(6, 2);
+        elevMotorSetpoint = elevMotorSetpointWidget.getEntry();
+
+        SimpleWidget hasCargoWidget = tab.add("Has Cargo", false);
+        hasCargoWidget.withSize(1, 1).withPosition(5, 3);
+        hasCargo = hasCargoWidget.getEntry();
+
+        SimpleWidget angleWidget = tab.add("Drivetrain Angle", 0);
+        angleWidget.withSize(2, 1).withPosition(2, 3);
+        angle = angleWidget.getEntry();
+
+        SimpleWidget encoderLeftWidget = tab.add("Left encoder", 0);
+        encoderLeftWidget.withSize(1, 1).withPosition(2, 2);
+        encoderLeft = encoderLeftWidget.getEntry();
+
+        SimpleWidget encoderRightWidget = tab.add("Right encoder", 0);
+        encoderRightWidget.withSize(1, 1).withPosition(3, 2);
+        encoderRight = encoderRightWidget.getEntry();
+
+        SimpleWidget chassisACSWidget = tab.add("Chassis ACS", 0);
+        chassisACSWidget.withSize(1, 1).withPosition(9, 1);
+        chassisACS = chassisACSWidget.getEntry();
+
+        SimpleWidget servoWidget = tab.add("Climber Servo", 0);
+        servoWidget.withSize(1, 1).withPosition(9, 2);
+        servo = servoWidget.getEntry();
+
+        SimpleWidget trolleyUpWidget = tab.add("Trolley Up", false);
+        trolleyUpWidget.withSize(1, 1).withPosition(8, 1);
+        trolleyUp = trolleyUpWidget.getEntry();
+
+        SimpleWidget armsDownWidget = tab.add("Arms Down", false);
+        armsDownWidget.withSize(1,1).withPosition(8, 2);
+        armsDown = armsDownWidget.getEntry();
+
+        SimpleWidget portCountWidget = tab.add("Port Count", 0);
+        portCountWidget.withSize(1, 1).withPosition(6, 1);
+        portCount = portCountWidget.getEntry();
+
+        tab.add("Auto chooser", autoChooser).withSize(2, 1).withPosition(2, 1);
     }
 
     @Override
     public void robotPeriodic() {
         // tab.add("Elevator subsystem", Elevator.getInstance());
-        elevHeight.setDouble(Elevator.getInstance().getPosition());
-        zeroSwitch.setBoolean(Elevator.getInstance().getSwitch());
-        elevSetpoint.setString(Elevator.getInstance().getSetpoint().name());
-        elevMotorSetpoint.setDouble(Elevator.getInstance().getMotorSetpoint());
-        hasCargo.setBoolean(Collector.getInstance().hasCargo());
-        angle.setDouble(Drivetrain.getInstance().getNavX().getYaw());
-        encoderLeft.setNumber(Drivetrain.getInstance().getLeftPosition());
-        encoderRight.setNumber(Drivetrain.getInstance().getRightPosition());
-        chassisACS.setNumber(Climber.getInstance().getChassisACS());
-        servo.setNumber(Climber.getInstance().getServoValue());
-        trolleyUp.setBoolean(Climber.getInstance().isTrolleyUp());
-        armsDown.setBoolean(Climber.getInstance().isArmsDown());
-        portCount.setNumber(Vision.getInstance().getPortCount());
+        // elevHeight.setDouble(Elevator.getInstance().getPosition());
+        // zeroSwitch.setBoolean(Elevator.getInstance().getSwitch());
+        // elevSetpoint.setString(Elevator.getInstance().getSetpoint().name());
+        // elevMotorSetpoint.setDouble(Elevator.getInstance().getMotorSetpoint());
+        // hasCargo.setBoolean(Collector.getInstance().hasCargo());
+        // angle.setDouble(Drivetrain.getInstance().getNavX().getYaw());
+        // encoderLeft.setNumber(Drivetrain.getInstance().getLeftPosition());
+        // encoderRight.setNumber(Drivetrain.getInstance().getRightPosition());
+        // chassisACS.setNumber(Climber.getInstance().getChassisACS());
+        // servo.setNumber(Climber.getInstance().getServoValue());
+        // trolleyUp.setBoolean(Climber.getInstance().isTrolleyUp());
+        // armsDown.setBoolean(Climber.getInstance().isArmsDown());
+        // portCount.setNumber(Vision.getInstance().getPortCount());
     }
 
     @Override

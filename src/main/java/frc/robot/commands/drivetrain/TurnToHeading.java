@@ -21,7 +21,7 @@ public class TurnToHeading extends PIDCommand {
     int countOnTarget = 0;
 
     public TurnToHeading(double heading) {
-        super(.03, 0, 0); // TODO: tune PID
+        super(.03, 0, 0);
         requires(drive);
         this.heading = heading;
         controller = getPIDController();
@@ -59,12 +59,11 @@ public class TurnToHeading extends PIDCommand {
 
     @Override
     protected double returnPIDInput() {
-        setSetpoint(Robot.headingChooser.getSelected());
         return drive.getYaw();
     }
 
     @Override
     protected void usePIDOutput(double output) {
-        drive.drive(ControlMode.PercentOutput, output, -output); //TODO: fix signs?
+        drive.drive(ControlMode.PercentOutput, output, -output);
     }
 }
