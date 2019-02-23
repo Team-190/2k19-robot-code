@@ -40,27 +40,31 @@ public class DriveSequence extends Command {
         drivetrain.setBrake();
 
         leftFollower = new EncoderFollower(sequence.getLeft());
-        leftFollower.configureEncoder(drivetrain.getLeftPosition(), (int) Drivetrain.TICKS_PER_REV, Drivetrain.WHEEL_DIAMETER);
+        leftFollower.configureEncoder(drivetrain.getLeftPosition(), (int) Drivetrain.TICKS_PER_REV,
+                Drivetrain.WHEEL_DIAMETER);
         leftFollower.configurePIDVA(0.75, 0, 0, 1 / 8, 0);
         rightFollower = new EncoderFollower(sequence.getRight());
-        rightFollower.configureEncoder(drivetrain.getRightPosition(), (int) Drivetrain.TICKS_PER_REV, Drivetrain.WHEEL_DIAMETER);
-        rightFollower.configurePIDVA(0.75, 0, 0, 1 / 8, 0); 
+        rightFollower.configureEncoder(drivetrain.getRightPosition(), (int) Drivetrain.TICKS_PER_REV,
+                Drivetrain.WHEEL_DIAMETER);
+        rightFollower.configurePIDVA(0.75, 0, 0, 1 / 8, 0);
 
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+        if (!drivetrain.getNavX().isCalibrating()) {
 
-        double leftSpeed = leftFollower.calculate(drivetrain.getLeftPosition());
-        double rightSpeed = rightFollower.calculate(drivetrain.getRightPosition());
+            double leftSpeed = leftFollower.calculate(drivetrain.getLeftPosition());
+            double rightSpeed = rightFollower.calculate(drivetrain.getRightPosition());
 
-        double gyroHeading = -drivetrain.getYaw(); // TODO: adjust get_____ for real robot
-        double desiredHeading = Pathfinder.r2d(leftFollower.getHeading());
-        double angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);
-        double turn = angleDifference / 600; // magic number from 254
+            double gyroHeading = -drivetrain.getYaw();
+            double desiredHeading = Pathfinder.r2d(leftFollower.getHeading());
+            double angleDifference = Pathfinder.boundHalfDegrees(desiredHeading - gyroHeading);
+            double turn = angleDifference / 600; // magic number from 254
 
-        drivetrain.drive(ControlMode.PercentOutput, leftSpeed + turn, rightSpeed - turn);
+            drivetrain.drive(ControlMode.PercentOutput, leftSpeed + turn, rightSpeed - turn);
+        }
 
     }
 
