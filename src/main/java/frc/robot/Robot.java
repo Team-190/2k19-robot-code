@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -41,12 +42,13 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-        // OI.getInstance();
-        // Collector.getInstance();
-        // Drivetrain.getInstance();
-        // Elevator.getInstance();
-        // BlinkinPark.getInstance();
-        // Drivetrain.getInstance().resetNavX();
+        CameraServer.getInstance().startAutomaticCapture();
+        OI.getInstance();
+        Collector.getInstance();
+        Drivetrain.getInstance();
+        Elevator.getInstance();
+        BlinkinPark.getInstance();
+        Drivetrain.getInstance().resetNavX();
         // // Climber.getInstance();
         // Vision.getInstance();
 
@@ -115,19 +117,19 @@ public class Robot extends TimedRobot {
     @Override
     public void robotPeriodic() {
         // tab.add("Elevator subsystem", Elevator.getInstance());
-        // elevHeight.setDouble(Elevator.getInstance().getPosition());
-        // zeroSwitch.setBoolean(Elevator.getInstance().getSwitch());
-        // elevSetpoint.setString(Elevator.getInstance().getSetpoint().name());
-        // elevMotorSetpoint.setDouble(Elevator.getInstance().getMotorSetpoint());
-        // hasCargo.setBoolean(Collector.getInstance().hasCargo());
-        // angle.setDouble(Drivetrain.getInstance().getNavX().getYaw());
-        // encoderLeft.setNumber(Drivetrain.getInstance().getLeftPosition());
-        // encoderRight.setNumber(Drivetrain.getInstance().getRightPosition());
-        // chassisACS.setNumber(Climber.getInstance().getChassisACS());
-        // servo.setNumber(Climber.getInstance().getServoValue());
-        // trolleyUp.setBoolean(Climber.getInstance().isTrolleyUp());
-        // armsDown.setBoolean(Climber.getInstance().isArmsDown());
-        // portCount.setNumber(Vision.getInstance().getPortCount());
+        elevHeight.setDouble(Elevator.getInstance().getPosition());
+        zeroSwitch.setBoolean(Elevator.getInstance().getSwitch());
+        elevSetpoint.setString(Elevator.getInstance().getSetpoint().name());
+        elevMotorSetpoint.setDouble(Elevator.getInstance().getMotorSetpoint());
+        hasCargo.setBoolean(Collector.getInstance().hasCargo());
+        angle.setDouble(Drivetrain.getInstance().getNavX().getYaw());
+        encoderLeft.setNumber(Drivetrain.getInstance().getLeftPosition());
+        encoderRight.setNumber(Drivetrain.getInstance().getRightPosition());
+        chassisACS.setNumber(Climber.getInstance().getChassisACS());
+        servo.setNumber(Climber.getInstance().getServoValue());
+        trolleyUp.setBoolean(Climber.getInstance().isTrolleyUp());
+        armsDown.setBoolean(Climber.getInstance().isArmsDown());
+        portCount.setNumber(Vision.getInstance().getPortCount());
     }
 
     @Override
