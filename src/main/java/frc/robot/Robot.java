@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.LeftRocketAuto;
+import frc.robot.commands.autonomous.ManualSandstormHatch;
 import frc.robot.commands.autonomous.RightRocketAuto;
 import frc.robot.subsystems.BlinkinPark;
 import frc.robot.subsystems.Climber;
@@ -144,9 +145,10 @@ public class Robot extends TimedRobot {
             autoCommand = new RightRocketAuto();
             break;
         default:
-            // manual, just use joy sticks
+            autoCommand = new ManualSandstormHatch();
             break;
         }
+        autoCommand.start();
     }
 
     /**
@@ -155,7 +157,6 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-
     }
 
     @Override
