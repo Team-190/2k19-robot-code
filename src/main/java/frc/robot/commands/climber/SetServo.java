@@ -13,22 +13,19 @@ import frc.robot.subsystems.Climber;
 /**
  * Add your docs here.
  */
-public class DeployArms extends InstantCommand {
-    Climber climber;
-    /**
-     * Add your docs here.
-     */
-    public DeployArms() {
+public class SetServo extends InstantCommand {
+    double point;
+
+    public SetServo(double point) {
         super();
-        climber = Climber.getInstance();
-        requires(climber);
+        requires(Climber.getInstance());
+        this.point = point;
     }
 
     // Called once when the command executes
     @Override
     protected void initialize() {
-        climber.setClimbPressed();
-        climber.setServo(.5);
+        Climber.getInstance().setServo(point);
     }
 
 }

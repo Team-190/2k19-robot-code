@@ -51,10 +51,10 @@ public class ButtonBox2 extends Joystick {
 
         blueOne = new JoystickButton(this, 10);
         blueTwo = new JoystickButton(this, 11);
-        // blueThree = new JoystickButton(this, 0);
+        blueThree = new JoystickButton(this, 12);
 
-        // greenOne = new JoystickButton(this, 0);
-        // greenTwo = new JoystickButton(this, 0);
+        greenOne = new JoystickButton(this, 14);
+        greenTwo = new JoystickButton(this, 13);
         // greenThree = new JoystickButton(this, 0);
     }
 

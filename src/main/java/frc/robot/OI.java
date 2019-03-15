@@ -15,6 +15,7 @@ import frc.robot.commands.climber.PreClimb;
 import frc.robot.commands.climber.RetractLifters;
 import frc.robot.commands.climber.RollManual;
 import frc.robot.commands.climber.RollWhileHeld;
+import frc.robot.commands.climber.SetServo;
 import frc.robot.commands.collector.AutoCargoCollect;
 import frc.robot.commands.collector.CloseCollector;
 import frc.robot.commands.collector.CollectHatch;
@@ -103,6 +104,8 @@ public class OI {
         buttonBox2.blueOne.whenReleased(new RollWhileHeld(Climber.Direction.OFF));
         buttonBox2.blueTwo.whenPressed(new DeployLifters());
         buttonBox2.blueThree.whenPressed(new RetractLifters());
+        buttonBox2.greenOne.whenPressed(new SetServo(0));
+        buttonBox2.greenTwo.whenPressed(new SetServo(.5));
     }
 
     /**

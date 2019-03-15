@@ -24,5 +24,4 @@ public class RollWhileHeld extends InstantCommand {
     protected void initialize() {
         Climber.getInstance().setDirection(direction);
     }
-
 }
