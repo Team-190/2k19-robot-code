@@ -7,33 +7,25 @@
 
 package frc.robot;
 
-import frc.robot.commands.autonomous.RightRocketAuto;
 import frc.robot.commands.climber.Climb;
 import frc.robot.commands.climber.DeployLifters;
 import frc.robot.commands.climber.InterruptClimb;
 import frc.robot.commands.climber.PreClimb;
 import frc.robot.commands.climber.RetractLifters;
-import frc.robot.commands.climber.RollManual;
 import frc.robot.commands.climber.RollWhileHeld;
 import frc.robot.commands.climber.SetServo;
 import frc.robot.commands.collector.AutoCargoCollect;
 import frc.robot.commands.collector.CloseCollector;
 import frc.robot.commands.collector.CollectHatch;
-import frc.robot.commands.collector.ExtakeHatchPanel;
 import frc.robot.commands.collector.OpenCollector;
 import frc.robot.commands.collector.ReleaseHatch;
 import frc.robot.commands.collector.RollIntake;
-import frc.robot.commands.collector.RollIntakeForCargo;
 import frc.robot.commands.collector.TimedRollIntake;
-import frc.robot.commands.drivetrain.DriveFeet;
-import frc.robot.commands.drivetrain.DriveSequence;
-import frc.robot.commands.drivetrain.ResetNavX;
 import frc.robot.commands.elevator.ElevateManual;
 import frc.robot.commands.elevator.ElevateToHeight;
 import frc.robot.input.AttackThree;
 import frc.robot.input.ButtonBox;
 import frc.robot.input.ButtonBox2;
-import frc.robot.models.PathfinderSequence;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Elevator;

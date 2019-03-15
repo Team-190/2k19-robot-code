@@ -36,7 +36,6 @@ public class ButtonBox extends Joystick {
 
     public ButtonBox(int channel) {
         super(channel);
-        // TODO: fix button values for real button box
         upperRocketCargo = new JoystickButton(this, 7);
         middleRocketCargo = new JoystickButton(this, 6);
         lowRocketCargo = new JoystickButton(this, 5);
