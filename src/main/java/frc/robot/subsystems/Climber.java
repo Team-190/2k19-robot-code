@@ -36,7 +36,7 @@ public class Climber extends Subsystem {
     private final int SERVO_PORT = 1;
 
     private DoubleSolenoid solenoid;
-    private final int SOLENOID_FORWARD_PORT = 4, SOLENOID_REVERSE_PORT = 5;
+    private final int SOLENOID_FORWARD_PORT = 6, SOLENOID_REVERSE_PORT = 5;
     private boolean climbPressed;
 
     private Climber() {
@@ -98,6 +98,10 @@ public class Climber extends Subsystem {
 
     public void setSpeed(ControlMode mode, double speed) {
         motor.set(mode, speed);
+    }
+
+    public void setDirection(Direction direction) {
+        setSpeed(ControlMode.PercentOutput, direction.value);
     }
 
     public void setSolenoid(boolean state) {

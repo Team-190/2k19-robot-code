@@ -9,28 +9,20 @@ package frc.robot.commands.climber;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Collector;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Climber.Direction;
 
-/**
- * Add your docs here.
- */
-public class InterruptClimb extends InstantCommand {
-    /**
-     * Add your docs here.
-     */
-    public InterruptClimb() {
+public class RollWhileHeld extends InstantCommand {
+    Direction direction;
+    public RollWhileHeld(Direction direction) {
         super();
-        requires(Drivetrain.getInstance());
         requires(Climber.getInstance());
-        requires(Collector.getInstance());
-        requires(Elevator.getInstance());
-        
+        this.direction = direction;
     }
 
+    // Called once when the command executes
     @Override
     protected void initialize() {
+        Climber.getInstance().setDirection(direction);
     }
 
 }

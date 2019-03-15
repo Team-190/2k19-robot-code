@@ -49,7 +49,7 @@ public class Robot extends TimedRobot {
         Drivetrain.getInstance();
         Elevator.getInstance();
         BlinkinPark.getInstance();
-        Drivetrain.getInstance().resetNavX();
+        // Drivetrain.getInstance().resetNavX();
         // // Climber.getInstance();
         // Vision.getInstance();
 
@@ -123,7 +123,7 @@ public class Robot extends TimedRobot {
         elevSetpoint.setString(Elevator.getInstance().getSetpoint().name());
         elevMotorSetpoint.setDouble(Elevator.getInstance().getMotorSetpoint());
         hasCargo.setBoolean(Collector.getInstance().hasCargo());
-        angle.setDouble(Drivetrain.getInstance().getNavX().getYaw());
+        // angle.setDouble(Drivetrain.getInstance().getNavX().getYaw());
         encoderLeft.setNumber(Drivetrain.getInstance().getLeftPosition());
         encoderRight.setNumber(Drivetrain.getInstance().getRightPosition());
         chassisACS.setNumber(Climber.getInstance().getChassisACS());

@@ -9,9 +9,12 @@ package frc.robot;
 
 import frc.robot.commands.autonomous.RightRocketAuto;
 import frc.robot.commands.climber.Climb;
+import frc.robot.commands.climber.DeployLifters;
 import frc.robot.commands.climber.InterruptClimb;
 import frc.robot.commands.climber.PreClimb;
+import frc.robot.commands.climber.RetractLifters;
 import frc.robot.commands.climber.RollManual;
+import frc.robot.commands.climber.RollWhileHeld;
 import frc.robot.commands.collector.AutoCargoCollect;
 import frc.robot.commands.collector.CloseCollector;
 import frc.robot.commands.collector.CollectHatch;
@@ -57,8 +60,8 @@ public class OI {
         // leftStick.getButton(7).whenPressed(new DriveFeet(6));
 
         // map button box commands
-        buttonBox2.blueOne.whenPressed(new RightRocketAuto());
-        buttonBox2.blueTwo.whenPressed(new ResetNavX());
+        // buttonBox2.blueOne.whenPressed(new RightRocketAuto());
+        // buttonBox2.blueTwo.whenPressed(new ResetNavX());
 
         // elevator
         buttonBox.upperRocketCargo.whenPressed(new ElevateToHeight(Elevator.Position.RocketCargoThree));
@@ -95,10 +98,11 @@ public class OI {
         buttonBox2.manualRoller.getForward().whileHeld(new RollIntake(Speed.OUT));
         buttonBox2.manualRoller.getBackward().whileHeld(new RollIntake(Speed.IN));
         buttonBox2.firePiston.whenPressed(new ReleaseHatch());
-        // buttonBox.manualClimbPistons.getForward().whileHeld(new
-        // RollManual(Climber.Direction.FORWARD));
-        // buttonBox.manualClimbPistons.getBackward().whileHeld(new
-        // RollManual(Climber.Direction.BACKWARD));
+
+        buttonBox2.blueOne.whenPressed(new RollWhileHeld(Climber.Direction.FORWARD));
+        buttonBox2.blueOne.whenReleased(new RollWhileHeld(Climber.Direction.OFF));
+        buttonBox2.blueTwo.whenPressed(new DeployLifters());
+        buttonBox2.blueThree.whenPressed(new RetractLifters());
     }
 
     /**
