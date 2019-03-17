@@ -25,7 +25,7 @@ public class SetServo extends InstantCommand {
     // Called once when the command executes
     @Override
     protected void initialize() {
-        Climber.getInstance().setServo(point);
+        // Climber.getInstance().setServo(point);
     }
 
 }

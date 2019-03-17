@@ -29,11 +29,11 @@ public class Climber extends Subsystem {
     private DigitalInput trolleyUp, armsDown;
     private final int TROLLEY_PORT = 7, ARMS_PORT = 6;
 
-    private WPI_TalonSRX motor;
-    private final int MOTOR_PORT = 18;
+    private WPI_TalonSRX trolleyMotor, armReleaseMotor;
+    private final int TROLLEY_MOTOR_PORT = 18, ARM_RELEASE_PORT = 16;
 
-    private Servo servo;
-    private final int SERVO_PORT = 1;
+    // private Servo servo;
+    // private final int SERVO_PORT = 1;
 
     private DoubleSolenoid solenoid;
     private final int SOLENOID_FORWARD_PORT = 6, SOLENOID_REVERSE_PORT = 5;
@@ -46,8 +46,9 @@ public class Climber extends Subsystem {
         trolleyUp = new DigitalInput(TROLLEY_PORT);
         armsDown = new DigitalInput(ARMS_PORT);
 
-        motor = new WPI_TalonSRX(MOTOR_PORT);
-        servo = new Servo(SERVO_PORT);
+        trolleyMotor = new WPI_TalonSRX(TROLLEY_MOTOR_PORT);
+        armReleaseMotor = new WPI_TalonSRX(ARM_RELEASE_PORT);
+        // servo = new Servo(SERVO_PORT);
 
         solenoid = new DoubleSolenoid(SOLENOID_FORWARD_PORT, SOLENOID_REVERSE_PORT);
     }
@@ -68,13 +69,13 @@ public class Climber extends Subsystem {
     /**
      * Value between 0 and 1
      */
-    public void setServo(double value) {
-        servo.set(value);
-    }
+    // public void setServo(double value) {
+    //     servo.set(value);
+    // }
 
-    public double getServoValue() {
-        return servo.get();
-    }
+    // public double getServoValue() {
+    //     return servo.get();
+    // }
 
     public void setClimbPressed() {
         climbPressed = true;
@@ -96,12 +97,16 @@ public class Climber extends Subsystem {
         return !armsDown.get();
     }
 
-    public void setSpeed(ControlMode mode, double speed) {
-        motor.set(mode, speed);
+    public void setTrolleySpeed(ControlMode mode, double speed) {
+        trolleyMotor.set(mode, speed);
     }
 
-    public void setDirection(Direction direction) {
-        setSpeed(ControlMode.PercentOutput, direction.value);
+    public void setTrolleyDirection(Direction direction) {
+        setTrolleySpeed(ControlMode.PercentOutput, direction.value);
+    }
+
+    public void setArmSpeed(ControlMode mode, double speed) {
+        armReleaseMotor.set(mode, speed);
     }
 
     public void setSolenoid(boolean state) {

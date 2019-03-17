@@ -21,11 +21,12 @@ public class RollToHAB extends Command {
 
     @Override
     protected void initialize() {
+        System.out.println("Roll to HAB");
     }
 
     @Override
     protected void execute() {
-        climber.setSpeed(ControlMode.PercentOutput, Climber.Direction.FORWARD.get());
+        climber.setTrolleySpeed(ControlMode.PercentOutput, Climber.Direction.FORWARD.get());
     }
 
     @Override
@@ -35,6 +36,6 @@ public class RollToHAB extends Command {
 
     @Override
     protected void end() {
-        climber.setSpeed(ControlMode.PercentOutput, 0);
+        climber.setTrolleySpeed(ControlMode.PercentOutput, 0);
     }
 }

@@ -127,7 +127,7 @@ public class Robot extends TimedRobot {
         encoderLeft.setNumber(Drivetrain.getInstance().getLeftPosition());
         encoderRight.setNumber(Drivetrain.getInstance().getRightPosition());
         chassisACS.setNumber(Climber.getInstance().getChassisACS());
-        servo.setNumber(Climber.getInstance().getServoValue());
+        // servo.setNumber(Climber.getInstance().getServoValue());
         trolleyUp.setBoolean(Climber.getInstance().isTrolleyUp());
         armsDown.setBoolean(Climber.getInstance().isArmsDown());
         portCount.setNumber(Vision.getInstance().getPortCount());

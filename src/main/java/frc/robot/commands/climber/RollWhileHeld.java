@@ -22,6 +22,6 @@ public class RollWhileHeld extends InstantCommand {
     // Called once when the command executes
     @Override
     protected void initialize() {
-        Climber.getInstance().setDirection(direction);
+        Climber.getInstance().setTrolleyDirection(direction);
     }
 }

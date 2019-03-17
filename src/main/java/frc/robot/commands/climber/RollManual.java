@@ -28,7 +28,7 @@ public class RollManual extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        climber.setSpeed(ControlMode.PercentOutput, direction.get());
+        climber.setTrolleySpeed(ControlMode.PercentOutput, direction.get());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -40,7 +40,7 @@ public class RollManual extends Command {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-        climber.setSpeed(ControlMode.PercentOutput, 0);
+        climber.setTrolleySpeed(ControlMode.PercentOutput, 0);
     }
 
     // Called when another command which requires one or more of the same

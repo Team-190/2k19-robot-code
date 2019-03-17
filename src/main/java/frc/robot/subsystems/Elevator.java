@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -24,7 +25,7 @@ import frc.robot.models.PairedTalonSRX;
  */
 public class Elevator extends Subsystem {
     private static Elevator elevator;
-    private PairedTalonSRX motor;
+    private WPI_TalonSRX motor;
     private DigitalInput zeroSwitch;
 
     private static final int LEFT = 15, RIGHT = 16;
@@ -58,11 +59,11 @@ public class Elevator extends Subsystem {
      * Constructs the Paired Talon, configures it
      */
     private Elevator() {
-        motor = new PairedTalonSRX(LEFT, RIGHT);
+        motor = new WPI_TalonSRX(LEFT);
         motor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
         motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, DEFAULT_TIMEOUT_MS);
         motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, DEFAULT_TIMEOUT_MS);
-        motor.configPIDF(PID_X, .5, 0, 0, 0);
+        motor.config_kP(PID_X, .5);
         motor.setInverted(InvertType.InvertMotorOutput);
         motor.setSensorPhase(true);
         motor.setNeutralMode(NeutralMode.Brake);
@@ -142,10 +143,11 @@ public class Elevator extends Subsystem {
 
     public enum Position {
         Ground(0), // collector cargo too
-        HatchOne(14), // cargo ship, rocket, and loading
+        LoadingHatch(12),
+        HatchOne(12), // cargo ship, rocket, and loading
         CargoShipCargo(20), 
-        RocketHatchTwo(46),
-        RocketHatchThree(73), 
+        RocketHatchTwo(42),
+        RocketHatchThree(71), 
         RocketCargoOne(22), 
         RocketCargoTwo(51),
         RocketCargoThree(82), 
@@ -160,7 +162,6 @@ public class Elevator extends Subsystem {
         public int getPosition() {
             return inches;
         }
-
     }
 
     public enum Direction {

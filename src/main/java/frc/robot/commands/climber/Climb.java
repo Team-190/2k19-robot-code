@@ -25,7 +25,5 @@ public class Climb extends CommandGroup {
         addSequential(new RollToHAB());
         //      Retract pneumatics
         addSequential(new RetractLifters());
-        // Drive forward 18"
-        addSequential(new DriveForward(), 2);
     }
 }

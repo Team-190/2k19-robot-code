@@ -7,28 +7,37 @@
 
 package frc.robot.commands.climber;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.subsystems.Climber;
 
 /**
  * Add your docs here.
  */
-public class DeployArms extends InstantCommand {
-    Climber climber;
+public class TimeArmSpin extends TimedCommand {
     /**
      * Add your docs here.
      */
-    public DeployArms() {
-        super();
-        climber = Climber.getInstance();
-        requires(climber);
+    public TimeArmSpin(double timeout) {
+        super(timeout);
+        requires(Climber.getInstance());
     }
 
-    // Called once when the command executes
+    // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        climber.setClimbPressed();
-        // climber.setServo(.5);
+        Climber.getInstance().setArmSpeed(ControlMode.PercentOutput, .5);
     }
 
+    // Called repeatedly when this Command is scheduled to run
+    @Override
+    protected void execute() {
+    }
+
+    // Called once after timeout
+    @Override
+    protected void end() {
+        Climber.getInstance().setArmSpeed(ControlMode.PercentOutput, 0);
+    }
 }

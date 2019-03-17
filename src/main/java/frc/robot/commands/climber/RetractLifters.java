@@ -20,6 +20,7 @@ public class RetractLifters extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        System.out.println("Retract Lifters");
         climber.setSolenoid(false);
     }
 

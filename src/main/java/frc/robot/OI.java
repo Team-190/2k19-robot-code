@@ -13,7 +13,7 @@ import frc.robot.commands.climber.InterruptClimb;
 import frc.robot.commands.climber.PreClimb;
 import frc.robot.commands.climber.RetractLifters;
 import frc.robot.commands.climber.RollWhileHeld;
-import frc.robot.commands.climber.SetServo;
+import frc.robot.commands.climber.TimeArmSpin;
 import frc.robot.commands.collector.AutoCargoCollect;
 import frc.robot.commands.collector.CloseCollector;
 import frc.robot.commands.collector.CollectHatch;
@@ -77,7 +77,7 @@ public class OI {
         // Climber
         buttonBox2.preClimb.whenPressed(new PreClimb());
         buttonBox.climb.whenPressed(new Climb());
-        // climbTrigger.whenActive(new Climb());
+
         leftStick.getButton(1).whenPressed(new InterruptClimb());
         rightStick.getButton(1).whenPressed(new InterruptClimb());
 
@@ -96,8 +96,11 @@ public class OI {
         buttonBox2.blueOne.whenReleased(new RollWhileHeld(Climber.Direction.OFF));
         buttonBox2.blueTwo.whenPressed(new DeployLifters());
         buttonBox2.blueThree.whenPressed(new RetractLifters());
-        buttonBox2.greenOne.whenPressed(new SetServo(0));
-        buttonBox2.greenTwo.whenPressed(new SetServo(.5));
+        buttonBox2.greenOne.whenPressed(new TimeArmSpin(2));
+        // buttonBox2.greenOne.whenPressed(new SetServo(0));
+
+
+        // buttonBox2.greenTwo.whenPressed(new SetServo(.5));
     }
 
     /**

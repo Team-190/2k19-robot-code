@@ -14,7 +14,7 @@ import frc.robot.subsystems.Elevator;
 public class CollectHatch extends CommandGroup {
     
     public CollectHatch() {
-        addSequential(new ElevateToHeight(Elevator.Position.HatchOne));
+        addSequential(new ElevateToHeight(Elevator.Position.LoadingHatch));
         addSequential(new CloseCollector());
     }
 }

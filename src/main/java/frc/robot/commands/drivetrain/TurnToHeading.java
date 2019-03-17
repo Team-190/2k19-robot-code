@@ -11,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.PIDCommand;
-import frc.robot.Robot;
 import frc.robot.subsystems.Drivetrain;
 
 public class TurnToHeading extends PIDCommand {
