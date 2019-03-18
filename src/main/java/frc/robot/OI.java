@@ -17,6 +17,7 @@ import frc.robot.commands.climber.TimeArmSpin;
 import frc.robot.commands.collector.AutoCargoCollect;
 import frc.robot.commands.collector.CloseCollector;
 import frc.robot.commands.collector.CollectHatch;
+import frc.robot.commands.collector.ManualHatch;
 import frc.robot.commands.collector.OpenCollector;
 import frc.robot.commands.collector.ReleaseHatch;
 import frc.robot.commands.collector.RollIntake;
@@ -90,7 +91,7 @@ public class OI {
         buttonBox.closeCollector.whenPressed(new CloseCollector());
         buttonBox2.manualRoller.getForward().whileHeld(new RollIntake(Speed.OUT));
         buttonBox2.manualRoller.getBackward().whileHeld(new RollIntake(Speed.IN));
-        buttonBox2.firePiston.whenPressed(new ReleaseHatch());
+        buttonBox2.firePiston.whenPressed(new ManualHatch());
 
         buttonBox2.blueOne.whenPressed(new RollWhileHeld(Climber.Direction.FORWARD));
         buttonBox2.blueOne.whenReleased(new RollWhileHeld(Climber.Direction.OFF));

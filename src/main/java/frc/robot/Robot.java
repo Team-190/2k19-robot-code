@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.autonomous.LeftRocketAuto;
 import frc.robot.commands.autonomous.ManualSandstormHatch;
 import frc.robot.commands.autonomous.RightRocketAuto;
+import frc.robot.commands.collector.RetractHatchCylinder;
 import frc.robot.subsystems.BlinkinPark;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
@@ -162,6 +163,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         // Drivetrain.getInstance().resetNavX();
+        Collector.getInstance().setEjector(false);
         Vision.getInstance().setLightOn(true);
         if (autoCommand != null)
             autoCommand.cancel();
