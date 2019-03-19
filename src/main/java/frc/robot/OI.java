@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import frc.robot.commands.blinkinpark.PlaySongForTime;
 import frc.robot.commands.climber.Climb;
 import frc.robot.commands.climber.DeployLifters;
 import frc.robot.commands.climber.InterruptClimb;
@@ -27,9 +28,12 @@ import frc.robot.commands.elevator.ElevateToHeight;
 import frc.robot.input.AttackThree;
 import frc.robot.input.ButtonBox;
 import frc.robot.input.ButtonBox2;
+import frc.robot.input.CargoTrigger;
+import frc.robot.input.HatchTrigger;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.BlinkinPark.Song;
 import frc.robot.subsystems.Collector.Speed;
 import frc.robot.subsystems.Elevator.Direction;
 
@@ -102,6 +106,9 @@ public class OI {
 
 
         // buttonBox2.greenTwo.whenPressed(new SetServo(.5));
+
+        new HatchTrigger().whenActive(new PlaySongForTime(Song.Color1HeartbeatFast, 3));
+        new CargoTrigger().whenActive(new PlaySongForTime(Song.Color2HeartbeatFast, 3));
     }
 
     /**

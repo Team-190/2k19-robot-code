@@ -30,6 +30,9 @@ public class Collector extends Subsystem {
     DigitalInput cargoBanner;
     private final int CARGO_BANNER_PORT = 8;
 
+    DigitalInput hatchLimit;
+    private final int HATCH_LIMIT_PORT = 5;
+
     /**
      * Constructs all hardware objects
      */
@@ -39,6 +42,7 @@ public class Collector extends Subsystem {
         intake = new WPI_TalonSRX(INTAKE_PORT);
         // ultrasonic = new AnalogUltrasonic(ULTRA_PORT);
         cargoBanner = new DigitalInput(CARGO_BANNER_PORT);
+        hatchLimit = new DigitalInput(HATCH_LIMIT_PORT);
     }
 
     /**
@@ -77,6 +81,10 @@ public class Collector extends Subsystem {
 
     public boolean hasCargo() {
         return !cargoBanner.get();
+    }
+
+    public boolean hasHatch(){
+        return hatchLimit.get();
     }
 
     @Override
