@@ -7,35 +7,32 @@
 
 package frc.robot.commands.blinkinpark;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 import frc.robot.subsystems.BlinkinPark;
 import frc.robot.subsystems.BlinkinPark.Song;
 
-public class TopOTheMornin extends Command {
-  public TopOTheMornin() {
+public class PlaySongForTime extends TimedCommand {
+  Song song;
+
+  public PlaySongForTime(Song song, double timeout) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    super(timeout);
+    this.song = song;
     requires(BlinkinPark.getInstance());
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    BlinkinPark.getInstance().playSong(Song.Color1LightChase);
+    BlinkinPark.getInstance().playSong(song);
   }
 
-  // Called repeatedly when this Command is scheduled to run
+
+  // Called once after isFinished returns true
   @Override
-  protected void execute() {
-    if (DriverStation.getInstance().getMatchTime() < 30) {
-      BlinkinPark.getInstance().playSong(Song.Color1HeartbeatMedium);
-    }
+  protected void end() {
+    BlinkinPark.getInstance().stop();
   }
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
 }
