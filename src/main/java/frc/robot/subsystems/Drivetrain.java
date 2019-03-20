@@ -91,6 +91,29 @@ public class Drivetrain extends Subsystem {
         rightPair.set(mode, right);
     }
 
+    public void arcadeDrive(double speed, double rotateValue) {
+        double leftMotorSpeed, rightMotorSpeed;
+        if (speed > 0.0) {
+            if (rotateValue > 0.0) {
+                leftMotorSpeed = speed - rotateValue;
+                rightMotorSpeed = Math.max(speed, rotateValue);
+            } else {
+                leftMotorSpeed = Math.max(speed, -rotateValue);
+                rightMotorSpeed = speed + rotateValue;
+            }
+        } else {
+            if (rotateValue > 0.0) {
+                leftMotorSpeed = -Math.max(-speed, rotateValue);
+                rightMotorSpeed = speed + rotateValue;
+            } else {
+                leftMotorSpeed = speed - rotateValue;
+                rightMotorSpeed = -Math.max(-speed, -rotateValue);
+            }
+        }
+
+        drive(ControlMode.PercentOutput, leftMotorSpeed, rightMotorSpeed);
+    }
+
     public double getYaw() {
         return (double) navx.getYaw();
     }

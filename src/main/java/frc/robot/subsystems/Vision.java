@@ -56,5 +56,13 @@ public class Vision {
     public void setLightOn(boolean status) {
         lightRing.set(status);
     }
+
+    public double[] getDistances() {
+        return table.getEntry("distances").getDoubleArray(new double[getDistCount()]);
+    }
+
+    public int getDistCount() {
+        return (int)table.getEntry("nb_distances").getNumber(-1);
+    }
 }
  

@@ -22,6 +22,8 @@ import frc.robot.commands.collector.OpenCollector;
 import frc.robot.commands.collector.ReleaseHatch;
 import frc.robot.commands.collector.RollIntake;
 import frc.robot.commands.collector.TimedRollIntake;
+import frc.robot.commands.drivetrain.ApproachTape;
+import frc.robot.commands.drivetrain.DefaultDrive;
 import frc.robot.commands.elevator.ElevateManual;
 import frc.robot.commands.elevator.ElevateToHeight;
 import frc.robot.input.AttackThree;
@@ -98,8 +100,10 @@ public class OI {
         buttonBox2.blueTwo.whenPressed(new DeployLifters());
         buttonBox2.blueThree.whenPressed(new RetractLifters());
         buttonBox2.greenOne.whenPressed(new TimeArmSpin(2));
-        // buttonBox2.greenOne.whenPressed(new SetServo(0));
+        buttonBox2.greenTwo.whenPressed(new ApproachTape());
 
+        buttonBox2.greenTwo.whenReleased(new DefaultDrive());
+        // buttonBox2.greenOne.whenPressed(new SetServo(0));
 
         // buttonBox2.greenTwo.whenPressed(new SetServo(.5));
     }

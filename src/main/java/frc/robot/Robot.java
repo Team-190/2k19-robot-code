@@ -44,15 +44,15 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-        CameraServer.getInstance().startAutomaticCapture();
+        // CameraServer.getInstance().startAutomaticCapture();
         OI.getInstance();
         Collector.getInstance();
         Drivetrain.getInstance();
         Elevator.getInstance();
         BlinkinPark.getInstance();
         // Drivetrain.getInstance().resetNavX();
-        // // Climber.getInstance();
-        // Vision.getInstance();
+        Climber.getInstance();
+        Vision.getInstance();
 
         autoChooser.setDefaultOption(MANUAL, MANUAL);
         autoChooser.addOption(LEFT_ROCKET, LEFT_ROCKET);
