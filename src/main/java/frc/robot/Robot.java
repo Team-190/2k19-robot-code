@@ -37,7 +37,7 @@ public class Robot extends TimedRobot {
     private final SendableChooser<String> autoChooser = new SendableChooser<>();
     ShuffleboardTab tab;
     NetworkTableEntry elevHeight, zeroSwitch, elevSetpoint, elevMotorSetpoint;
-    NetworkTableEntry hasCargo, angle;
+    NetworkTableEntry hasHatch, hasCargo, angle;
     NetworkTableEntry encoderLeft, encoderRight;
     NetworkTableEntry chassisACS, servo, trolleyUp, armsDown;
     NetworkTableEntry portCount;
@@ -101,6 +101,10 @@ public class Robot extends TimedRobot {
         servoWidget.withSize(1, 1).withPosition(9, 2);
         servo = servoWidget.getEntry();
 
+        SimpleWidget hasHatchWidget = tab.add("Have Hatch", false);
+        hasHatchWidget.withSize(1, 1).withPosition(8, 0);
+        hasHatch = hasHatchWidget.getEntry();
+
         SimpleWidget trolleyUpWidget = tab.add("Trolley Up", false);
         trolleyUpWidget.withSize(1, 1).withPosition(8, 1);
         trolleyUp = trolleyUpWidget.getEntry();
@@ -123,8 +127,9 @@ public class Robot extends TimedRobot {
         zeroSwitch.setBoolean(Elevator.getInstance().getSwitch());
         elevSetpoint.setString(Elevator.getInstance().getSetpoint().name());
         elevMotorSetpoint.setDouble(Elevator.getInstance().getMotorSetpoint());
+        hasHatch.setBoolean(Collector.getInstance().hasHatch());
         hasCargo.setBoolean(Collector.getInstance().hasCargo());
-        // angle.setDouble(Drivetrain.getInstance().getNavX().getYaw());
+        angle.setDouble(Drivetrain.getInstance().getNavX().getYaw());
         encoderLeft.setNumber(Drivetrain.getInstance().getLeftPosition());
         encoderRight.setNumber(Drivetrain.getInstance().getRightPosition());
         chassisACS.setNumber(Climber.getInstance().getChassisACS());
@@ -163,7 +168,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         // Drivetrain.getInstance().resetNavX();
-        Collector.getInstance().setEjector(false);
+        Drivetrain.getInstance().getNavX().zeroYaw();
         Vision.getInstance().setLightOn(true);
         if (autoCommand != null)
             autoCommand.cancel();

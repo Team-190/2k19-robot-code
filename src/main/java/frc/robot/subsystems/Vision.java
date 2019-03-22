@@ -61,8 +61,14 @@ public class Vision {
         return table.getEntry("distances").getDoubleArray(new double[getDistCount()]);
     }
 
+    public double distToFeet(double pixels) {
+        return 0.1135 * pixels + 7.6591;
+    }
+
+
+
     public int getDistCount() {
-        return (int)table.getEntry("nb_distances").getNumber(-1);
+        return table.getEntry("nb_distances").getNumber(-1).intValue();
     }
 }
  

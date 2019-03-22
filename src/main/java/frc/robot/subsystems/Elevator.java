@@ -63,7 +63,7 @@ public class Elevator extends Subsystem {
         motor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
         motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, DEFAULT_TIMEOUT_MS);
         motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, DEFAULT_TIMEOUT_MS);
-        motor.config_kP(PID_X, .5);
+        motor.config_kP(PID_X, .75);
         motor.setInverted(InvertType.InvertMotorOutput);
         motor.setSensorPhase(true);
         motor.setNeutralMode(NeutralMode.Brake);
@@ -143,8 +143,8 @@ public class Elevator extends Subsystem {
 
     public enum Position {
         Ground(0), // collector cargo too
-        LoadingHatch(12),
-        HatchOne(12), // cargo ship, rocket, and loading
+        LoadingHatch(4),
+        HatchOne(10), // cargo ship, rocket, and loading
         CargoShipCargo(20), 
         RocketHatchTwo(42),
         RocketHatchThree(71), 

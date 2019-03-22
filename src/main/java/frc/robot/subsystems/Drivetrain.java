@@ -40,7 +40,7 @@ public class Drivetrain extends Subsystem {
     PairedTalonSRX leftPair, rightPair;
 
     private Drivetrain() {
-        // navx = new AHRS(Port.kUSB);
+        navx = new AHRS(Port.kUSB);
         leftPair = new PairedTalonSRX(LEFT_FRONT, LEFT_REAR);
         rightPair = new PairedTalonSRX(RIGHT_FRONT, RIGHT_REAR);
         leftPair.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);

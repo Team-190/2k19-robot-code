@@ -17,11 +17,7 @@ public class ReleaseHatch extends CommandGroup {
     public ReleaseHatch() {
         
         
-        addSequential(new ExtakeHatchPanel());
-        addSequential(new WaitCommand(.75));
-        addSequential(new OpenCollector());
-        addSequential(new WaitCommand(.5));
-        addSequential(new RetractHatchCylinder());
+        addSequential(new HatchOpen());
 
     }
 }

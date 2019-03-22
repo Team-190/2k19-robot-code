@@ -57,6 +57,9 @@ public class OI {
         buttonBox = new ButtonBox(BUTTON_BOX);
         buttonBox2 = new ButtonBox2(BUTTON_BOX_2);
 
+        rightStick.getButton(1).whenPressed(new ApproachTape());
+        rightStick.getButton(1).whenReleased(new DefaultDrive());
+
         // leftStick.getButton(7).whenPressed(new DriveFeet(6));
 
         // map button box commands
@@ -86,7 +89,7 @@ public class OI {
         buttonBox.climb.whenPressed(new Climb());
 
         leftStick.getButton(1).whenPressed(new InterruptClimb());
-        rightStick.getButton(1).whenPressed(new InterruptClimb());
+        // rightStick.getButton(1).whenPressed(new InterruptClimb());
 
         // Manual
         buttonBox2.manualElevator.getForward().whileHeld(new ElevateManual(Direction.UP));

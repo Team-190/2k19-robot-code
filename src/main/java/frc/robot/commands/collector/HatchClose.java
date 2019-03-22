@@ -7,16 +7,27 @@
 
 package frc.robot.commands.collector;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.elevator.ElevateToHeight;
-import frc.robot.subsystems.Elevator;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.subsystems.Collector;
 
-public class CollectHatch extends CommandGroup {
-    
-    public CollectHatch() {
-        addSequential(new CloseCollector());
-        addSequential(new ElevateToHeight(Elevator.Position.LoadingHatch));
-        addSequential(new HatchOpenLimitSwitch());
-        addSequential(new HatchClose());
-    }
+/**
+ * Add your docs here.
+ */
+public class HatchClose extends InstantCommand {
+  /**
+   * Add your docs here.
+   */
+  public HatchClose() {
+    super();
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Collector.getInstance());
+  }
+
+  // Called once when the command executes
+  @Override
+  protected void initialize() {
+    Collector.getInstance().setEjector(false);
+  }
+
 }

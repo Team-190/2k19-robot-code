@@ -16,12 +16,16 @@ import frc.robot.subsystems.Vision;
 import java.util.Arrays;
 import java.util.Collections;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 public class ApproachTape extends PIDCommand {
     Drivetrain drive = Drivetrain.getInstance();
     Vision vision = Vision.getInstance();
+
+    boolean noLines = false;
     double[] distances, ports;
     public ApproachTape() {
-        super(.1, 0, 0);
+        super(1.0, 0, 0);
         requires(drive);
         setInputRange(-1, 1);
         getPIDController().setOutputRange(-1, 1);
@@ -30,6 +34,7 @@ public class ApproachTape extends PIDCommand {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        noLines = false;
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -41,27 +46,48 @@ public class ApproachTape extends PIDCommand {
     // Called once after isFinished returns true
     @Override
     protected void end() {
+        drive.drive(ControlMode.PercentOutput, 0, 0);
     }
 
     @Override
     protected double returnPIDInput() {
         distances = vision.getDistances();
         ports = vision.getXCoordinates();
-        int closestIndex = -1;
-        double largestDist = -1;
+
+        // find the minimum (the distances are negative for some bizarre reason)
+        int minIndex = -1;
+        double minValue = 1;
+
         for (int i = 0; i< distances.length; i++) {
-            if (largestDist < distances[i]) {
-                closestIndex = i;
-                largestDist = distances[i];
+            if (distances[i] < minValue) {
+                minIndex = i;
+                minValue = distances[i];
             }
         }
-        double port = Math.max(ports[closestIndex]/80 - 1.5, -1);
+
+
+        // if (minValue < -40 || minIndex == -1) {
+        if (minIndex == -1) {
+            noLines = true;
+            System.out.println("We are stopping");
+            return 0;
+        } else {
+            noLines = false;
+        }
+        // double port = Math.max(ports[minIndex]/80 - 1.5, -1);
+        // double port = Math.max(ports[minIndex]/80 - 1, -1);
+
+
         
-        return port;
+        return ports[minIndex]/75 - 1.5;
     }
 
     @Override
     protected void usePIDOutput(double output) {
-        drive.arcadeDrive(.5, output);
+        if (noLines) {
+            drive.drive(ControlMode.PercentOutput, 0, 0);
+        } else {
+            drive.arcadeDrive(.5, output);
+        }
     }
 }

@@ -5,26 +5,27 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.blinkinpark;
+package frc.robot.commands.collector;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
-import frc.robot.subsystems.BlinkinPark;
-import frc.robot.subsystems.BlinkinPark.Song;
+import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.subsystems.Collector;
 
-public class PlaySongForTime extends TimedCommand {
-  Song song;
-
-  public PlaySongForTime(Song song, double timeout) {
+public class HatchOpenLimitSwitch extends Command {
+  public HatchOpenLimitSwitch() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    super(timeout);
-    this.song = song;
-    requires(BlinkinPark.getInstance());
+    requires(Collector.getInstance());
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    BlinkinPark.getInstance().playSong(song);
+    Collector.getInstance().setEjector(true);
+  }
+
+  // Make this return true when this Command no longer needs to run execute()
+  @Override
+  protected boolean isFinished() {
+    return Collector.getInstance().hasHatch();
   }
 }
