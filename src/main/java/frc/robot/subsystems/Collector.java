@@ -71,6 +71,10 @@ public class Collector extends Subsystem {
         ejectHatchSolenoid.set(state);
     }
 
+    public boolean getEjector() {
+        return ejectHatchSolenoid.get();
+    }
+
     /**
      * Sets the speed of the intake roller
      * @param speed speed of roller, -1 to 1

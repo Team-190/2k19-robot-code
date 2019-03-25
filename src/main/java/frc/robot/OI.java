@@ -23,6 +23,8 @@ import frc.robot.commands.collector.OpenCollector;
 import frc.robot.commands.collector.ReleaseHatch;
 import frc.robot.commands.collector.RollIntake;
 import frc.robot.commands.collector.TimedRollIntake;
+import frc.robot.commands.collector.ToggleHatch;
+import frc.robot.commands.drivetrain.ApproachFrontShip;
 import frc.robot.commands.drivetrain.ApproachTape;
 import frc.robot.commands.drivetrain.DefaultDrive;
 import frc.robot.commands.elevator.ElevateManual;
@@ -88,7 +90,7 @@ public class OI {
         buttonBox2.preClimb.whenPressed(new PreClimb());
         buttonBox.climb.whenPressed(new Climb());
 
-        leftStick.getButton(1).whenPressed(new InterruptClimb());
+        leftStick.getButton(1).whenPressed(new ApproachFrontShip());
         // rightStick.getButton(1).whenPressed(new InterruptClimb());
 
         // Manual
@@ -100,13 +102,13 @@ public class OI {
         buttonBox.closeCollector.whenPressed(new CloseCollector());
         buttonBox2.manualRoller.getForward().whileHeld(new RollIntake(Speed.OUT));
         buttonBox2.manualRoller.getBackward().whileHeld(new RollIntake(Speed.IN));
-        buttonBox2.firePiston.whenPressed(new ManualHatch());
+        buttonBox2.firePiston.whenPressed(new ToggleHatch());
 
         buttonBox2.blueOne.whenPressed(new RollWhileHeld(Climber.Direction.FORWARD));
         buttonBox2.blueOne.whenReleased(new RollWhileHeld(Climber.Direction.OFF));
         buttonBox2.blueTwo.whenPressed(new DeployLifters());
         buttonBox2.blueThree.whenPressed(new RetractLifters());
-        buttonBox2.greenOne.whenPressed(new TimeArmSpin(2));
+        buttonBox2.greenOne.whenPressed(new TimeArmSpin(4));
         buttonBox2.greenTwo.whenPressed(new ApproachTape());
 
         buttonBox2.greenTwo.whenReleased(new DefaultDrive());
@@ -114,8 +116,8 @@ public class OI {
 
         // buttonBox2.greenTwo.whenPressed(new SetServo(.5));
 
-        new HatchTrigger().whenActive(new PlaySongForTime(Song.Color1HeartbeatFast, 3));
-        new CargoTrigger().whenActive(new PlaySongForTime(Song.Color2HeartbeatFast, 3));
+        // new HatchTrigger().whenActive(new PlaySongForTime(Song.Color1HeartbeatFast, 3));
+        // new CargoTrigger().whenActive(new PlaySongForTime(Song.Color2HeartbeatFast, 3));
     }
 
     /**

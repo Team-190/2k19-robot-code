@@ -5,16 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.autonomous;
+package frc.robot.commands.collector;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.collector.CloseCollector;
-import frc.robot.commands.elevator.ElevateToHeight;
-import frc.robot.subsystems.Elevator;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.subsystems.Collector;
 
-public class ManualSandstormHatch extends CommandGroup {
-    public ManualSandstormHatch() {
-        // addSequential(new ElevateToHeight(Elevator.Position.RocketHatchTwo));
-        addSequential(new CloseCollector());
+/**
+ * Add your docs here.
+ */
+public class ToggleHatch extends InstantCommand {
+    Collector collector = Collector.getInstance();
+    public ToggleHatch() {
+        super();
+        requires(collector);
     }
+
+    // Called once when the command executes
+    @Override
+    protected void initialize() {
+        collector.setEjector(!collector.getEjector());
+    }
+
 }

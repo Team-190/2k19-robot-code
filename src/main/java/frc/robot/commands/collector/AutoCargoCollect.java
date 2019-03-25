@@ -8,9 +8,11 @@
 package frc.robot.commands.collector;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.blinkinpark.PlaySongForTime;
 import frc.robot.commands.elevator.ElevateToHeight;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.BlinkinPark.Song;
 import frc.robot.subsystems.Collector.Speed;
 
 public class AutoCargoCollect extends CommandGroup {
@@ -25,6 +27,7 @@ public class AutoCargoCollect extends CommandGroup {
         addSequential(new ElevateToHeight(Elevator.Position.Ground));
         // Roll roller until limit switch
         addSequential(new RollIntakeForCargo(Collector.Speed.IN));
+        addParallel(new PlaySongForTime(Song.Color2HeartbeatFast, 1));
         addSequential(new RollIntake(Speed.IN), .75);
         // Move elevator to height 1
         addSequential(new ElevateToHeight(Elevator.Position.RocketCargoOne));

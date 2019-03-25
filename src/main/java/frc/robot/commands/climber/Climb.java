@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.climber.DeployLifters;
 import frc.robot.commands.climber.RetractLifters;
 import frc.robot.commands.climber.RollToHAB;
+import frc.robot.commands.collector.OpenCollector;
 import frc.robot.commands.drivetrain.DriveForward;
 
 
@@ -19,11 +20,13 @@ public class Climb extends CommandGroup {
      * Triggered by Climb Button
      */
     public Climb() {
+        addSequential(new OpenCollector());
         // trigger lifting pneumatics
         addSequential(new DeployLifters());
         // drive BAG motor on until chassis anti-cliff triggered
         addSequential(new RollToHAB());
         //      Retract pneumatics
         addSequential(new RetractLifters());
+        
     }
 }

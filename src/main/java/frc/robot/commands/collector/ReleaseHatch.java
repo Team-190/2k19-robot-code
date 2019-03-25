@@ -15,8 +15,7 @@ public class ReleaseHatch extends CommandGroup {
      * Add your docs here.
      */
     public ReleaseHatch() {
-        
-        
+
         addSequential(new HatchOpen());
 
     }

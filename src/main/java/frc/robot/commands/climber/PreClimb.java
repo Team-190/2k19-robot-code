@@ -10,6 +10,8 @@ package frc.robot.commands.climber;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 import frc.robot.subsystems.Elevator;
+import frc.robot.commands.collector.HatchClose;
+import frc.robot.commands.collector.HatchOpen;
 import frc.robot.commands.collector.OpenCollector;
 import frc.robot.commands.elevator.ElevateToHeight;
 
@@ -21,9 +23,10 @@ public class PreClimb extends CommandGroup {
      * Add your docs here.
      */
     public PreClimb() {
-        addParallel(new TimeArmSpin(2));
+        addParallel(new TimeArmSpin(4));
         // move elevator to ground
         addParallel(new ElevateToHeight(Elevator.Position.Ground));
+        addParallel(new HatchClose());
         // collector to starting position
         addSequential(new OpenCollector(), 3);
     }

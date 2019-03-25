@@ -18,13 +18,13 @@ import java.util.Collections;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
-public class ApproachTape extends PIDCommand {
+public class ApproachFrontShip extends PIDCommand {
     Drivetrain drive = Drivetrain.getInstance();
     Vision vision = Vision.getInstance();
 
     boolean noLines = false;
     double[] distances, ports;
-    public ApproachTape() {
+    public ApproachFrontShip() {
         super(1.0, 0, 0);
         requires(drive);
         setInputRange(-1, 1);
@@ -79,7 +79,7 @@ public class ApproachTape extends PIDCommand {
 
 
         
-        return ports[minIndex]/75 - 1.55;
+        return ports[minIndex]/75 - 1.5;
     }
 
     @Override

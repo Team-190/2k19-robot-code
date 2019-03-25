@@ -8,8 +8,10 @@
 package frc.robot.commands.collector;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.blinkinpark.PlaySongForTime;
 import frc.robot.commands.elevator.ElevateToHeight;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.BlinkinPark.Song;
 
 public class CollectHatch extends CommandGroup {
     
@@ -17,6 +19,7 @@ public class CollectHatch extends CommandGroup {
         addSequential(new CloseCollector());
         addSequential(new ElevateToHeight(Elevator.Position.LoadingHatch));
         addSequential(new HatchOpenLimitSwitch());
+        addParallel(new PlaySongForTime(Song.Color1HeartbeatFast, 1));
         addSequential(new HatchClose());
     }
 }
