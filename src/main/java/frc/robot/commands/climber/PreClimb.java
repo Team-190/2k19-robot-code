@@ -25,8 +25,8 @@ public class PreClimb extends CommandGroup {
     public PreClimb() {
         addParallel(new TimeArmSpin(4));
         // move elevator to ground
-        addParallel(new ElevateToHeight(Elevator.Position.Ground));
-        addParallel(new HatchClose());
+        addSequential(new ElevateToHeight(Elevator.Position.Ground));
+        addSequential(new HatchClose());
         // collector to starting position
         addSequential(new OpenCollector(), 3);
     }

@@ -24,6 +24,7 @@ public class ApproachTape extends PIDCommand {
 
     boolean noLines = false;
     double[] distances, ports;
+
     public ApproachTape() {
         super(1.0, 0, 0);
         requires(drive);
@@ -58,13 +59,12 @@ public class ApproachTape extends PIDCommand {
         int minIndex = -1;
         double minValue = 1;
 
-        for (int i = 0; i< distances.length; i++) {
+        for (int i = 0; i < distances.length; i++) {
             if (distances[i] < minValue) {
                 minIndex = i;
                 minValue = distances[i];
             }
         }
-
 
         // if (minValue < -40 || minIndex == -1) {
         if (minIndex == -1) {
@@ -77,9 +77,7 @@ public class ApproachTape extends PIDCommand {
         // double port = Math.max(ports[minIndex]/80 - 1.5, -1);
         // double port = Math.max(ports[minIndex]/80 - 1, -1);
 
-
-        
-        return ports[minIndex]/75 - 1.55;
+        return ports[minIndex] / 75 - 1.47;
     }
 
     @Override

@@ -24,16 +24,15 @@ import frc.robot.commands.collector.ReleaseHatch;
 import frc.robot.commands.collector.RollIntake;
 import frc.robot.commands.collector.TimedRollIntake;
 import frc.robot.commands.collector.ToggleHatch;
-import frc.robot.commands.drivetrain.ApproachFrontShip;
 import frc.robot.commands.drivetrain.ApproachTape;
 import frc.robot.commands.drivetrain.DefaultDrive;
+import frc.robot.commands.drivetrain.HoldForward;
+import frc.robot.commands.drivetrain.StopDrive;
 import frc.robot.commands.elevator.ElevateManual;
 import frc.robot.commands.elevator.ElevateToHeight;
 import frc.robot.input.AttackThree;
 import frc.robot.input.ButtonBox;
 import frc.robot.input.ButtonBox2;
-import frc.robot.input.CargoTrigger;
-import frc.robot.input.HatchTrigger;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Elevator;
@@ -90,7 +89,8 @@ public class OI {
         buttonBox2.preClimb.whenPressed(new PreClimb());
         buttonBox.climb.whenPressed(new Climb());
 
-        leftStick.getButton(1).whenPressed(new ApproachFrontShip());
+        leftStick.getButton(1).whileHeld(new HoldForward());
+        leftStick.getButton(1).whenReleased(new StopDrive());
         // rightStick.getButton(1).whenPressed(new InterruptClimb());
 
         // Manual
@@ -112,9 +112,6 @@ public class OI {
         buttonBox2.greenTwo.whenPressed(new ApproachTape());
 
         buttonBox2.greenTwo.whenReleased(new DefaultDrive());
-        // buttonBox2.greenOne.whenPressed(new SetServo(0));
-
-        // buttonBox2.greenTwo.whenPressed(new SetServo(.5));
 
         // new HatchTrigger().whenActive(new PlaySongForTime(Song.Color1HeartbeatFast, 3));
         // new CargoTrigger().whenActive(new PlaySongForTime(Song.Color2HeartbeatFast, 3));

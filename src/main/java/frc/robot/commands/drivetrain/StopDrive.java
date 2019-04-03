@@ -5,26 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.collector;
+package frc.robot.commands.drivetrain;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
-import frc.robot.subsystems.Collector;
+import frc.robot.subsystems.Drivetrain;
 
 /**
  * Add your docs here.
  */
-public class RetractHatchCylinder extends InstantCommand {
-    Collector collector;
-    public RetractHatchCylinder() {
-        super();
-        collector = Collector.getInstance();
-        requires(collector);
-    }
+public class StopDrive extends InstantCommand {
+  /**
+   * Add your docs here.
+   */
+  public StopDrive() {
+    super();
+    requires(Drivetrain.getInstance());
+  }
 
-    // Called once when the command executes
-    @Override
-    protected void initialize() {
-        collector.setEjector(false);
-    }
+  // Called once when the command executes
+  @Override
+  protected void initialize() {
+    Drivetrain.getInstance().drive(ControlMode.PercentOutput, 0, 0);
+  }
 
 }

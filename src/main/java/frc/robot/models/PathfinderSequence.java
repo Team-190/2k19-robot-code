@@ -12,6 +12,8 @@ public enum PathfinderSequence {
     RightStartFarRocket,
     RightFarLoading,
     LoadingRightCloseRocket,
+
+    Center,
     
     Forward;
 

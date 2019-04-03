@@ -8,7 +8,8 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.collector.ExtakeHatchPanel;
+import frc.robot.commands.collector.CollectHatch;
+import frc.robot.commands.collector.ReleaseHatch;
 import frc.robot.commands.drivetrain.DriveSequence;
 import frc.robot.commands.drivetrain.TurnToHeading;
 import frc.robot.models.PathfinderSequence;
@@ -19,10 +20,12 @@ public class RightRocketAuto extends CommandGroup {
      */
     public RightRocketAuto() {
         addSequential(new DriveSequence(PathfinderSequence.RightStartFarRocket, true));
-        addSequential(new TurnToHeading(145));
-        // addSequential(new ExtakeHatchPanel());
+        addSequential(new ReleaseHatch());
+        addSequential(new TurnToHeading(150));
 
-        // addSequential(new DriveSequence(PathfinderSequence.RightFarLoading, false));
+        addParallel(new CollectHatch());
+        addSequential(new DriveSequence(PathfinderSequence.RightFarLoading, false));
+        
         // //TODO: wack into wall and get hatch panel, trial and error for that
 
         // addSequential(new DriveSequence(PathfinderSequence.LoadingRightCloseRocket, false));

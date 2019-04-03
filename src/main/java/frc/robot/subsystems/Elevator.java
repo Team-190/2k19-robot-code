@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
@@ -41,8 +42,7 @@ public class Elevator extends Subsystem {
     private double motorSetpoint;
 
     // Encoder config values
-    private final int PID_X = 0,
-        TIMEOUT_MS = 0;
+    private final int PID_X = 0, TIMEOUT_MS = 0;
 
     /**
      * Gets the singular instance of the Elevator class
@@ -61,8 +61,10 @@ public class Elevator extends Subsystem {
     private Elevator() {
         motor = new WPI_TalonSRX(LEFT);
         motor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
-        motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, DEFAULT_TIMEOUT_MS);
-        motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, DEFAULT_TIMEOUT_MS);
+        motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen,
+                DEFAULT_TIMEOUT_MS);
+        motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen,
+                DEFAULT_TIMEOUT_MS);
         motor.config_kP(PID_X, .75);
         motor.setInverted(InvertType.InvertMotorOutput);
         motor.setSensorPhase(true);
@@ -90,6 +92,7 @@ public class Elevator extends Subsystem {
 
     /**
      * Gets the encoder value of the elevator
+     * 
      * @return the encoder value
      */
     public int getPosition() {
@@ -106,6 +109,7 @@ public class Elevator extends Subsystem {
 
     /**
      * Converts inches to encoder values
+     * 
      * @param inches the amount of inches to convert
      * @return the encoder values in inches
      */
@@ -117,13 +121,14 @@ public class Elevator extends Subsystem {
 
     /**
      * Changes the setpoint of Elevator subsystem to position
+     * 
      * @param position Position to move the elevator
      */
     public void setHeight(Position position) {
         resetTrigger();
         setpoint = position;
         motorSetpoint = heightToEnc(position.getPosition());
-        motor.set(ControlMode.Position, motorSetpoint);
+        motor.set(ControlMode.Position, motorSetpoint, DemandType.ArbitraryFeedForward, 0.1);
     }
 
     public void stop() {
@@ -143,15 +148,9 @@ public class Elevator extends Subsystem {
 
     public enum Position {
         Ground(0), // collector cargo too
-        LoadingHatch(5),
-        HatchOne(7), // cargo ship, rocket, and loading
-        CargoShipCargo(20), 
-        RocketHatchTwo(37),
-        RocketHatchThree(66), 
-        RocketCargoOne(22), 
-        RocketCargoTwo(51),
-        RocketCargoThree(82), 
-        MaximumHeight(80);
+        LoadingHatch(5), HatchOne(7), // cargo ship, rocket, and loading
+        CargoShipCargo(20), RocketHatchTwo(37), RocketHatchThree(66), RocketCargoOne(22), RocketCargoTwo(51),
+        RocketCargoThree(81), MaximumHeight(80);
 
         private int inches;
 

@@ -8,14 +8,15 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.collector.CloseCollector;
-import frc.robot.commands.elevator.ElevateToHeight;
-import frc.robot.subsystems.Elevator;
+import frc.robot.commands.drivetrain.DriveSequence;
+import frc.robot.models.PathfinderSequence;
 
-public class ManualSandstormHatch extends CommandGroup {
-    public ManualSandstormHatch() {
-        addSequential(new ElevateToHeight(Elevator.Position.LoadingHatch));
-        addSequential(new CloseCollector());
-        // addSequential(new TurnToHeading());
-    }
+public class Center extends CommandGroup {
+  /**
+   * Add your docs here.
+   */
+  public Center() {
+    addSequential(new ManualSandstormHatch());
+    addSequential(new DriveSequence(PathfinderSequence.Center, true));
+  }
 }

@@ -17,10 +17,10 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.autonomous.Center;
 import frc.robot.commands.autonomous.LeftRocketAuto;
 import frc.robot.commands.autonomous.ManualSandstormHatch;
 import frc.robot.commands.autonomous.RightRocketAuto;
-import frc.robot.commands.collector.RetractHatchCylinder;
 import frc.robot.subsystems.BlinkinPark;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
@@ -32,6 +32,7 @@ public class Robot extends TimedRobot {
     private static final String MANUAL = "Teleop";
     private static final String LEFT_ROCKET = "Left rocket";
     private static final String RIGHT_ROCKET = "Right rocket";
+    private static final String CENTER = "Center";
     private static Command autoCommand = null;
     private String autoSelected;
     private final SendableChooser<String> autoChooser = new SendableChooser<>();
@@ -57,6 +58,7 @@ public class Robot extends TimedRobot {
         autoChooser.setDefaultOption(MANUAL, MANUAL);
         autoChooser.addOption(LEFT_ROCKET, LEFT_ROCKET);
         autoChooser.addOption(RIGHT_ROCKET, RIGHT_ROCKET);
+        autoChooser.addOption(CENTER, CENTER);
         SmartDashboard.putData("Autos", autoChooser);
 
         tab = Shuffleboard.getTab("Sensors");
@@ -110,7 +112,7 @@ public class Robot extends TimedRobot {
         trolleyUp = trolleyUpWidget.getEntry();
 
         SimpleWidget armsDownWidget = tab.add("Arms Down", false);
-        armsDownWidget.withSize(1,1).withPosition(8, 2);
+        armsDownWidget.withSize(1, 1).withPosition(8, 2);
         armsDown = armsDownWidget.getEntry();
 
         SimpleWidget portCountWidget = tab.add("Port Count", 0);
@@ -149,6 +151,9 @@ public class Robot extends TimedRobot {
             break;
         case RIGHT_ROCKET:
             autoCommand = new RightRocketAuto();
+            break;
+        case CENTER:
+            autoCommand = new Center();
             break;
         default:
             autoCommand = new ManualSandstormHatch();

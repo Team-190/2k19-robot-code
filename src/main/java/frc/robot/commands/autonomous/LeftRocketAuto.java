@@ -8,7 +8,6 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.collector.ExtakeHatchPanel;
 import frc.robot.commands.drivetrain.DriveSequence;
 import frc.robot.models.PathfinderSequence;
 
