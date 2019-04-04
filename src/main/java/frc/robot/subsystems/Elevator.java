@@ -128,7 +128,7 @@ public class Elevator extends Subsystem {
         resetTrigger();
         setpoint = position;
         motorSetpoint = heightToEnc(position.getPosition());
-        motor.set(ControlMode.Position, motorSetpoint, DemandType.ArbitraryFeedForward, 0.1);
+        motor.set(ControlMode.Position, motorSetpoint);
     }
 
     public void stop() {

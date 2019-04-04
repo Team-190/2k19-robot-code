@@ -14,7 +14,7 @@ import frc.robot.subsystems.Elevator;
 
 public class ManualSandstormHatch extends CommandGroup {
     public ManualSandstormHatch() {
-        addSequential(new ElevateToHeight(Elevator.Position.LoadingHatch));
+        addSequential(new ElevateToHeight(Elevator.Position.HatchOne));
         addSequential(new CloseCollector());
         // addSequential(new TurnToHeading());
     }

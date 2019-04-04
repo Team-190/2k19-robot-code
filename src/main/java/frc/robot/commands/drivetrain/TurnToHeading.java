@@ -24,7 +24,7 @@ public class TurnToHeading extends PIDCommand {
         requires(drive);
         this.heading = heading;
         controller = getPIDController();
-        controller.setPercentTolerance(1);
+        controller.setPercentTolerance(3);
         setInputRange(-180, 180);
         controller.setContinuous();
         setSetpoint(heading);
@@ -39,15 +39,15 @@ public class TurnToHeading extends PIDCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        // if (controller.onTarget()) {
-        //     if (countOnTarget == 3)
-        //         return true;
-        //     countOnTarget++;
-        // } else
-        //     countOnTarget = 0;
-        // return false;
-        // return controller.onTarget();
+        if (controller.onTarget()) {
+            if (countOnTarget == 10)
+                return true;
+            countOnTarget++;
+        } else
+            countOnTarget = 0;
         return false;
+        // return controller.onTarget();
+        // return false;
     }
 
     // Called once after isFinished returns true

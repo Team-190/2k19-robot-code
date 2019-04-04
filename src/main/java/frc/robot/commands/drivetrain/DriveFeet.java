@@ -16,6 +16,7 @@ public class DriveFeet extends PIDCommand {
     Drivetrain drive = Drivetrain.getInstance();
     static final double P = 0.0004, I = 0.0, D = 0.0;
     double feet;
+    int reverse = 1;
 
     public DriveFeet(double feet) {
         super(P, I, D);
@@ -28,6 +29,13 @@ public class DriveFeet extends PIDCommand {
     public DriveFeet(double feet, double maxAbsSpeed) {
         this(feet);
         getPIDController().setOutputRange(-maxAbsSpeed, maxAbsSpeed);
+
+    }
+
+    public DriveFeet(double feet, boolean reverse) {
+        this(feet);
+        this.reverse = reverse ? -1 : 1;
+        setSetpoint(this.reverse * drive.feetToEncoder(feet));
     }
 
     // Called just before this Command runs the first time
@@ -35,6 +43,7 @@ public class DriveFeet extends PIDCommand {
     protected void initialize() {
         drive.setBrake();
         drive.resetEncoders();
+        // System.out.println(reverse);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -58,7 +67,7 @@ public class DriveFeet extends PIDCommand {
 
     @Override
     protected void usePIDOutput(double output) {
-        // System.out.println(output);
+        // System.out.println(output*reverse);
         // drive.setBrake();
         drive.drive(ControlMode.PercentOutput, output, output);
     }

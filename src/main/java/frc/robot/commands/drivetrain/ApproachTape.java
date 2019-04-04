@@ -69,7 +69,7 @@ public class ApproachTape extends PIDCommand {
         // if (minValue < -40 || minIndex == -1) {
         if (minIndex == -1) {
             noLines = true;
-            System.out.println("We are stopping");
+            // System.out.println("We are stopping");
             return 0;
         } else {
             noLines = false;

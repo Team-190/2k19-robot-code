@@ -21,6 +21,8 @@ import frc.robot.commands.autonomous.Center;
 import frc.robot.commands.autonomous.LeftRocketAuto;
 import frc.robot.commands.autonomous.ManualSandstormHatch;
 import frc.robot.commands.autonomous.RightRocketAuto;
+import frc.robot.commands.drivetrain.ResetNavX;
+import frc.robot.commands.drivetrain.TurnToHeading;
 import frc.robot.subsystems.BlinkinPark;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
@@ -45,7 +47,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-        CameraServer.getInstance().startAutomaticCapture();
+        // CameraServer.getInstance().startAutomaticCapture();
         OI.getInstance();
         Collector.getInstance();
         Drivetrain.getInstance();
@@ -62,6 +64,8 @@ public class Robot extends TimedRobot {
         SmartDashboard.putData("Autos", autoChooser);
 
         tab = Shuffleboard.getTab("Sensors");
+        tab.add(new ResetNavX());
+        // tab.add(new TurnToHeading(90));
 
         SimpleWidget elevHeightWidget = tab.add("Elevator Height", 0);
         elevHeightWidget.withSize(1, 1).withPosition(5, 2);
