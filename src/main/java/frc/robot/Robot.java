@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
         autoChooser.addOption(LEFT_ROCKET, LEFT_ROCKET);
         autoChooser.addOption(RIGHT_ROCKET, RIGHT_ROCKET);
         autoChooser.addOption(CENTER, CENTER);
-        SmartDashboard.putData("Autos", autoChooser);
+        // SmartDashboard.putData("Autos", autoChooser);
 
         tab = Shuffleboard.getTab("Sensors");
         tab.add(new ResetNavX());
