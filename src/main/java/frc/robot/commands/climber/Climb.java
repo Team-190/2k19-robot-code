@@ -12,7 +12,7 @@ import frc.robot.commands.climber.DeployLifters;
 import frc.robot.commands.climber.RetractLifters;
 import frc.robot.commands.climber.RollToHAB;
 import frc.robot.commands.collector.OpenCollector;
-import frc.robot.commands.drivetrain.DriveForward;
+import frc.robot.commands.drivetrain.TimedDrive;
 
 
 public class Climb extends CommandGroup {
@@ -27,6 +27,6 @@ public class Climb extends CommandGroup {
         addSequential(new RollToHAB());
         //      Retract pneumatics
         addSequential(new RetractLifters());
-        
+        addSequential(new TimedDrive(.5, .25));
     }
 }
