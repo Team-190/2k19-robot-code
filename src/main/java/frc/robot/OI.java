@@ -106,7 +106,7 @@ public class OI {
         buttonBox2.manualRoller.getBackward().whileHeld(new RollIntake(Speed.IN));
         buttonBox2.firePiston.whenPressed(new ToggleHatch());
 
-        buttonBox2.blueOne.whenPressed(new RollWhileHeld(Climber.Direction.FORWARD));
+        buttonBox2.blueOne.whenPressed(new RollWhileHeld(Climber.Direction.BACKWARD));
         buttonBox2.blueOne.whenReleased(new RollWhileHeld(Climber.Direction.OFF));
         buttonBox2.blueTwo.whenPressed(new DeployLifters());
         buttonBox2.blueThree.whenPressed(new RetractLifters());
