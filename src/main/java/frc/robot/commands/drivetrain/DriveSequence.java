@@ -53,6 +53,7 @@ public class DriveSequence extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+        /*
         if (!drivetrain.getNavX().isCalibrating()) {
 
             double leftSpeed = leftFollower.calculate(drivetrain.getLeftPosition());
@@ -65,7 +66,7 @@ public class DriveSequence extends Command {
 
             drivetrain.drive(ControlMode.PercentOutput, leftSpeed + turn, rightSpeed - turn);
         }
-
+*/
     }
 
     // Make this return true when this Command no longer needs to run execute()

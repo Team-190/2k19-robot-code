@@ -20,6 +20,8 @@ import frc.robot.commands.drivetrain.DefaultDrive;
 import frc.robot.commands.drivetrain.TurnToHeading;
 import frc.robot.models.PairedTalonSRX;
 
+import edu.wpi.first.cameraserver.CameraServer;;
+
 /**
  * Subsystem controls drivetrain and associated sensors
  */
@@ -30,7 +32,6 @@ public class Drivetrain extends Subsystem {
     public final static double WHEEL_DIAMETER = .5; // feet
     public final static double ENCODER_TO_FEET = WHEEL_DIAMETER * TICKS_PER_REV; // TODO: configure this
 
-    AHRS navx;
     // Speed controller ports
     private final int LEFT_FRONT = 8, LEFT_REAR = 6, RIGHT_FRONT = 7, RIGHT_REAR = 5;
 
@@ -40,7 +41,6 @@ public class Drivetrain extends Subsystem {
     PairedTalonSRX leftPair, rightPair;
 
     private Drivetrain() {
-        navx = new AHRS(Port.kUSB);
         leftPair = new PairedTalonSRX(LEFT_FRONT, LEFT_REAR);
         rightPair = new PairedTalonSRX(RIGHT_FRONT, RIGHT_REAR);
         leftPair.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, PID_X, TIMEOUT_MS);
@@ -114,17 +114,7 @@ public class Drivetrain extends Subsystem {
         drive(ControlMode.PercentOutput, leftMotorSpeed, rightMotorSpeed);
     }
 
-    public double getYaw() {
-        return (double) navx.getYaw();
-    }
 
-    public AHRS getNavX() {
-        return navx;
-    }
-
-    public void resetNavX() {
-        navx.reset();
-    }
 
     public int getLeftPosition() {
         return leftPair.getSelectedSensorPosition(PID_X);

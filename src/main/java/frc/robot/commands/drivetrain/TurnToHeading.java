@@ -58,7 +58,7 @@ public class TurnToHeading extends PIDCommand {
 
     @Override
     protected double returnPIDInput() {
-        return drive.getYaw();
+        return 1.0; //drive.getYaw();
     }
 
     @Override

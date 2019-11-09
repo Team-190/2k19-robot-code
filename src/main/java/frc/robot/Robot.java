@@ -135,7 +135,6 @@ public class Robot extends TimedRobot {
         elevMotorSetpoint.setDouble(Elevator.getInstance().getMotorSetpoint());
         hasHatch.setBoolean(Collector.getInstance().hasHatch());
         hasCargo.setBoolean(Collector.getInstance().hasCargo());
-        angle.setDouble(Drivetrain.getInstance().getNavX().getYaw());
         encoderLeft.setNumber(Drivetrain.getInstance().getLeftPosition());
         encoderRight.setNumber(Drivetrain.getInstance().getRightPosition());
         chassisACS.setNumber(Climber.getInstance().getChassisACS());
@@ -177,7 +176,6 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         // Drivetrain.getInstance().resetNavX();
-        Drivetrain.getInstance().getNavX().zeroYaw();
         Vision.getInstance().setLightOn(true);
         if (autoCommand != null)
             autoCommand.cancel();

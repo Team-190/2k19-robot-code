@@ -25,7 +25,9 @@ public class ResetNavX extends InstantCommand {
     // Called once when the command executes
     @Override
     protected void initialize() {
+        /*
         Drivetrain.getInstance().getNavX().zeroYaw();
+        */
     }
 
 }
