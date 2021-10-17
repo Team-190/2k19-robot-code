@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 
-import com.kauailabs.navx.frc.AHRS;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -59,7 +58,7 @@ public class Drivetrain extends Subsystem {
 
     /**
      * Gets the Drivetrain instance
-     * 
+     *
      * @return the single instance of the class
      */
     public static Drivetrain getInstance() {
@@ -82,7 +81,7 @@ public class Drivetrain extends Subsystem {
 
     /**
      * Set motor values of drive speed controllers
-     * 
+     *
      * @param left  left motor value
      * @param right right motor value
      */
@@ -116,11 +115,11 @@ public class Drivetrain extends Subsystem {
 
 
 
-    public int getLeftPosition() {
+    public double getLeftPosition() {
         return leftPair.getSelectedSensorPosition(PID_X);
     }
 
-    public int getRightPosition() {
+    public double getRightPosition() {
         return rightPair.getSelectedSensorPosition(PID_X);
     }
 

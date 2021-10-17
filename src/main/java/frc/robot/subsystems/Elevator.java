@@ -46,7 +46,7 @@ public class Elevator extends Subsystem {
 
     /**
      * Gets the singular instance of the Elevator class
-     * 
+     *
      * @return the Elevator instance
      */
     public static Elevator getInstance() {
@@ -92,10 +92,10 @@ public class Elevator extends Subsystem {
 
     /**
      * Gets the encoder value of the elevator
-     * 
+     *
      * @return the encoder value
      */
-    public int getPosition() {
+    public double getPosition() {
         return motor.getSelectedSensorPosition();
     }
 
@@ -109,7 +109,7 @@ public class Elevator extends Subsystem {
 
     /**
      * Converts inches to encoder values
-     * 
+     *
      * @param inches the amount of inches to convert
      * @return the encoder values in inches
      */
@@ -121,7 +121,7 @@ public class Elevator extends Subsystem {
 
     /**
      * Changes the setpoint of Elevator subsystem to position
-     * 
+     *
      * @param position Position to move the elevator
      */
     public void setHeight(Position position) {

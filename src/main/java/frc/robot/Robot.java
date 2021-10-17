@@ -17,10 +17,6 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.autonomous.Center;
-import frc.robot.commands.autonomous.LeftRocketAuto;
-import frc.robot.commands.autonomous.ManualSandstormHatch;
-import frc.robot.commands.autonomous.RightRocketAuto;
 import frc.robot.commands.drivetrain.ResetNavX;
 import frc.robot.commands.drivetrain.TurnToHeading;
 import frc.robot.subsystems.BlinkinPark;
@@ -146,23 +142,6 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        Vision.getInstance().setLightOn(true);
-        autoSelected = autoChooser.getSelected();
-        switch (autoSelected) {
-        case LEFT_ROCKET:
-            autoCommand = new LeftRocketAuto();
-            break;
-        case RIGHT_ROCKET:
-            autoCommand = new RightRocketAuto();
-            break;
-        case CENTER:
-            autoCommand = new Center();
-            break;
-        default:
-            autoCommand = new ManualSandstormHatch();
-            break;
-        }
-        autoCommand.start();
     }
 
     /**
